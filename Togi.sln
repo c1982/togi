@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Togi", "Togi\Togi.csproj", "{5E848B29-C7A7-4ED3-9CBE-D2E153380BF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TogiApi", "TogiApi\TogiApi.csproj", "{2FDAF68D-928E-4993-A2B4-E142D3AF1A33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeLineControl", "TimeLineControl\TimeLineControl.csproj", "{2F4452C8-ABC5-41CE-8E1D-993FBC0D0750}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E848B29-C7A7-4ED3-9CBE-D2E153380BF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E848B29-C7A7-4ED3-9CBE-D2E153380BF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E848B29-C7A7-4ED3-9CBE-D2E153380BF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E848B29-C7A7-4ED3-9CBE-D2E153380BF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FDAF68D-928E-4993-A2B4-E142D3AF1A33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FDAF68D-928E-4993-A2B4-E142D3AF1A33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FDAF68D-928E-4993-A2B4-E142D3AF1A33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FDAF68D-928E-4993-A2B4-E142D3AF1A33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F4452C8-ABC5-41CE-8E1D-993FBC0D0750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F4452C8-ABC5-41CE-8E1D-993FBC0D0750}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F4452C8-ABC5-41CE-8E1D-993FBC0D0750}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F4452C8-ABC5-41CE-8E1D-993FBC0D0750}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

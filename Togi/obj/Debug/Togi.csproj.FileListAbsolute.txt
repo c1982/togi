@@ -1,0 +1,28 @@
+C:\Documents and Settings\ev\Belgelerim\Visual Studio 2008\Projects\Togi\Togi\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\ev\Belgelerim\Visual Studio 2008\Projects\Togi\Togi\obj\Debug\Togi.Properties.Resources.resources
+C:\Documents and Settings\ev\Belgelerim\Visual Studio 2008\Projects\Togi\Togi\obj\Debug\Togi.csproj.GenerateResource.Cache
+C:\Documents and Settings\ev\Belgelerim\Visual Studio 2008\Projects\Togi\Togi\bin\Debug\Togi.exe
+C:\Documents and Settings\ev\Belgelerim\Visual Studio 2008\Projects\Togi\Togi\bin\Debug\Togi.pdb
+C:\Documents and Settings\ev\Belgelerim\Visual Studio 2008\Projects\Togi\Togi\obj\Debug\Togi.exe
+C:\Documents and Settings\ev\Belgelerim\Visual Studio 2008\Projects\Togi\Togi\obj\Debug\Togi.pdb
+C:\Documents and Settings\ev\Belgelerim\Visual Studio 2008\Projects\Togi\Togi\bin\Debug\TogiApi.dll
+C:\Documents and Settings\ev\Belgelerim\Visual Studio 2008\Projects\Togi\Togi\bin\Debug\TogiApi.pdb
+C:\Documents and Settings\ev\Belgelerim\Visual Studio 2008\Projects\Togi\Togi\obj\Debug\Togi.TimeLine.resources
+C:\Documents and Settings\ev\Belgelerim\Visual Studio 2008\Projects\Togi\Togi\obj\Debug\Togi.Login.resources
+C:\Documents and Settings\ev\Belgelerim\Visual Studio 2008\Projects\Togi\Togi\bin\Debug\TimeLineControl.dll
+C:\Documents and Settings\ev\Belgelerim\Visual Studio 2008\Projects\Togi\Togi\bin\Debug\TimeLineControl.pdb
+C:\Documents and Settings\ev\Belgelerim\Visual Studio 2008\Projects\Togi\Togi\obj\Debug\Togi.SettingsForm.resources
+C:\Users\Oguzhan\Desktop\Togi\Togi\obj\Debug\Togi.exe
+C:\Users\Oguzhan\Desktop\Togi\Togi\obj\Debug\Togi.pdb
+C:\Users\Oguzhan\Desktop\Togi\Togi\bin\Debug\Togi.exe
+C:\Users\Oguzhan\Desktop\Togi\Togi\bin\Debug\Togi.pdb
+C:\Users\Oguzhan\Desktop\Togi\Togi\bin\Debug\TimeLineControl.dll
+C:\Users\Oguzhan\Desktop\Togi\Togi\bin\Debug\TogiApi.dll
+C:\Users\Oguzhan\Desktop\Togi\Togi\bin\Debug\TogiApi.pdb
+C:\Users\Oguzhan\Desktop\Togi\Togi\bin\Debug\TimeLineControl.pdb
+C:\Users\Oguzhan\Desktop\Togi\Togi\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Oguzhan\Desktop\Togi\Togi\obj\Debug\Togi.Login.resources
+C:\Users\Oguzhan\Desktop\Togi\Togi\obj\Debug\Togi.Properties.Resources.resources
+C:\Users\Oguzhan\Desktop\Togi\Togi\obj\Debug\Togi.SettingsForm.resources
+C:\Users\Oguzhan\Desktop\Togi\Togi\obj\Debug\Togi.TimeLine.resources
+C:\Users\Oguzhan\Desktop\Togi\Togi\obj\Debug\Togi.csproj.GenerateResource.Cache

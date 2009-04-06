@@ -1,0 +1,5 @@
+C:\Users\Oguzhan\Desktop\Togi\TogiApi\bin\Release\TogiApi.dll
+C:\Users\Oguzhan\Desktop\Togi\TogiApi\bin\Release\TogiApi.pdb
+C:\Users\Oguzhan\Desktop\Togi\TogiApi\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Oguzhan\Desktop\Togi\TogiApi\obj\Release\TogiApi.dll
+C:\Users\Oguzhan\Desktop\Togi\TogiApi\obj\Release\TogiApi.pdb

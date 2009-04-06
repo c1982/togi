@@ -1,0 +1,14 @@
+C:\Users\Oguzhan\Desktop\Togi\Togi\bin\Release\Togi.exe
+C:\Users\Oguzhan\Desktop\Togi\Togi\bin\Release\Togi.pdb
+C:\Users\Oguzhan\Desktop\Togi\Togi\bin\Release\TimeLineControl.dll
+C:\Users\Oguzhan\Desktop\Togi\Togi\bin\Release\TogiApi.dll
+C:\Users\Oguzhan\Desktop\Togi\Togi\bin\Release\TogiApi.pdb
+C:\Users\Oguzhan\Desktop\Togi\Togi\bin\Release\TimeLineControl.pdb
+C:\Users\Oguzhan\Desktop\Togi\Togi\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Oguzhan\Desktop\Togi\Togi\obj\Release\Togi.Login.resources
+C:\Users\Oguzhan\Desktop\Togi\Togi\obj\Release\Togi.Properties.Resources.resources
+C:\Users\Oguzhan\Desktop\Togi\Togi\obj\Release\Togi.SettingsForm.resources
+C:\Users\Oguzhan\Desktop\Togi\Togi\obj\Release\Togi.TimeLine.resources
+C:\Users\Oguzhan\Desktop\Togi\Togi\obj\Release\Togi.csproj.GenerateResource.Cache
+C:\Users\Oguzhan\Desktop\Togi\Togi\obj\Release\Togi.exe
+C:\Users\Oguzhan\Desktop\Togi\Togi\obj\Release\Togi.pdb
