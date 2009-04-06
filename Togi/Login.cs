@@ -26,6 +26,12 @@ namespace Togi
         public Login()
         {
             InitializeComponent();
+
+            if (isSave(out ScreenName, out Password))
+            {
+                LoginStart();
+            }
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -45,9 +51,14 @@ namespace Togi
             ScreenName = tSname.Text;
             Password = tPass.Text;
 
+            LoginStart();
+        }
+
+        private void LoginStart()
+        {
             SetPanelVisibility(P1, false);
             SetPanelVisibility(P2, true);
-            
+
             lng = new Thread(TwitterLogin);
             lng.IsBackground = true;
             lng.Start();
@@ -55,32 +66,35 @@ namespace Togi
 
         private void TwitterLogin()
         {
-            //try
-            //{
-                // TimeLine ve User Info alınıyor.
+            try
+            {
                 Thread.Sleep(1000);
-
                 Twitter login = new Twitter(ScreenName, Password);
 
-                SetTextBoxText("Getting Time Line...", lLoading);
+                // TimeLine geliyor
+                SetTextBoxText("TimeLine yükleniyor...", lLoading);
                 FriendsTimeLine = login.FriendsTimeLine("");
 
-                SetTextBoxText("Setting Session...", lLoading);
+                // User bilgileri geliyor
+                SetTextBoxText("Oturum açılıyor...", lLoading);
                 LoginUser = login.ShowUser(ScreenName);
-
                 LoginUser.UserName = ScreenName;
                 LoginUser.UserPass = Password;
 
-                DialogResult = DialogResult.OK;
-            //}
-            //catch
-            //{
-            //    SetTextBoxText("Incorrect Login", lLoading);
-            //    Thread.Sleep(2000);
+                // Hesap Regedit'e yazılyor.
+                if (cRemember.Checked)
+                    RememberThisAccount(ScreenName, Password);
 
-            //    SetPanelVisibility(P1, true);
-            //    SetPanelVisibility(P2, false);
-            //}
+                DialogResult = DialogResult.OK;
+            }
+            catch
+            {
+                SetTextBoxText("Incorrect Login", lLoading);
+                Thread.Sleep(2000);
+
+                SetPanelVisibility(P1, true);
+                SetPanelVisibility(P2, false);
+            }
         }
 
         private void lClose_Click(object sender, EventArgs e)
@@ -108,6 +122,39 @@ namespace Togi
             }
 
             p.Visible = Display;
+        }
+
+        private void RememberThisAccount(string lUser, string lPass)
+        {
+            string EncodePass;
+            string EncodeScreenName;
+
+            Tools.Crypto encode_ = new Togi.Tools.Crypto();
+            EncodePass = encode_.EncryptString(lUser);
+            EncodeScreenName = encode_.EncryptString(lPass);
+
+            Tools.Regedit.SetKey_("login_name", EncodePass);
+            Tools.Regedit.SetKey_("login_pass", EncodeScreenName);
+        }
+
+        private bool isSave(out string lUser, out string lPass)
+        {
+            bool CheckSave;
+            CheckSave = false;
+
+            Tools.Crypto decode_ = new Togi.Tools.Crypto();
+
+            lUser = Tools.Regedit.GetKey_("login_name");
+            lPass = Tools.Regedit.GetKey_("login_pass");
+
+            if (!String.IsNullOrEmpty(lUser) && !String.IsNullOrEmpty(lPass))
+            {
+                lUser = decode_.DecryptString(lUser);
+                lPass = decode_.DecryptString(lPass);
+                CheckSave = true;
+            }
+
+            return CheckSave;
         }
 
     }

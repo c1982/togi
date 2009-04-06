@@ -3,3 +3,8 @@ C:\Documents and Settings\ev\Belgelerim\Visual Studio 2008\Projects\Togi\TogiApi
 C:\Documents and Settings\ev\Belgelerim\Visual Studio 2008\Projects\Togi\TogiApi\obj\Debug\ResolveAssemblyReference.cache
 C:\Documents and Settings\ev\Belgelerim\Visual Studio 2008\Projects\Togi\TogiApi\obj\Debug\TogiApi.dll
 C:\Documents and Settings\ev\Belgelerim\Visual Studio 2008\Projects\Togi\TogiApi\obj\Debug\TogiApi.pdb
+C:\Documents and Settings\ev\Belgelerim\Visual Studio 2008\Projects\TogiGit\TogiApi\bin\Debug\TogiApi.dll
+C:\Documents and Settings\ev\Belgelerim\Visual Studio 2008\Projects\TogiGit\TogiApi\bin\Debug\TogiApi.pdb
+C:\Documents and Settings\ev\Belgelerim\Visual Studio 2008\Projects\TogiGit\TogiApi\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\ev\Belgelerim\Visual Studio 2008\Projects\TogiGit\TogiApi\obj\Debug\TogiApi.dll
+C:\Documents and Settings\ev\Belgelerim\Visual Studio 2008\Projects\TogiGit\TogiApi\obj\Debug\TogiApi.pdb

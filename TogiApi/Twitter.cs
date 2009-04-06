@@ -53,19 +53,18 @@ namespace TogiApi
 
         private WebProxy CreateProxy()
         {
-            string proxyUserName;
-            string proxyPassword;
             string proxyAddress;
+            //proxyAddress = "http://66.29.36.95:554";
+            //proxyPassword = "c1982";
+            //proxyUserName = "20665960";
 
-            proxyAddress = "http://66.29.36.95:554";
-            proxyPassword = "c1982";
-            proxyUserName = "20665960";
+            proxyAddress = String.Format("http://{0}:{1}",
+                Regedit.GetKey_("proxy_server"),
+                Regedit.GetKey_("proxy_port"));
 
-            WebProxy p = new WebProxy();
-            ICredentials cred = new NetworkCredential(proxyUserName, proxyPassword);
+            WebProxy p = new WebProxy();            
             p.Address = new Uri(proxyAddress); // örnek: proxy.domain.com:8080
-            p.BypassProxyOnLocal = true;
-            p.Credentials = cred;
+            p.BypassProxyOnLocal = true;            
 
             return p;
         }

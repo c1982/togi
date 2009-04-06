@@ -14,5 +14,40 @@ namespace Togi
         {
             InitializeComponent();
         }
+
+        private void nCheckTime_ValueChanged(object sender, EventArgs e)
+        {
+            Tools.Regedit.SetKey_("check_time", nCheckTime.Value.ToString());
+        }
+
+        private void cLang_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(!String.IsNullOrEmpty(cLang.Text))
+                Tools.Regedit.SetKey_("language", cLang.Text);
+        }
+
+        private void cShorUrl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(cShorUrl.Text))
+                Tools.Regedit.SetKey_("short_url", cShorUrl.Text);
+        }
+
+        private void cRun_CheckedChanged(object sender, EventArgs e)
+        {
+            Tools.Regedit.SetKey_("run", cRun.Checked ? "true":"false");
+        }
+
+        private void cProxy_CheckedChanged(object sender, EventArgs e)
+        {
+            Tools.Regedit.SetKey_("proxy", cProxy.Checked ? "true" : "false");
+        }
+
+        private void bProxySave_Click(object sender, EventArgs e)
+        {
+            Tools.Regedit.SetKey_("proxy_server", tProxyServer.Text);
+            Tools.Regedit.SetKey_("proxy_port", tProxyPort.Text);
+            Tools.Regedit.SetKey_("proxy_user", tProxyUser.Text);
+            Tools.Regedit.SetKey_("proxy_pass", tProxyPass.Text);
+        }
     }
 }

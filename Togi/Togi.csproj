@@ -91,6 +91,8 @@
     <Compile Include="TimeLine.Designer.cs">
       <DependentUpon>TimeLine.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tools\Crypto.cs" />
+    <Compile Include="Tools\Regedit.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TimeLineControl\TimeLineControl.csproj">
@@ -140,9 +142,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\powered-by-twitter-sig.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Tools\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
