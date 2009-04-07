@@ -81,12 +81,12 @@ namespace TogiApi
 
         public User ShowUser(string ScreenName)
         {
-            NameValueCollection Gonder = new NameValueCollection();
-            Gonder.Add(String.Empty, String.Empty);
+            //NameValueCollection Gonder = new NameValueCollection();
+            //Gonder.Add(String.Empty, String.Empty);
 
             string XmlData = Istek(String.Format("http://twitter.com/users/show/{0}.xml",ScreenName)
                 ,"GET"
-                , Gonder);
+                , null);
 
             return new User(XmlData);
         }
@@ -94,14 +94,25 @@ namespace TogiApi
         public IList<Tweet> FriendsTimeLine(string SinceId)
         {
             string XmlString;
-            NameValueCollection Gonder = new NameValueCollection();
+            string ApiUri;
 
-            if (!String.IsNullOrEmpty(SinceId))
-            {
-                Gonder.Add("since_id", SinceId);
-            }
+            ApiUri = String.IsNullOrEmpty(SinceId) ? "http://twitter.com/statuses/friends_timeline.xml" :
+                "http://twitter.com/statuses/friends_timeline.xml?since_id="+ SinceId;
 
-            XmlString = Istek(@"http://twitter.com/statuses/friends_timeline.xml", "POST", Gonder);
+            XmlString = Istek(ApiUri, "GET", null);
+
+            return FriendsTimeLineParser(XmlString);
+        }
+
+        public IList<Tweet> RepliesTimeLine(string SinceId)
+        {
+            string XmlString;
+            string ApiUri;
+
+            ApiUri = String.IsNullOrEmpty(SinceId) ? "http://twitter.com/statuses/replies.xml" :
+                "http://twitter.com/statuses/replies.xml?since_id="+ SinceId;
+
+            XmlString = Istek(ApiUri, "GET", null);
 
             return FriendsTimeLineParser(XmlString);
         }

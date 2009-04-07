@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using TogiApi;
 using TimeLineControl;
+using System.Threading;
 
 namespace Togi
 {
@@ -14,10 +15,12 @@ namespace Togi
     {
         private User TwitterUser;
         public IList<Tweet> FriendsTimeLine { get; set; }
+        public IList<Tweet> RepliesTimeLine { get; set; }
 
         public TimeLine()
         {
             InitializeComponent();
+            TableCtor();
         }        
 
         private void lClose_Click_1(object sender, EventArgs e)
@@ -45,20 +48,15 @@ namespace Togi
                 }
             }
 
-            int TableRowIndex = 0;
-            Tablo.Controls.Clear();
-            Tablo.RowStyles.Clear();
+            // TimeLine yükleniyor.
+            if(FriendsTimeLine != null)
+                FillTableTweet(FriendsTimeLine);
 
-            foreach (Tweet item in FriendsTimeLine)
-            {
-                TweetItem tw = new TweetItem(item);
-                tw.Dock = DockStyle.Bottom;
+            // Repliesler yukleniyor.
+            LoadReplies();
 
-                Tablo.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-                Tablo.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
-                Tablo.Controls.Add(tw, 1, TableRowIndex);
-                TableRowIndex++;
-            }
+            // Mesajlar yukleniyor.
+
         }
 
         private void tsAdvanced_Click(object sender, EventArgs e)
@@ -67,6 +65,61 @@ namespace Togi
             {
                 s.ShowDialog();                                    
             }
+        }
+
+        private void TableCtor()
+        {
+            Padding p = Tablo.Padding;
+            Tablo.Padding = new Padding(p.Left, p.Top - 10,
+                SystemInformation.VerticalScrollBarWidth - 15, p.Bottom - 15);
+            Tablo.RowStyles.Clear();
+            this.Tablo.Focus();
+        }
+
+        private void LoadReplies()
+        {
+            string SinceId;
+
+            SinceId = Regedit.GetKey_("since_replies");
+            Thread t_replies = new Thread(new ParameterizedThreadStart(GetReplies));
+            t_replies.SetApartmentState(ApartmentState.STA);
+            t_replies.Start(SinceId);
+        }
+
+        private void GetReplies(object SinceId)
+        {
+            Twitter t = new Twitter(TwitterUser.UserName, TwitterUser.UserPass);
+            RepliesTimeLine = t.RepliesTimeLine((string)SinceId);
+        }
+
+        private void FillTableTweet(IList<Tweet> TweetList)
+        {
+            int TableRowIndex = 0;
+            Tablo.Controls.Clear();
+
+            lock (this)
+            {
+                foreach (Tweet item in TweetList)
+                {
+                    TweetItem tw = new TweetItem(item);
+                    tw.Dock = DockStyle.Bottom;
+
+                    Tablo.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+                    Tablo.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+                    Tablo.Controls.Add(tw, 1, TableRowIndex);
+                    TableRowIndex++;
+                }   
+            }
+        }
+
+        private void tsRecents_Click(object sender, EventArgs e)
+        {
+            FillTableTweet(RepliesTimeLine);
+        }
+
+        private void tsReplys_Click(object sender, EventArgs e)
+        {
+            FillTableTweet(RepliesTimeLine);
         }
     }
 }

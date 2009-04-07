@@ -82,6 +82,7 @@
             this.tsRecents.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.tsRecents.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             this.tsRecents.ToolTipText = "Recents";
+            this.tsRecents.Click += new System.EventHandler(this.tsRecents_Click);
             // 
             // tsReplys
             // 
@@ -95,6 +96,7 @@
             this.tsReplys.Size = new System.Drawing.Size(26, 26);
             this.tsReplys.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.tsReplys.ToolTipText = "Replies";
+            this.tsReplys.Click += new System.EventHandler(this.tsReplys_Click);
             // 
             // tsMessages
             // 
@@ -114,7 +116,7 @@
             this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripLabel1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(44, 25);
+            this.toolStripLabel1.Size = new System.Drawing.Size(38, 25);
             this.toolStripLabel1.Text = "Durum";
             // 
             // tsSettings
@@ -139,13 +141,13 @@
             // checkingForNewVersionToolStripMenuItem
             // 
             this.checkingForNewVersionToolStripMenuItem.Name = "checkingForNewVersionToolStripMenuItem";
-            this.checkingForNewVersionToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.checkingForNewVersionToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.checkingForNewVersionToolStripMenuItem.Text = "Checking for New Version";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(208, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(204, 6);
             // 
             // checkingForNewTweetsToolStripMenuItem
             // 
@@ -153,7 +155,7 @@
             this.checkingForNewTweetsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkingForNewTweetsToolStripMenuItem.Name = "checkingForNewTweetsToolStripMenuItem";
             this.checkingForNewTweetsToolStripMenuItem.ShowShortcutKeys = false;
-            this.checkingForNewTweetsToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.checkingForNewTweetsToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.checkingForNewTweetsToolStripMenuItem.Text = "Checking for new tweets";
             // 
             // checkingTimeToolStripMenuItem
@@ -162,7 +164,7 @@
             this.checkingTimeToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkingTimeToolStripMenuItem.Name = "checkingTimeToolStripMenuItem";
             this.checkingTimeToolStripMenuItem.ShowShortcutKeys = false;
-            this.checkingTimeToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.checkingTimeToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.checkingTimeToolStripMenuItem.Text = "Shorting Url";
             // 
             // showNotificationsToolStripMenuItem
@@ -171,18 +173,18 @@
             this.showNotificationsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showNotificationsToolStripMenuItem.Name = "showNotificationsToolStripMenuItem";
             this.showNotificationsToolStripMenuItem.ShowShortcutKeys = false;
-            this.showNotificationsToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.showNotificationsToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.showNotificationsToolStripMenuItem.Text = "Show Notifications";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(208, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(204, 6);
             // 
             // tsAdvanced
             // 
             this.tsAdvanced.Name = "tsAdvanced";
-            this.tsAdvanced.Size = new System.Drawing.Size(211, 22);
+            this.tsAdvanced.Size = new System.Drawing.Size(207, 22);
             this.tsAdvanced.Text = "Advanced";
             this.tsAdvanced.Click += new System.EventHandler(this.tsAdvanced_Click);
             // 

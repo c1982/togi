@@ -60,7 +60,7 @@ namespace Togi
             SetPanelVisibility(P2, true);
 
             lng = new Thread(TwitterLogin);
-            lng.IsBackground = true;
+            lng.SetApartmentState(ApartmentState.STA);
             lng.Start();
         }
 
