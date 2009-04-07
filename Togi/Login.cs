@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Threading;
 using TogiApi;
 using System.Collections;
+using TogiApi.Tools;
 
 namespace Togi
 {
@@ -31,7 +32,6 @@ namespace Togi
             {
                 LoginStart();
             }
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -66,8 +66,8 @@ namespace Togi
 
         private void TwitterLogin()
         {
-            try
-            {
+            //try
+            //{
                 Thread.Sleep(1000);
                 Twitter login = new Twitter(ScreenName, Password);
 
@@ -86,15 +86,15 @@ namespace Togi
                     RememberThisAccount(ScreenName, Password);
 
                 DialogResult = DialogResult.OK;
-            }
-            catch
-            {
-                SetTextBoxText("Incorrect Login", lLoading);
-                Thread.Sleep(2000);
+            //}
+            //catch
+            //{
+            //    SetTextBoxText("Incorrect Login", lLoading);
+            //    Thread.Sleep(2000);
 
-                SetPanelVisibility(P1, true);
-                SetPanelVisibility(P2, false);
-            }
+            //    SetPanelVisibility(P1, true);
+            //    SetPanelVisibility(P2, false);
+            //}
         }
 
         private void lClose_Click(object sender, EventArgs e)
@@ -129,12 +129,12 @@ namespace Togi
             string EncodePass;
             string EncodeScreenName;
 
-            Tools.Crypto encode_ = new Togi.Tools.Crypto();
+            Crypto encode_ = new Crypto();
             EncodePass = encode_.EncryptString(lUser);
             EncodeScreenName = encode_.EncryptString(lPass);
 
-            Tools.Regedit.SetKey_("login_name", EncodePass);
-            Tools.Regedit.SetKey_("login_pass", EncodeScreenName);
+            Regedit.SetKey_("login_name", EncodePass);
+            Regedit.SetKey_("login_pass", EncodeScreenName);
         }
 
         private bool isSave(out string lUser, out string lPass)
@@ -142,10 +142,10 @@ namespace Togi
             bool CheckSave;
             CheckSave = false;
 
-            Tools.Crypto decode_ = new Togi.Tools.Crypto();
+            Crypto decode_ = new Crypto();
 
-            lUser = Tools.Regedit.GetKey_("login_name");
-            lPass = Tools.Regedit.GetKey_("login_pass");
+            lUser = Regedit.GetKey_("login_name");
+            lPass = Regedit.GetKey_("login_pass");
 
             if (!String.IsNullOrEmpty(lUser) && !String.IsNullOrEmpty(lPass))
             {

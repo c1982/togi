@@ -3,8 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-
-namespace Togi.Tools
+namespace TogiApi.Tools
 {
     public class Crypto
     {

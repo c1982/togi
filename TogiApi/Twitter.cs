@@ -32,18 +32,22 @@ namespace TogiApi
                 wClient.Headers.Add("X-Twitter-Version", "0.3.0");
                 wClient.Headers.Add("X-Twitter-URL", "http://www.oguzhan.info/togi");
 
-                //ICredentials cred = new NetworkCredential("c1982", "20665960");
-                //wClient.Proxy = CreateProxy();                
-                //wClient.Proxy.Credentials = cred;                
-
-                if (Method == "POST")
+                if (UseProxy())
                 {
-                    DonenYanit = wClient.UploadValues(HttpUrl, Method, Parametreler);
+                    string ProxyUser;
+                    string ProxyPass;
 
-                }else if(Method == "GET")
-                {
-                    DonenYanit = wClient.DownloadData(HttpUrl);
+                    ProxyUser = Regedit.GetKey_("proxy_user");
+                    ProxyPass = Regedit.GetKey_("proxy_pass");
+
+                    ICredentials cred = new NetworkCredential(ProxyUser, ProxyPass);
+                    wClient.Proxy = CreateProxy();
+                    wClient.Proxy.Credentials = cred;                
                 }
+ 
+                DonenYanit = Method.Equals("POST") ? 
+                                wClient.UploadValues(HttpUrl, Method, Parametreler) :
+                                wClient.DownloadData(HttpUrl);
 
                 wClient.Dispose();
             }
@@ -54,19 +58,25 @@ namespace TogiApi
         private WebProxy CreateProxy()
         {
             string proxyAddress;
-            //proxyAddress = "http://66.29.36.95:554";
-            //proxyPassword = "c1982";
-            //proxyUserName = "20665960";
-
             proxyAddress = String.Format("http://{0}:{1}",
                 Regedit.GetKey_("proxy_server"),
                 Regedit.GetKey_("proxy_port"));
 
             WebProxy p = new WebProxy();            
-            p.Address = new Uri(proxyAddress); // örnek: proxy.domain.com:8080
+            p.Address = new Uri(proxyAddress); // format: http://proxy.domain.com:8080
             p.BypassProxyOnLocal = true;            
 
             return p;
+        }
+
+        private bool UseProxy()
+        {
+            string GetProxy;
+            GetProxy = Regedit.GetKey_("proxy");
+            if (String.IsNullOrEmpty(GetProxy))
+                GetProxy = "false";
+
+            return bool.Parse(GetProxy);
         }
 
         public User ShowUser(string ScreenName)

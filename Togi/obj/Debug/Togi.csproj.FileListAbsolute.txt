@@ -40,3 +40,17 @@ C:\Documents and Settings\ev\Belgelerim\Visual Studio 2008\Projects\TogiGit\Togi
 C:\Documents and Settings\ev\Belgelerim\Visual Studio 2008\Projects\TogiGit\Togi\bin\Debug\TogiApi.dll
 C:\Documents and Settings\ev\Belgelerim\Visual Studio 2008\Projects\TogiGit\Togi\bin\Debug\TogiApi.pdb
 C:\Documents and Settings\ev\Belgelerim\Visual Studio 2008\Projects\TogiGit\Togi\bin\Debug\TimeLineControl.pdb
+C:\Project\07042009\Togi\obj\Debug\Togi.exe
+C:\Project\07042009\Togi\obj\Debug\Togi.pdb
+C:\Project\07042009\Togi\bin\Debug\Togi.exe
+C:\Project\07042009\Togi\bin\Debug\Togi.pdb
+C:\Project\07042009\Togi\bin\Debug\TimeLineControl.dll
+C:\Project\07042009\Togi\bin\Debug\TogiApi.dll
+C:\Project\07042009\Togi\bin\Debug\TogiApi.pdb
+C:\Project\07042009\Togi\bin\Debug\TimeLineControl.pdb
+C:\Project\07042009\Togi\obj\Debug\ResolveAssemblyReference.cache
+C:\Project\07042009\Togi\obj\Debug\Togi.Login.resources
+C:\Project\07042009\Togi\obj\Debug\Togi.Properties.Resources.resources
+C:\Project\07042009\Togi\obj\Debug\Togi.SettingsForm.resources
+C:\Project\07042009\Togi\obj\Debug\Togi.TimeLine.resources
+C:\Project\07042009\Togi\obj\Debug\Togi.csproj.GenerateResource.Cache
