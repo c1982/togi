@@ -6,15 +6,21 @@ namespace TogiApi
 {
     public class Tweet
     {
-        //Tweet
+        // Tweet
         public string Id { get; set; }
         public DateTime CreateAt { get; set; }
         public string Text { get; set; }
         public string Source { get; set; }
+
+        // Is?
         public bool isFavorite { get; set; }
         public bool isRead { get; set; }
+        public bool isTweet { get; set; }
+        public bool isReply { get; set; }
+        public bool isMessage { get; set; }
 
-        //User
+
+        // User
         public string UserId { get; set; }
         public string UserName { get; set; }
         public string UserScreenName { get; set; }
@@ -24,5 +30,8 @@ namespace TogiApi
         public string ReplyStatusId { get; set; }
         public string ReplyUserId { get; set; }
         public string ReplyScreenName { get; set; }
+
+        // Message
+
     }
 }

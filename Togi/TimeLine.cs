@@ -14,8 +14,8 @@ namespace Togi
     public partial class TimeLine : Form
     {
         private User TwitterUser;
-        public IList<Tweet> FriendsTimeLine { get; set; }
-        public IList<Tweet> RepliesTimeLine { get; set; }
+        public IList<TweetItem> FriendsTimeLine { get; set; }
+        public IList<TweetItem> RepliesTimeLine { get; set; }
 
         public TimeLine()
         {
@@ -49,8 +49,7 @@ namespace Togi
             }
 
             // TimeLine yükleniyor.
-            if(FriendsTimeLine != null)
-                FillTableTweet(FriendsTimeLine);
+            FillTableTweet(FriendsTimeLine);
 
             // Repliesler yukleniyor.
             LoadReplies();
@@ -88,33 +87,43 @@ namespace Togi
 
         private void GetReplies(object SinceId)
         {
+            IList<TweetItem> tmp_list = new List<TweetItem>();
             Twitter t = new Twitter(TwitterUser.UserName, TwitterUser.UserPass);
-            RepliesTimeLine = t.RepliesTimeLine((string)SinceId);
+            lock (this)
+            {
+                foreach (Tweet item in t.RepliesTimeLine((string)SinceId))
+                {
+                    tmp_list.Add(new TweetItem(item));
+                }
+
+                RepliesTimeLine = tmp_list;
+            }
         }
 
-        private void FillTableTweet(IList<Tweet> TweetList)
+        private void FillTableTweet(IList<TweetItem> TweetList)
         {
             int TableRowIndex = 0;
             Tablo.Controls.Clear();
 
             lock (this)
             {
-                foreach (Tweet item in TweetList)
+                foreach (TweetItem item in TweetList)
                 {
-                    TweetItem tw = new TweetItem(item);
-                    tw.Dock = DockStyle.Bottom;
+                    item.Dock = DockStyle.Bottom;
 
                     Tablo.RowStyles.Add(new RowStyle(SizeType.AutoSize));
                     Tablo.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
-                    Tablo.Controls.Add(tw, 1, TableRowIndex);
+                    Tablo.Controls.Add(item, 1, TableRowIndex);
                     TableRowIndex++;
                 }   
             }
+
+            this.Tablo.Focus();
         }
 
         private void tsRecents_Click(object sender, EventArgs e)
         {
-            FillTableTweet(RepliesTimeLine);
+            FillTableTweet(FriendsTimeLine);
         }
 
         private void tsReplys_Click(object sender, EventArgs e)

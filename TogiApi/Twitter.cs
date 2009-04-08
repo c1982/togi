@@ -31,7 +31,7 @@ namespace TogiApi
                 wClient.Headers.Add("X-Twitter-Client", "Togi");
                 wClient.Headers.Add("X-Twitter-Version", "0.3.0");
                 wClient.Headers.Add("X-Twitter-URL", "http://www.oguzhan.info/togi");
-
+                
                 if (UseProxy())
                 {
                     string ProxyUser;
@@ -117,6 +117,19 @@ namespace TogiApi
             return FriendsTimeLineParser(XmlString);
         }
 
+        public IList<Tweet> MessageTimeLine(string SinceId)
+        {
+            string XmlString;
+            string ApiUri;
+
+            ApiUri = String.IsNullOrEmpty(SinceId) ? "http://twitter.com/direct_messages.xml" :
+                "http://twitter.com/direct_messages.xml?since_id=" + SinceId;
+
+            XmlString = Istek(ApiUri, "GET", null);
+
+            return MessageTimeLineParser(XmlString);
+        }
+
         private IList<Tweet> FriendsTimeLineParser(string XmlString)
         {
             IList<Tweet> TimeLine = new List<Tweet>();
@@ -142,6 +155,31 @@ namespace TogiApi
             return TimeLine;
         }
 
+        private IList<Tweet> MessageTimeLineParser(string XmlString)
+        {
+            IList<Tweet> TimeLine = new List<Tweet>();
+
+            XmlDocument Xdoc = new XmlDocument();
+            XmlNodeList Liste = null;
+
+            Xdoc.LoadXml(XmlString);
+            XmlElement Kok = Xdoc.DocumentElement;
+
+            // TimeLine dolu ise.
+            if (Kok.SelectSingleNode("/direct-messages/direct_message") != null)
+            {
+                Liste = Xdoc.SelectNodes("/direct-messages/direct_message");
+
+                // Xml Listesi Aktarılıyor.
+                for (int i = 0; i < Liste.Count; i++)
+                {
+                    TimeLine.Add(CreateMessage(Liste[i]));
+                }
+            }
+
+            return TimeLine;
+        }
+
         private Tweet CreateTweet(XmlNode XmlTweet)
         {
             Tweet t = new Tweet();
@@ -161,6 +199,24 @@ namespace TogiApi
             t.UserName = XmlTweet.SelectSingleNode("user/name").InnerText;
             t.UserScreenName = XmlTweet.SelectSingleNode("user/screen_name").InnerText;
             t.ProfilImageUrl = XmlTweet.SelectSingleNode("user/profile_image_url").InnerText;
+
+            return t;
+        }
+
+        private Tweet CreateMessage(XmlNode XmlTweet)
+        {
+            Tweet t = new Tweet();
+            t.CreateAt = Utils.TarihVer(XmlTweet.SelectSingleNode("created_at").InnerText);
+            t.Id = XmlTweet.SelectSingleNode("id").InnerText;
+            t.isRead = false;
+            t.isMessage = true;
+
+            t.Text = XmlTweet.SelectSingleNode("text").InnerText;
+
+            t.UserId = XmlTweet.SelectSingleNode("sender/id").InnerText;
+            t.UserName = XmlTweet.SelectSingleNode("sender/name").InnerText;
+            t.UserScreenName = XmlTweet.SelectSingleNode("sender/screen_name").InnerText;
+            t.ProfilImageUrl = XmlTweet.SelectSingleNode("sender/profile_image_url").InnerText;
 
             return t;
         }

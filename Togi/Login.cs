@@ -9,13 +9,14 @@ using System.Threading;
 using TogiApi;
 using System.Collections;
 using TogiApi.Tools;
+using TimeLineControl;
 
 namespace Togi
 {
     public partial class Login : Form
     {
         public User LoginUser { get; set; }
-        public IList<Tweet> FriendsTimeLine { get; set; }
+        public IList<TweetItem> FriendsTimeLine { get; set; }
 
         private Thread lng;
         private string ScreenName;
@@ -73,7 +74,8 @@ namespace Togi
 
                 // TimeLine geliyor
                 SetTextBoxText("TimeLine yükleniyor...", lLoading);
-                FriendsTimeLine = login.FriendsTimeLine("");
+                FriendsTimeLine = LoadTweetItem(login.FriendsTimeLine(""));
+            
 
                 // User bilgileri geliyor
                 SetTextBoxText("Oturum açılıyor...", lLoading);
@@ -157,5 +159,19 @@ namespace Togi
             return CheckSave;
         }
 
+        private IList<TweetItem> LoadTweetItem(IList<Tweet> liste)
+        {
+            IList<TweetItem> fTimeLine_ = new List<TweetItem>();
+
+            lock (this)
+            {                
+                foreach (Tweet item in liste)
+                {
+                    fTimeLine_.Add(new TweetItem(item));
+                }
+            }
+
+            return fTimeLine_;
+        }
     }
 }
