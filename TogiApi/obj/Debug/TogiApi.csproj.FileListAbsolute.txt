@@ -18,3 +18,8 @@ C:\togi\08042008\TogiApi\bin\Debug\TogiApi.pdb
 C:\togi\08042008\TogiApi\obj\Debug\ResolveAssemblyReference.cache
 C:\togi\08042008\TogiApi\obj\Debug\TogiApi.dll
 C:\togi\08042008\TogiApi\obj\Debug\TogiApi.pdb
+C:\togi\09042008\TogiApi\bin\Debug\TogiApi.dll
+C:\togi\09042008\TogiApi\bin\Debug\TogiApi.pdb
+C:\togi\09042008\TogiApi\obj\Debug\ResolveAssemblyReference.cache
+C:\togi\09042008\TogiApi\obj\Debug\TogiApi.dll
+C:\togi\09042008\TogiApi\obj\Debug\TogiApi.pdb

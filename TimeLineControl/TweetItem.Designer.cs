@@ -102,41 +102,41 @@
             this.ItemMenu.Name = "ItemMenu";
             this.ItemMenu.ShowImageMargin = false;
             this.ItemMenu.ShowItemToolTips = false;
-            this.ItemMenu.Size = new System.Drawing.Size(141, 120);
+            this.ItemMenu.Size = new System.Drawing.Size(136, 120);
             // 
             // replyToolStripMenuItem
             // 
             this.replyToolStripMenuItem.Name = "replyToolStripMenuItem";
-            this.replyToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.replyToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.replyToolStripMenuItem.Text = "Reply";
             // 
             // reTweetToolStripMenuItem
             // 
             this.reTweetToolStripMenuItem.Name = "reTweetToolStripMenuItem";
-            this.reTweetToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.reTweetToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.reTweetToolStripMenuItem.Text = "Re Tweet";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(137, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(132, 6);
             // 
             // messageToolStripMenuItem
             // 
             this.messageToolStripMenuItem.Name = "messageToolStripMenuItem";
-            this.messageToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.messageToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.messageToolStripMenuItem.Text = "Message User";
             // 
             // markAsFavoritesToolStripMenuItem
             // 
             this.markAsFavoritesToolStripMenuItem.Name = "markAsFavoritesToolStripMenuItem";
-            this.markAsFavoritesToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.markAsFavoritesToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.markAsFavoritesToolStripMenuItem.Text = "Mark as Favorite";
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.deleteToolStripMenuItem.Text = "Delete Tweet";
             // 
             // lTime

@@ -79,11 +79,21 @@ namespace TogiApi
             return bool.Parse(GetProxy);
         }
 
+
+        public void Update(string UpdateText)
+        {
+            if (String.IsNullOrEmpty(UpdateText))
+                return;
+
+            NameValueCollection Postlar = new NameValueCollection();
+            Postlar.Add("status", UpdateText);
+            Postlar.Add("source", "togi");
+
+            Istek("http://twitter.com/statuses/update.xml", "POST", Postlar);
+        }
+
         public User ShowUser(string ScreenName)
         {
-            //NameValueCollection Gonder = new NameValueCollection();
-            //Gonder.Add(String.Empty, String.Empty);
-
             string XmlData = Istek(String.Format("http://twitter.com/users/show/{0}.xml",ScreenName)
                 ,"GET"
                 , null);
@@ -101,7 +111,7 @@ namespace TogiApi
 
             XmlString = Istek(ApiUri, "GET", null);
 
-            return FriendsTimeLineParser(XmlString);
+            return FriendsTimeLineParser(XmlString, Tweet.TweetTypes.Normal);
         }
 
         public IList<Tweet> RepliesTimeLine(string SinceId)
@@ -114,7 +124,7 @@ namespace TogiApi
 
             XmlString = Istek(ApiUri, "GET", null);
 
-            return FriendsTimeLineParser(XmlString);
+            return FriendsTimeLineParser(XmlString, Tweet.TweetTypes.Reply);
         }
 
         public IList<Tweet> MessageTimeLine(string SinceId)
@@ -130,7 +140,7 @@ namespace TogiApi
             return MessageTimeLineParser(XmlString);
         }
 
-        private IList<Tweet> FriendsTimeLineParser(string XmlString)
+        private IList<Tweet> FriendsTimeLineParser(string XmlString, Tweet.TweetTypes tip)
         {
             IList<Tweet> TimeLine = new List<Tweet>();
 
@@ -148,7 +158,7 @@ namespace TogiApi
                 // Xml Listesi Aktarılıyor.
                 for (int i = 0; i < Liste.Count; i++)
                 {
-                    TimeLine.Add(CreateTweet(Liste[i]));
+                    TimeLine.Add(CreateTweet(Liste[i], tip));
                 }
             }
 
@@ -180,7 +190,7 @@ namespace TogiApi
             return TimeLine;
         }
 
-        private Tweet CreateTweet(XmlNode XmlTweet)
+        private Tweet CreateTweet(XmlNode XmlTweet, Tweet.TweetTypes tip)
         {
             Tweet t = new Tweet();
             t.CreateAt = Utils.TarihVer(XmlTweet.SelectSingleNode("created_at").InnerText);
@@ -191,6 +201,8 @@ namespace TogiApi
             t.ReplyScreenName = XmlTweet.SelectSingleNode("in_reply_to_screen_name").InnerText;
             t.ReplyStatusId = XmlTweet.SelectSingleNode("in_reply_to_status_id").InnerText;
             t.ReplyUserId = XmlTweet.SelectSingleNode("in_reply_to_user_id").InnerText;
+
+            t.TweetType = tip;
 
             t.Source = XmlTweet.SelectSingleNode("source").InnerText;
             t.Text = XmlTweet.SelectSingleNode("text").InnerText;
@@ -209,7 +221,7 @@ namespace TogiApi
             t.CreateAt = Utils.TarihVer(XmlTweet.SelectSingleNode("created_at").InnerText);
             t.Id = XmlTweet.SelectSingleNode("id").InnerText;
             t.isRead = false;
-            t.isMessage = true;
+            t.TweetType = Tweet.TweetTypes.Message;
 
             t.Text = XmlTweet.SelectSingleNode("text").InnerText;
 

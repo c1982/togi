@@ -15,9 +15,7 @@ namespace TogiApi
         // Is?
         public bool isFavorite { get; set; }
         public bool isRead { get; set; }
-        public bool isTweet { get; set; }
-        public bool isReply { get; set; }
-        public bool isMessage { get; set; }
+        public TweetTypes TweetType{ get; set; }
 
 
         // User
@@ -33,5 +31,11 @@ namespace TogiApi
 
         // Message
 
+        public enum TweetTypes
+        {
+            Normal,
+            Reply,
+            Message
+        }
     }
 }

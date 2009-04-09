@@ -11,18 +11,18 @@ namespace TogiApi
 {
     public class Utils
     {
-        public static Bitmap GetImage(string Uri)
+        public static Bitmap GetImage(string Uri_)
         {
             Bitmap Resim;
-
             try
             {
                 using (WebClient istek = new WebClient())
                 {
-                    using (Stream Strm = istek.OpenRead(Uri))
+                    using (Stream Strm = istek.OpenRead(Uri_))
                     {
-                        Resim = new Bitmap(Strm);
-                        istek.Dispose();
+                        //istek.OpenReadAsync(new Uri(Uri_));
+
+                        Resim = new Bitmap(Strm);                        
                         Strm.Dispose();
                     }
                 }

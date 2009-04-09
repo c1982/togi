@@ -40,6 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog.Designer.cs">
+      <DependentUpon>Dialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -48,6 +54,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Dialog.resx">
+      <DependentUpon>Dialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -91,6 +100,8 @@
     <Compile Include="TimeLine.Designer.cs">
       <DependentUpon>TimeLine.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tools\HandleKeys.cs" />
+    <Compile Include="Tools\WinAPI.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TimeLineControl\TimeLineControl.csproj">
@@ -140,6 +151,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\powered-by-twitter-sig.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\favicon_online.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\favicon_offline.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arr.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

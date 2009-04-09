@@ -51,11 +51,15 @@
             // tSname
             // 
             this.tSname.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.T1.SetColumnSpan(this.tSname, 2);
             this.tSname.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tSname.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tSname.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.tSname.Location = new System.Drawing.Point(3, 15);
             this.tSname.MaxLength = 50;
             this.tSname.Name = "tSname";
-            this.tSname.Size = new System.Drawing.Size(217, 20);
+            this.tSname.ShortcutsEnabled = false;
+            this.tSname.Size = new System.Drawing.Size(217, 23);
             this.tSname.TabIndex = 0;
             this.tSname.Text = "c1982";
             // 
@@ -63,11 +67,13 @@
             // 
             this.tPass.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tPass.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tPass.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tPass.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.tPass.Location = new System.Drawing.Point(3, 70);
             this.tPass.MaxLength = 50;
             this.tPass.Name = "tPass";
             this.tPass.PasswordChar = '*';
-            this.tPass.Size = new System.Drawing.Size(217, 20);
+            this.tPass.Size = new System.Drawing.Size(217, 23);
             this.tPass.TabIndex = 1;
             this.tPass.Text = "osman12";
             // 
@@ -123,7 +129,7 @@
             this.T1.Controls.Add(this.label2, 0, 0);
             this.T1.Controls.Add(this.label3, 0, 2);
             this.T1.Controls.Add(this.tPass, 0, 3);
-            this.T1.Controls.Add(this.tSname, 0, 1);
+            this.T1.Controls.Add(this.tSname, 1, 0);
             this.T1.Location = new System.Drawing.Point(3, 3);
             this.T1.Name = "T1";
             this.T1.RowCount = 4;
@@ -223,11 +229,11 @@
             this.BackgroundImage = global::Togi.Properties.Resources.bg2;
             this.ClientSize = new System.Drawing.Size(245, 260);
             this.ControlBox = false;
-            this.Controls.Add(this.P2);
             this.Controls.Add(this.lClose);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.P1);
+            this.Controls.Add(this.P2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;

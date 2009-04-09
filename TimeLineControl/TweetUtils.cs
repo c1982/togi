@@ -24,7 +24,7 @@ namespace TimeLineControl
 
         public static void UserLinkEkle(LinkLabel Status)
         {
-            string Desen = "@[a-zA-Z0-9]+";
+            string Desen = "@[a-zA-Z0-9_]+";
 
             MatchCollection Uyanlar = Regex.Matches(Status.Text, Desen);
             for (int ls = 0; ls < Uyanlar.Count; ls++)
@@ -63,7 +63,7 @@ namespace TimeLineControl
 
             if (timeSpan <= TimeSpan.FromDays(365))
             {
-                return timeSpan.Days > 30 ? timeSpan.Days / 30 + "ay önce" : "geçen ay";
+                return timeSpan.Days > 30 ? timeSpan.Days / 30 + " ay önce" : "geçen ay";
             }
 
             return timeSpan.Days > 365 ? timeSpan.Days / 365 + " yıl önce" : "geçen sene";
