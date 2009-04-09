@@ -266,5 +266,10 @@ namespace Togi
                 dForm.Dispose();
             }
         }
+
+        private void Zaman_Tick(object sender, EventArgs e)
+        {
+
+        }
     }
 }
