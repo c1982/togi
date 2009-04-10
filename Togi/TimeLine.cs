@@ -19,6 +19,11 @@ namespace Togi
         public IList<TweetItem> MessagesTimeLine { get; set; }
 
         private const int WM_HOTKEY = 0x0312;
+
+        private delegate void del_OpenNoticeForm(TweetItem t);
+        private delegate void SetTextToolStripButtons(ToolStripButton ts, int Count_);
+
+        #region Construct
         public TimeLine()
         {
             InitializeComponent();
@@ -29,11 +34,6 @@ namespace Togi
             // Togi is Offline;
             TogiNotify.Icon = Properties.Resources.favicon_offline;
         }        
-
-        private void lClose_Click_1(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
 
         private void TimeLine_Load(object sender, EventArgs e)
         {
@@ -54,6 +54,9 @@ namespace Togi
 
                     //WndProc'u çalıştırır.
                     Tools.HandleKeys.RegisterRecordKey(this.Handle);
+
+                    // Check Schedule
+                    SetZamanTimer();
                 }
                 else
                 {                    
@@ -66,17 +69,9 @@ namespace Togi
                 FillTableTweet(FriendsTimeLine);
 
             // Repliesler yukleniyor.
-            Thread l_replies = new Thread(new ThreadStart(LoadReplies));
-            l_replies.SetApartmentState(ApartmentState.STA);
-            l_replies.Start();                       
-        }
-
-        private void tsAdvanced_Click(object sender, EventArgs e)
-        {
-            using (SettingsForm s = new SettingsForm())
-            {
-                s.ShowDialog();                                    
-            }
+            //Thread l_replies = new Thread(new ThreadStart(LoadReplies));
+            //l_replies.SetApartmentState(ApartmentState.STA);
+            //l_replies.Start();                       
         }
 
         private void TableCtor()
@@ -108,9 +103,21 @@ namespace Togi
         {
             string SinceId;
 
-            SinceId = Regedit.GetKey_("since_replies");
+            SinceId = Regedit.GetKey_("since_reply");
+            SinceId = String.IsNullOrEmpty(SinceId) ? "" : SinceId;
 
             Thread t_replies = new Thread(new ParameterizedThreadStart(GetReplies));
+            t_replies.SetApartmentState(ApartmentState.STA);
+            t_replies.Start(SinceId);
+        }
+
+        private void LoadMessages()
+        {
+            string SinceId;
+            SinceId = Regedit.GetKey_("since_message");
+            SinceId = String.IsNullOrEmpty(SinceId) ? "" : SinceId;
+
+            Thread t_replies = new Thread(new ParameterizedThreadStart(GetMessages));
             t_replies.SetApartmentState(ApartmentState.STA);
             t_replies.Start(SinceId);
         }
@@ -133,18 +140,11 @@ namespace Togi
             }
         }
 
-        private void LoadMessages()
-        {
-            string SinceId;
-
-            SinceId = Regedit.GetKey_("since_messages");
-            Thread t_replies = new Thread(new ParameterizedThreadStart(GetMessages));
-            t_replies.SetApartmentState(ApartmentState.STA);
-            t_replies.Start(SinceId);
-        }
-
         private void GetMessages(object SinceId)
         {
+            if (TwitterUser == null)
+                return;
+
             IList<TweetItem> tmp_list = new List<TweetItem>();
             Twitter t = new Twitter(TwitterUser.UserName, TwitterUser.UserPass);
             lock (this)
@@ -155,6 +155,22 @@ namespace Togi
                 }
 
                 MessagesTimeLine = tmp_list;
+            }
+        }
+
+        #endregion
+
+        #region Events
+        private void lClose_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void tsAdvanced_Click(object sender, EventArgs e)
+        {
+            using (SettingsForm s = new SettingsForm())
+            {
+                s.ShowDialog();
             }
         }
 
@@ -186,16 +202,20 @@ namespace Togi
 
         private void tsRecents_Click(object sender, EventArgs e)
         {
+            tsRecents.Text = String.Empty;
             FillTableTweet(FriendsTimeLine);
         }
 
         private void tsReplys_Click(object sender, EventArgs e)
         {
+            tsReplys.Text = String.Empty;
             FillTableTweet(RepliesTimeLine);
         }
 
         private void tsMessages_Click(object sender, EventArgs e)
         {
+            tsMessages.Text = String.Empty;
+
             // Mesajlar yukleniyor.
             if (MessagesTimeLine == null)
             {
@@ -209,7 +229,7 @@ namespace Togi
 
                 } while (l_messages.IsAlive);
 
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
 
                 FillTableTweet(MessagesTimeLine);
             }
@@ -267,9 +287,103 @@ namespace Togi
             }
         }
 
+        private void SetZamanTimer()
+        {
+            string IntTimeString = Regedit.GetKey_("check_time");
+            int IntTime = String.IsNullOrEmpty(IntTimeString) ? 3 : int.Parse(IntTimeString);
+            IntTime = (IntTime * 60) * 1000;
+
+            Zaman.Enabled = true;
+            Zaman.Interval = 25000;
+            Zaman.Start();
+        }        
+
         private void Zaman_Tick(object sender, EventArgs e)
         {
+            Thread tCheck = new Thread(new ThreadStart(CheckNewTweets));
+            tCheck.SetApartmentState(ApartmentState.STA);
+            tCheck.IsBackground = true;
+            tCheck.Start();
+        }
+
+        #endregion
+
+        #region CheckNewTweets
+
+        private void CheckNewTweets()
+        {
+            int NewTweetCount;
+
+            Tools.CheckTweets chck = new Togi.Tools.CheckTweets(TwitterUser);
+            AddNewTweetInList(chck.CheckTimeLine(), Tweet.TweetTypes.Normal, out NewTweetCount);
+            SetTweetNumber(tsRecents, NewTweetCount);
+
+            AddNewTweetInList(chck.CheckReplies(), Tweet.TweetTypes.Reply, out NewTweetCount);
+            SetTweetNumber(tsReplys, NewTweetCount);
+
+            AddNewTweetInList(chck.CheckMessages(), Tweet.TweetTypes.Message, out NewTweetCount);
+            SetTweetNumber(tsMessages, NewTweetCount);
+        }
+
+        private void AddNewTweetInList(IList<TweetItem> tList, Tweet.TweetTypes tip, out int NewTweetCount)
+        {
+            NewTweetCount = 0;
+            lock (this)
+            {
+                if (tList != null)
+                {
+                    NewTweetCount = tList.Count;
+                    foreach (TweetItem item in tList)
+                    {
+                        switch (tip)
+                        {
+                            case Tweet.TweetTypes.Normal:
+                                FriendsTimeLine.Insert(0, item);                                
+                                break;
+                            case Tweet.TweetTypes.Reply:
+                                RepliesTimeLine.Insert(0, item);
+                                break;
+                            case Tweet.TweetTypes.Message:
+                                MessagesTimeLine.Insert(0, item);
+                                break;
+                            default:
+                                break;
+                        }
+
+                        // Show Notice
+                        if (Regedit.GetKey_("check_notice").Equals("true"))
+                        {
+                            OpenNoticeForm(item);                            
+                        }
+                    }                   
+                }
+            }
+        }
+        
+        private void SetTweetNumber(ToolStripButton ts, int Count_)
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new SetTextToolStripButtons(SetTweetNumber), new object[]{ts, Count_});
+                return;
+            }
+
+            if(Count_ > 0)
+                ts.Text = Count_.ToString();
 
         }
+
+        private void OpenNoticeForm(TweetItem t)
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new del_OpenNoticeForm(OpenNoticeForm), new object[] { t});
+                return;
+            }
+
+            Notification n = new Notification(t);
+            n.Notice();
+        }
+        #endregion
     }
 }

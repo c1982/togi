@@ -19,13 +19,17 @@ namespace TimeLineControl
         private Bitmap Resim;
         private WebClient ResimIstegi;
 
+        public TweetItem()
+        {
+            InitializeComponent();
+        }
+
         public TweetItem(Tweet t)
         {
             InitializeComponent();
             ItemTweet = t;
             
-
-            SetControlValues();
+            
         }
 
         void ResimIstegi_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
@@ -147,6 +151,11 @@ namespace TimeLineControl
                 default:
                     break;
             }
+        }
+
+        private void TweetItem_Load(object sender, EventArgs e)
+        {
+            SetControlValues();
         }
     }
 }

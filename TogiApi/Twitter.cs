@@ -79,7 +79,6 @@ namespace TogiApi
             return bool.Parse(GetProxy);
         }
 
-
         public void Update(string UpdateText)
         {
             if (String.IsNullOrEmpty(UpdateText))
@@ -107,7 +106,7 @@ namespace TogiApi
             string ApiUri;
 
             ApiUri = String.IsNullOrEmpty(SinceId) ? "http://twitter.com/statuses/friends_timeline.xml" :
-                "http://twitter.com/statuses/friends_timeline.xml?since_id="+ SinceId;
+                "http://twitter.com/statuses/friends_timeline.xml?since_id=" + SinceId; //+"&count=50";
 
             XmlString = Istek(ApiUri, "GET", null);
 
@@ -162,6 +161,9 @@ namespace TogiApi
                 }
             }
 
+            if (TimeLine != null && TimeLine.Count > 0)
+                SetSinceId(TimeLine[0]);
+
             return TimeLine;
         }
 
@@ -186,6 +188,9 @@ namespace TogiApi
                     TimeLine.Add(CreateMessage(Liste[i]));
                 }
             }
+
+            if(TimeLine != null && TimeLine.Count > 0)
+                SetSinceId(TimeLine[0]);
 
             return TimeLine;
         }
@@ -231,6 +236,24 @@ namespace TogiApi
             t.ProfilImageUrl = XmlTweet.SelectSingleNode("sender/profile_image_url").InnerText;
 
             return t;
+        }
+
+        private void SetSinceId(Tweet t)
+        {
+            switch (t.TweetType)
+            {
+                case Tweet.TweetTypes.Normal:
+                    Regedit.SetKey_("since_recent", t.Id);
+                    break;
+                case Tweet.TweetTypes.Reply:
+                    Regedit.SetKey_("since_reply", t.Id);
+                    break;
+                case Tweet.TweetTypes.Message:
+                    Regedit.SetKey_("since_message", t.Id);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

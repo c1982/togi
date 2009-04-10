@@ -98,3 +98,4 @@ C:\togi\10042008\Togi\obj\Debug\Togi.Properties.Resources.resources
 C:\togi\10042008\Togi\obj\Debug\Togi.SettingsForm.resources
 C:\togi\10042008\Togi\obj\Debug\Togi.TimeLine.resources
 C:\togi\10042008\Togi\obj\Debug\Togi.csproj.GenerateResource.Cache
+C:\togi\10042008\Togi\obj\Debug\Togi.Notification.resources

@@ -61,7 +61,7 @@
             this.tSname.ShortcutsEnabled = false;
             this.tSname.Size = new System.Drawing.Size(217, 23);
             this.tSname.TabIndex = 0;
-            this.tSname.Text = "c1982";
+            this.tSname.Text = "tellibahce";
             // 
             // tPass
             // 

@@ -69,16 +69,19 @@ namespace Togi
         {
             //try
             //{
+            string SinceRecent = Regedit.GetKey_("since_recent");
                 Thread.Sleep(1000);
                 Twitter login = new Twitter(ScreenName, Password);
 
                 // TimeLine geliyor
-                SetTextBoxText("TimeLine yükleniyor...", lLoading);
+                SetTextBoxText("Getting Timeline...", lLoading);
+                FriendsTimeLine = LoadTweetItem(login.FriendsTimeLine(SinceRecent));
+
+            if(FriendsTimeLine == null || FriendsTimeLine.Count < 20)
                 FriendsTimeLine = LoadTweetItem(login.FriendsTimeLine(""));
-            
 
                 // User bilgileri geliyor
-                SetTextBoxText("Oturum açılıyor...", lLoading);
+                SetTextBoxText("Opening Session...", lLoading);
                 LoginUser = login.ShowUser(ScreenName);
                 LoginUser.UserName = ScreenName;
                 LoginUser.UserPass = Password;

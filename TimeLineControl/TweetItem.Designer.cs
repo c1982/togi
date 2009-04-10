@@ -162,6 +162,7 @@
             this.Controls.Add(this.ProfileImage);
             this.Name = "TweetItem";
             this.Size = new System.Drawing.Size(296, 61);
+            this.Load += new System.EventHandler(this.TweetItem_Load);
             this.MouseLeave += new System.EventHandler(this.TweetItem_MouseLeave);
             this.MouseHover += new System.EventHandler(this.TweetItem_MouseHover);
             this.MouseEnter += new System.EventHandler(this.TweetItem_MouseHover);
