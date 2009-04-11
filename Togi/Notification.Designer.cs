@@ -45,6 +45,7 @@
             this.ClientSize = new System.Drawing.Size(295, 60);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Notification";
+            this.Opacity = 0.7;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Togi Notice";

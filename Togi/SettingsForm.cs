@@ -46,6 +46,31 @@ namespace Togi
 
         private void bProxySave_Click(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(tProxyServer.Text))
+            {
+                tProxyServer.Focus();
+                return;
+            }
+
+            if (String.IsNullOrEmpty(tProxyPort.Text))
+            {
+                tProxyPort.Focus();
+                return;
+            }
+
+            if (String.IsNullOrEmpty(tProxyUser.Text))
+            {
+                tProxyUser.Focus();
+                return;
+            }
+
+            if (String.IsNullOrEmpty(tProxyPass.Text))
+            {
+                tProxyPass.Focus();
+                return;
+            }
+
+
             Regedit.SetKey_("proxy_server", tProxyServer.Text);
             Regedit.SetKey_("proxy_port", tProxyPort.Text);
             Regedit.SetKey_("proxy_user", tProxyUser.Text);

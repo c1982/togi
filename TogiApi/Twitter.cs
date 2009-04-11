@@ -32,6 +32,7 @@ namespace TogiApi
                 wClient.Headers.Add("X-Twitter-Version", "0.3.0");
                 wClient.Headers.Add("X-Twitter-URL", "http://www.oguzhan.info/togi");
                 
+                // Proxy Kullanılacak mı?
                 if (UseProxy())
                 {
                     string ProxyUser;
@@ -84,11 +85,21 @@ namespace TogiApi
             if (String.IsNullOrEmpty(UpdateText))
                 return;
 
+            // Url Kısaltma Kontrolü.
+            if (Regedit.GetKey_("check_shorturl").Equals("true"))
+            {
+                Tools.ShortUrl kisalt_ = new TogiApi.Tools.ShortUrl(UpdateText);
+                UpdateText = kisalt_.NewText;
+            }
+
+            // Parametreler
             NameValueCollection Postlar = new NameValueCollection();
             Postlar.Add("status", UpdateText);
             Postlar.Add("source", "togi");
 
-            Istek("http://twitter.com/statuses/update.xml", "POST", Postlar);
+            Istek("http://twitter.com/statuses/update.xml", 
+                "POST", 
+                Postlar);
         }
 
         public User ShowUser(string ScreenName)

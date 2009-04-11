@@ -42,7 +42,7 @@ namespace Togi
         public void Notice()
         {
             ShowWindow(Handle, SW_SHOWNOACTIVATE);
-            SetWindowPos(Handle, HWND_TOPMOST, Screen_.Width, Screen_.Bottom, this.Width, 0, SWP_NOACTIVATE);
+            //SetWindowPos(Handle, HWND_TOPMOST, Screen_.Width, Screen_.Bottom, this.Width, 0, SWP_NOACTIVATE);
             NoticeTime.Start();
         }
 

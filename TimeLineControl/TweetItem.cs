@@ -9,9 +9,11 @@ using TogiApi;
 using System.Threading;
 using System.Net;
 using System.IO;
+using System.ComponentModel.Design;
 
 namespace TimeLineControl
 {
+    [Designer("System.Windows.Forms.Design.ParentControlDesigner, System.Design", typeof(IDesigner))] 
     public partial class TweetItem : UserControl
     {
         delegate void SetPicture(Bitmap Resim);
@@ -22,14 +24,13 @@ namespace TimeLineControl
         public TweetItem()
         {
             InitializeComponent();
+            this.Dispose(false);            
         }
 
         public TweetItem(Tweet t)
         {
             InitializeComponent();
-            ItemTweet = t;
-            
-            
+            ItemTweet = t;                       
         }
 
         void ResimIstegi_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
@@ -52,8 +53,11 @@ namespace TimeLineControl
             TweetUtils.LinkEkle(TweetText);
 
             // Resim Aliniyor.
-            Thread img = new Thread(new ParameterizedThreadStart(ShowProfileImage));
-            img.Start(ItemTweet.ProfilImageUrl);            
+            if (Resim == null)
+            {
+                Thread img = new Thread(new ParameterizedThreadStart(ShowProfileImage));
+                img.Start(ItemTweet.ProfilImageUrl);
+            }
         }
 
         private void ShowProfileImage(object ImageUrl)

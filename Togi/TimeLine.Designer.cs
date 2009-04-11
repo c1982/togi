@@ -49,9 +49,16 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lScreenName = new System.Windows.Forms.Label();
             this.TogiNotify = new System.Windows.Forms.NotifyIcon(this.components);
+            this.NotifyMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsShow = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsExit = new System.Windows.Forms.ToolStripMenuItem();
             this.Zaman = new System.Windows.Forms.Timer(this.components);
+            this.tsCheckTweetsNow = new System.Windows.Forms.ToolStripMenuItem();
             this.tsDugmeler.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.NotifyMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // tsDugmeler
@@ -273,13 +280,59 @@
             // 
             // TogiNotify
             // 
+            this.TogiNotify.ContextMenuStrip = this.NotifyMenu;
             this.TogiNotify.Icon = ((System.Drawing.Icon)(resources.GetObject("TogiNotify.Icon")));
-            this.TogiNotify.Text = "TogiNotify";
+            this.TogiNotify.Text = "Togi Twitter Client";
             this.TogiNotify.Visible = true;
+            // 
+            // NotifyMenu
+            // 
+            this.NotifyMenu.BackgroundImage = global::Togi.Properties.Resources.bg2;
+            this.NotifyMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.changeUserToolStripMenuItem,
+            this.tsCheckTweetsNow,
+            this.toolStripSeparator1,
+            this.tsExit,
+            this.tsShow});
+            this.NotifyMenu.Name = "NotifyMenu";
+            this.NotifyMenu.ShowImageMargin = false;
+            this.NotifyMenu.Size = new System.Drawing.Size(151, 120);
+            // 
+            // tsShow
+            // 
+            this.tsShow.Name = "tsShow";
+            this.tsShow.Size = new System.Drawing.Size(150, 22);
+            this.tsShow.Text = "Show";
+            this.tsShow.Click += new System.EventHandler(this.tsShow_Click);
+            // 
+            // changeUserToolStripMenuItem
+            // 
+            this.changeUserToolStripMenuItem.Name = "changeUserToolStripMenuItem";
+            this.changeUserToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.changeUserToolStripMenuItem.Text = "Change User";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(147, 6);
+            // 
+            // tsExit
+            // 
+            this.tsExit.Name = "tsExit";
+            this.tsExit.Size = new System.Drawing.Size(150, 22);
+            this.tsExit.Text = "Exit";
+            this.tsExit.Click += new System.EventHandler(this.tsExit_Click);
             // 
             // Zaman
             // 
             this.Zaman.Tick += new System.EventHandler(this.Zaman_Tick);
+            // 
+            // tsCheckTweetsNow
+            // 
+            this.tsCheckTweetsNow.Name = "tsCheckTweetsNow";
+            this.tsCheckTweetsNow.Size = new System.Drawing.Size(150, 22);
+            this.tsCheckTweetsNow.Text = "Check Tweets Now";
+            this.tsCheckTweetsNow.Click += new System.EventHandler(this.Zaman_Tick);
             // 
             // TimeLine
             // 
@@ -301,6 +354,7 @@
             this.tsDugmeler.ResumeLayout(false);
             this.tsDugmeler.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.NotifyMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -328,6 +382,12 @@
         private System.Windows.Forms.ToolStripMenuItem tsChangeUser;
         private System.Windows.Forms.NotifyIcon TogiNotify;
         private System.Windows.Forms.Timer Zaman;
+        private System.Windows.Forms.ContextMenuStrip NotifyMenu;
+        private System.Windows.Forms.ToolStripMenuItem tsShow;
+        private System.Windows.Forms.ToolStripMenuItem tsExit;
+        private System.Windows.Forms.ToolStripMenuItem changeUserToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem tsCheckTweetsNow;
 
     }
 }

@@ -6,7 +6,7 @@ using TimeLineControl;
 
 namespace Togi.Tools
 {
-    public class CheckTweets
+    public class CheckTweets: IDisposable
     {
         private User TwetterUser;
         private Twitter TwitterApi;
@@ -57,5 +57,28 @@ namespace Togi.Tools
 
             return tmp_list;
         }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+       protected virtual void Dispose(bool disposing) 
+       {
+          if (disposing) 
+          {
+
+          }
+       }
+
+
+       ~CheckTweets()
+       {
+
+          Dispose (false);
+       }
+
+
     }
 }

@@ -21,7 +21,7 @@ namespace Togi
         private const int WM_HOTKEY = 0x0312;
 
         private delegate void del_OpenNoticeForm(TweetItem t);
-        private delegate void SetTextToolStripButtons(ToolStripButton ts, int Count_);
+        private delegate void SetTextToolStripButtons(ToolStripButton ts, int Count_);        
 
         #region Construct
         public TimeLine()
@@ -176,33 +176,46 @@ namespace Togi
 
         private void FillTableTweet(IList<TweetItem> TweetList)
         {
-            int TableRowIndex = 0;
-            Tablo.Visible = false;
-            Tablo.Controls.Clear();
 
-            lock (this)
+            if (TweetList == null)
+                return;
+
+            int TableRowIndex = 0;
+            //Tablo.Visible = false;
+            Tablo.Controls.Clear();
+            Tablo.RowStyles.Clear();
+            
+            
+            lock (TweetList)
             {
+                IList<TweetItem> tmpList = TweetList;
+
                 if (TweetList != null)
                 {
-                    foreach (TweetItem item in TweetList)
+                    foreach (TweetItem item in tmpList)
                     {
-                        item.Dock = DockStyle.Bottom;
-
-                        Tablo.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-                        Tablo.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
-                        Tablo.Controls.Add(item, 1, TableRowIndex);
-                        TableRowIndex++;
+                        //if (!item.IsDisposed)
+                        //{
+                            item.Dock = DockStyle.Bottom;
+                            Tablo.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+                            Tablo.Controls.Add(item, 1, TableRowIndex);
+                            TableRowIndex++;
+                        //}
                     }
                 }
             }
 
-            Tablo.Visible = true;
+            //Tablo.ResumeLayout();
+            //Tablo.Visible = true;
             Tablo.Focus();
         }
 
         private void tsRecents_Click(object sender, EventArgs e)
         {
             tsRecents.Text = String.Empty;
+
+            //Thread k = new Thread(new ParameterizedThreadStart(FillTableTweet));
+            //k.Start(FriendsTimeLine);
             FillTableTweet(FriendsTimeLine);
         }
 
@@ -280,7 +293,6 @@ namespace Togi
             }
             else
             {
-
                 Dialog dForm = new Dialog(TwitterUser);
                 dForm.ShowDialog();
                 dForm.Dispose();
@@ -294,7 +306,7 @@ namespace Togi
             IntTime = (IntTime * 60) * 1000;
 
             Zaman.Enabled = true;
-            Zaman.Interval = 25000;
+            Zaman.Interval = IntTime;
             Zaman.Start();
         }        
 
@@ -302,8 +314,17 @@ namespace Togi
         {
             Thread tCheck = new Thread(new ThreadStart(CheckNewTweets));
             tCheck.SetApartmentState(ApartmentState.STA);
-            tCheck.IsBackground = true;
             tCheck.Start();
+        }
+
+        private void tsExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void tsShow_Click(object sender, EventArgs e)
+        {
+            this.Show();
         }
 
         #endregion
@@ -314,46 +335,132 @@ namespace Togi
         {
             int NewTweetCount;
 
-            Tools.CheckTweets chck = new Togi.Tools.CheckTweets(TwitterUser);
-            AddNewTweetInList(chck.CheckTimeLine(), Tweet.TweetTypes.Normal, out NewTweetCount);
-            SetTweetNumber(tsRecents, NewTweetCount);
+            using (Tools.CheckTweets chck = new Togi.Tools.CheckTweets(TwitterUser))
+            {
+                bool ShowNotice = bool.Parse(Regedit.GetKey_("check_notice"));
 
-            AddNewTweetInList(chck.CheckReplies(), Tweet.TweetTypes.Reply, out NewTweetCount);
-            SetTweetNumber(tsReplys, NewTweetCount);
+                //#region Recents
+                //IList<TweetItem> tmp_recents = chck.CheckTimeLine();
+                //NewTweetCount = tmp_recents.Count;
 
-            AddNewTweetInList(chck.CheckMessages(), Tweet.TweetTypes.Message, out NewTweetCount);
-            SetTweetNumber(tsMessages, NewTweetCount);
+                //foreach (TweetItem it in tmp_recents)
+                //{
+                //    FriendsTimeLine.Insert(0, it);
+
+                //    if(ShowNotice)
+                //        OpenNoticeForm(it);
+                //}
+
+                //SetTweetNumber(tsRecents, NewTweetCount);
+                //#endregion
+
+                //#region Replies
+                //IList<TweetItem> tmp_replies= chck.CheckReplies();
+                //NewTweetCount = tmp_replies.Count;
+
+                //foreach (TweetItem it in tmp_replies)
+                //{
+                //    RepliesTimeLine.Insert(0, it);
+
+                //    if (ShowNotice)
+                //        OpenNoticeForm(it);
+                //}
+                //SetTweetNumber(tsReplys, NewTweetCount);
+                //#endregion
+
+                //#region Messages
+                //IList<TweetItem> tmp_messages = chck.CheckMessages();
+                //NewTweetCount = tmp_messages.Count;
+
+                //foreach (TweetItem it in tmp_messages)
+                //{
+                //    MessagesTimeLine.Insert(0, it);
+
+                //    if (ShowNotice)
+                //        OpenNoticeForm(it);
+                //}
+                //SetTweetNumber(tsMessages, NewTweetCount);
+                //#endregion
+
+                AddNewTweetInList(chck.CheckTimeLine(), Tweet.TweetTypes.Normal, out NewTweetCount);
+                SetTweetNumber(tsRecents, NewTweetCount);
+
+                AddNewTweetInList(chck.CheckReplies(), Tweet.TweetTypes.Reply, out NewTweetCount);
+                SetTweetNumber(tsReplys, NewTweetCount);
+
+                AddNewTweetInList(chck.CheckMessages(), Tweet.TweetTypes.Message, out NewTweetCount);
+                SetTweetNumber(tsMessages, NewTweetCount);
+            }
+
+            //string SinceId = Regedit.GetKey_("since_recent");
+            //Twitter TwitterApi = new Twitter(TwitterUser.UserName, TwitterUser.UserPass);
+            //AddNewTweetInList(LoadTweetItem(TwitterApi.FriendsTimeLine(SinceId)), Tweet.TweetTypes.Normal, out NewTweetCount);
+
+            //foreach (TweetItem it in LoadTweetItem(TwitterApi.FriendsTimeLine(SinceId)))
+            //{
+            //    FriendsTimeLine.Insert(0, it);
+            //}
+
         }
 
-        private void AddNewTweetInList(IList<TweetItem> tList, Tweet.TweetTypes tip, out int NewTweetCount)
+        private IList<TweetItem> LoadTweetItem(IList<Tweet> liste)
         {
+            IList<TweetItem> fTimeLine_ = new List<TweetItem>();
+
+            lock (this)
+            {
+                foreach (Tweet item in liste)
+                {
+                    fTimeLine_.Add(new TweetItem(item));
+                }
+            }
+
+            return fTimeLine_;
+        }
+
+        private void AddNewTweetInList(IList<TweetItem> tList_, Tweet.TweetTypes tip, out int NewTweetCount)
+        {
+            IList<TweetItem> tList = tList_;
+
             NewTweetCount = 0;
             lock (this)
             {
                 if (tList != null)
-                {
+                {                    
                     NewTweetCount = tList.Count;
                     foreach (TweetItem item in tList)
                     {
-                        switch (tip)
+                        if (item != null)
                         {
-                            case Tweet.TweetTypes.Normal:
-                                FriendsTimeLine.Insert(0, item);                                
-                                break;
-                            case Tweet.TweetTypes.Reply:
-                                RepliesTimeLine.Insert(0, item);
-                                break;
-                            case Tweet.TweetTypes.Message:
-                                MessagesTimeLine.Insert(0, item);
-                                break;
-                            default:
-                                break;
-                        }
+                            switch (tip)
+                            {
+                                case Tweet.TweetTypes.Normal:
 
-                        // Show Notice
-                        if (Regedit.GetKey_("check_notice").Equals("true"))
-                        {
-                            OpenNoticeForm(item);                            
+                                    if(FriendsTimeLine != null)
+                                        FriendsTimeLine.Insert(0, item);
+
+                                    break;
+                                case Tweet.TweetTypes.Reply:
+
+                                    if(RepliesTimeLine != null)
+                                        RepliesTimeLine.Insert(0, item);
+
+                                    break;
+                                case Tweet.TweetTypes.Message:
+
+                                    if(MessagesTimeLine != null)
+                                        MessagesTimeLine.Insert(0, item);
+
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                            // Show Notice
+                            //if (Regedit.GetKey_("check_notice").Equals("true"))
+                            //{
+                            //    OpenNoticeForm(item);
+                            //}
                         }
                     }                   
                 }
@@ -385,5 +492,10 @@ namespace Togi
             n.Notice();
         }
         #endregion
+
+
+
+
+
     }
 }
