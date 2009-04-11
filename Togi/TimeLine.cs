@@ -337,7 +337,7 @@ namespace Togi
 
             using (Tools.CheckTweets chck = new Togi.Tools.CheckTweets(TwitterUser))
             {
-                bool ShowNotice = bool.Parse(Regedit.GetKey_("check_notice"));
+                //bool ShowNotice = bool.Parse(Regedit.GetKey_("check_notice"));
 
                 //#region Recents
                 //IList<TweetItem> tmp_recents = chck.CheckTimeLine();
@@ -420,6 +420,8 @@ namespace Togi
 
         private void AddNewTweetInList(IList<TweetItem> tList_, Tweet.TweetTypes tip, out int NewTweetCount)
         {
+            bool ShowNotice = bool.Parse(Regedit.GetKey_("check_notice"));
+
             IList<TweetItem> tList = tList_;
 
             NewTweetCount = 0;
@@ -457,10 +459,8 @@ namespace Togi
                             }
 
                             // Show Notice
-                            //if (Regedit.GetKey_("check_notice").Equals("true"))
-                            //{
-                            //    OpenNoticeForm(item);
-                            //}
+                            //if (ShowNotice)                            
+                            //    OpenNoticeForm(item);                            
                         }
                     }                   
                 }
