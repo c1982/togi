@@ -4,13 +4,21 @@ using System.Text;
 using System.Net;
 using System.Collections.Specialized;
 using System.Xml;
+using TogiApi.Tools;
 
 namespace TogiApi
 {
-    public class Twitter
+    public class Twitter:IDisposable
     {
         public string UserName { get; set; }
         public string Password { get; set; }
+
+        public Twitter()
+        {
+            Crypto decode_ = new Crypto();
+            UserName = decode_.DecryptString(Regedit.GetKey_("login_name"));
+            Password = decode_.DecryptString(Regedit.GetKey_("login_pass"));
+        }
 
         public Twitter(string user, string pass)
         {
@@ -99,6 +107,19 @@ namespace TogiApi
 
             Istek("http://twitter.com/statuses/update.xml", 
                 "POST", 
+                Postlar);
+        }
+
+        public void Favorite(string StatusId)
+        {
+            if (String.IsNullOrEmpty(StatusId))
+                return;
+
+            NameValueCollection Postlar = new NameValueCollection();
+            Postlar.Add("id", StatusId);
+
+            Istek(String.Format("http://twitter.com/favorites/create/{0}.xml",StatusId),
+                "POST",
                 Postlar);
         }
 
@@ -248,7 +269,7 @@ namespace TogiApi
 
             return t;
         }
-
+        
         private void SetSinceId(Tweet t)
         {
             switch (t.TweetType)
@@ -266,5 +287,23 @@ namespace TogiApi
                     break;
             }
         }
+
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion
+
+        #region IDisposable Members
+
+        void IDisposable.Dispose()
+        {
+            
+        }
+
+        #endregion
     }
 }

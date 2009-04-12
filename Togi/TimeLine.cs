@@ -37,11 +37,22 @@ namespace Togi
 
         private void TimeLine_Load(object sender, EventArgs e)
         {
+            LoginIn();
+        }
+
+        private void LoginIn()
+        {
             // Login Prosedürü.
             using (Login lgn = new Login())
             {
                 if (lgn.ShowDialog() == DialogResult.OK)
                 {
+                    // Veriler sıfırlanıyor.
+                    FriendsTimeLine = null;
+                    RepliesTimeLine = null;
+                    MessagesTimeLine = null;
+
+                    // Veriler yükleniyor.
                     TwitterUser = lgn.LoginUser;
                     FriendsTimeLine = lgn.FriendsTimeLine;
 
@@ -59,19 +70,20 @@ namespace Togi
                     SetZamanTimer();
                 }
                 else
-                {                    
-                    Application.Exit();
+                {
+                    if(TwitterUser == null)
+                        Application.Exit();
                 }
             }
 
             // TimeLine yükleniyor.
-            if(FriendsTimeLine != null)
+            if (FriendsTimeLine != null)
                 FillTableTweet(FriendsTimeLine);
 
             // Repliesler yukleniyor.
             //Thread l_replies = new Thread(new ThreadStart(LoadReplies));
             //l_replies.SetApartmentState(ApartmentState.STA);
-            //l_replies.Start();                       
+            //l_replies.Start();  
         }
 
         private void TableCtor()
@@ -176,12 +188,12 @@ namespace Togi
 
         private void FillTableTweet(IList<TweetItem> TweetList)
         {
-
             if (TweetList == null)
                 return;
 
             int TableRowIndex = 0;
-            //Tablo.Visible = false;
+            Tablo.RowCount = 0;
+            Tablo.Visible = false;
             Tablo.Controls.Clear();
             Tablo.RowStyles.Clear();
             
@@ -205,8 +217,7 @@ namespace Togi
                 }
             }
 
-            //Tablo.ResumeLayout();
-            //Tablo.Visible = true;
+            Tablo.Visible = true;
             Tablo.Focus();
         }
 
@@ -214,8 +225,6 @@ namespace Togi
         {
             tsRecents.Text = String.Empty;
 
-            //Thread k = new Thread(new ParameterizedThreadStart(FillTableTweet));
-            //k.Start(FriendsTimeLine);
             FillTableTweet(FriendsTimeLine);
         }
 
@@ -327,60 +336,29 @@ namespace Togi
             this.Show();
         }
 
+        private void tsChangeUser_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Kullanıcıyı değiştirmek istiyormusun?", "Togi",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                LoginIn();
+            }
+        }
+
         #endregion
 
         #region CheckNewTweets
 
         private void CheckNewTweets()
         {
+            Zaman.Stop();
+
             int NewTweetCount;
+            NewTweetCount = 0;
 
             using (Tools.CheckTweets chck = new Togi.Tools.CheckTweets(TwitterUser))
             {
-                //bool ShowNotice = bool.Parse(Regedit.GetKey_("check_notice"));
-
-                //#region Recents
-                //IList<TweetItem> tmp_recents = chck.CheckTimeLine();
-                //NewTweetCount = tmp_recents.Count;
-
-                //foreach (TweetItem it in tmp_recents)
-                //{
-                //    FriendsTimeLine.Insert(0, it);
-
-                //    if(ShowNotice)
-                //        OpenNoticeForm(it);
-                //}
-
-                //SetTweetNumber(tsRecents, NewTweetCount);
-                //#endregion
-
-                //#region Replies
-                //IList<TweetItem> tmp_replies= chck.CheckReplies();
-                //NewTweetCount = tmp_replies.Count;
-
-                //foreach (TweetItem it in tmp_replies)
-                //{
-                //    RepliesTimeLine.Insert(0, it);
-
-                //    if (ShowNotice)
-                //        OpenNoticeForm(it);
-                //}
-                //SetTweetNumber(tsReplys, NewTweetCount);
-                //#endregion
-
-                //#region Messages
-                //IList<TweetItem> tmp_messages = chck.CheckMessages();
-                //NewTweetCount = tmp_messages.Count;
-
-                //foreach (TweetItem it in tmp_messages)
-                //{
-                //    MessagesTimeLine.Insert(0, it);
-
-                //    if (ShowNotice)
-                //        OpenNoticeForm(it);
-                //}
-                //SetTweetNumber(tsMessages, NewTweetCount);
-                //#endregion
 
                 AddNewTweetInList(chck.CheckTimeLine(), Tweet.TweetTypes.Normal, out NewTweetCount);
                 SetTweetNumber(tsRecents, NewTweetCount);
@@ -392,22 +370,14 @@ namespace Togi
                 SetTweetNumber(tsMessages, NewTweetCount);
             }
 
-            //string SinceId = Regedit.GetKey_("since_recent");
-            //Twitter TwitterApi = new Twitter(TwitterUser.UserName, TwitterUser.UserPass);
-            //AddNewTweetInList(LoadTweetItem(TwitterApi.FriendsTimeLine(SinceId)), Tweet.TweetTypes.Normal, out NewTweetCount);
-
-            //foreach (TweetItem it in LoadTweetItem(TwitterApi.FriendsTimeLine(SinceId)))
-            //{
-            //    FriendsTimeLine.Insert(0, it);
-            //}
-
+            Zaman.Start();
         }
 
         private IList<TweetItem> LoadTweetItem(IList<Tweet> liste)
         {
             IList<TweetItem> fTimeLine_ = new List<TweetItem>();
 
-            lock (this)
+            lock (liste)
             {
                 foreach (Tweet item in liste)
                 {
@@ -420,7 +390,9 @@ namespace Togi
 
         private void AddNewTweetInList(IList<TweetItem> tList_, Tweet.TweetTypes tip, out int NewTweetCount)
         {
-            bool ShowNotice = bool.Parse(Regedit.GetKey_("check_notice"));
+            string ShotNoticeStr_ = Regedit.GetKey_("check_notice");
+            bool ShowNotice = String.IsNullOrEmpty(ShotNoticeStr_) ? true : 
+                bool.Parse(ShotNoticeStr_);
 
             IList<TweetItem> tList = tList_;
 
@@ -492,9 +464,6 @@ namespace Togi
             n.Notice();
         }
         #endregion
-
-
-
 
 
     }

@@ -176,5 +176,10 @@ namespace Togi
 
             return fTimeLine_;
         }
+
+        private void cRemember_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

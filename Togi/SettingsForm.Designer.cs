@@ -298,9 +298,11 @@
             // 
             this.tProxyPass.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tProxyPass.Location = new System.Drawing.Point(3, 55);
+            this.tProxyPass.MaxLength = 50;
             this.tProxyPass.Name = "tProxyPass";
             this.tProxyPass.Size = new System.Drawing.Size(224, 20);
             this.tProxyPass.TabIndex = 2;
+            this.tProxyPass.UseSystemPasswordChar = true;
             // 
             // label6
             // 
@@ -315,6 +317,7 @@
             // 
             this.tProxyUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tProxyUser.Location = new System.Drawing.Point(3, 16);
+            this.tProxyUser.MaxLength = 50;
             this.tProxyUser.Name = "tProxyUser";
             this.tProxyUser.Size = new System.Drawing.Size(224, 20);
             this.tProxyUser.TabIndex = 1;
@@ -355,6 +358,7 @@
             // 
             this.tProxyServer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tProxyServer.Location = new System.Drawing.Point(33, 42);
+            this.tProxyServer.MaxLength = 20;
             this.tProxyServer.Name = "tProxyServer";
             this.tProxyServer.Size = new System.Drawing.Size(139, 20);
             this.tProxyServer.TabIndex = 0;
@@ -363,6 +367,7 @@
             // 
             this.tProxyPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tProxyPort.Location = new System.Drawing.Point(178, 42);
+            this.tProxyPort.MaxLength = 5;
             this.tProxyPort.Name = "tProxyPort";
             this.tProxyPort.Size = new System.Drawing.Size(79, 20);
             this.tProxyPort.TabIndex = 3;

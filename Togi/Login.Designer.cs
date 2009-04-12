@@ -156,12 +156,13 @@
             this.cRemember.AutoSize = true;
             this.cRemember.BackColor = System.Drawing.Color.Transparent;
             this.cRemember.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cRemember.Location = new System.Drawing.Point(6, 124);
+            this.cRemember.Location = new System.Drawing.Point(6, 122);
             this.cRemember.Name = "cRemember";
             this.cRemember.Size = new System.Drawing.Size(94, 17);
             this.cRemember.TabIndex = 1;
             this.cRemember.Text = "Remember me.";
             this.cRemember.UseVisualStyleBackColor = false;
+            this.cRemember.CheckedChanged += new System.EventHandler(this.cRemember_CheckedChanged);
             // 
             // lClose
             // 
@@ -226,7 +227,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::Togi.Properties.Resources.bg2;
+            this.BackColor = System.Drawing.Color.PaleTurquoise;
             this.ClientSize = new System.Drawing.Size(245, 260);
             this.ControlBox = false;
             this.Controls.Add(this.lClose);

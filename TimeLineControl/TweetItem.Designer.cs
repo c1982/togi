@@ -30,18 +30,20 @@
         {
             this.components = new System.ComponentModel.Container();
             this.FullName = new System.Windows.Forms.Label();
-            this.ProfileImage = new System.Windows.Forms.PictureBox();
             this.TweetText = new System.Windows.Forms.LinkLabel();
             this.ItemMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.replyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reTweetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.messageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.markAsFavoritesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsFavorite = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lTime = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.ProfileImage)).BeginInit();
+            this.pFavoriIcon = new System.Windows.Forms.PictureBox();
+            this.ProfileImage = new System.Windows.Forms.PictureBox();
             this.ItemMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pFavoriIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ProfileImage)).BeginInit();
             this.SuspendLayout();
             // 
             // FullName
@@ -54,18 +56,6 @@
             this.FullName.Size = new System.Drawing.Size(57, 14);
             this.FullName.TabIndex = 1;
             this.FullName.Text = "FullName";
-            // 
-            // ProfileImage
-            // 
-            this.ProfileImage.BackColor = System.Drawing.Color.Transparent;
-            this.ProfileImage.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ProfileImage.Image = global::TimeLineControl.Properties.Resources.default_profile_normal;
-            this.ProfileImage.Location = new System.Drawing.Point(3, 3);
-            this.ProfileImage.Name = "ProfileImage";
-            this.ProfileImage.Size = new System.Drawing.Size(31, 31);
-            this.ProfileImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ProfileImage.TabIndex = 6;
-            this.ProfileImage.TabStop = false;
             // 
             // TweetText
             // 
@@ -96,47 +86,49 @@
             this.reTweetToolStripMenuItem,
             this.toolStripSeparator1,
             this.messageToolStripMenuItem,
-            this.markAsFavoritesToolStripMenuItem,
+            this.tsFavorite,
             this.deleteToolStripMenuItem});
             this.ItemMenu.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.ItemMenu.Name = "ItemMenu";
             this.ItemMenu.ShowImageMargin = false;
             this.ItemMenu.ShowItemToolTips = false;
-            this.ItemMenu.Size = new System.Drawing.Size(136, 120);
+            this.ItemMenu.Size = new System.Drawing.Size(141, 120);
             // 
             // replyToolStripMenuItem
             // 
             this.replyToolStripMenuItem.Name = "replyToolStripMenuItem";
-            this.replyToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.replyToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.replyToolStripMenuItem.Text = "Reply";
+            this.replyToolStripMenuItem.Click += new System.EventHandler(this.replyToolStripMenuItem_Click);
             // 
             // reTweetToolStripMenuItem
             // 
             this.reTweetToolStripMenuItem.Name = "reTweetToolStripMenuItem";
-            this.reTweetToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.reTweetToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.reTweetToolStripMenuItem.Text = "Re Tweet";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(132, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(137, 6);
             // 
             // messageToolStripMenuItem
             // 
             this.messageToolStripMenuItem.Name = "messageToolStripMenuItem";
-            this.messageToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.messageToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.messageToolStripMenuItem.Text = "Message User";
             // 
-            // markAsFavoritesToolStripMenuItem
+            // tsFavorite
             // 
-            this.markAsFavoritesToolStripMenuItem.Name = "markAsFavoritesToolStripMenuItem";
-            this.markAsFavoritesToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
-            this.markAsFavoritesToolStripMenuItem.Text = "Mark as Favorite";
+            this.tsFavorite.Name = "tsFavorite";
+            this.tsFavorite.Size = new System.Drawing.Size(140, 22);
+            this.tsFavorite.Text = "Mark as Favorite";
+            this.tsFavorite.Click += new System.EventHandler(this.tsFavorite_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.deleteToolStripMenuItem.Text = "Delete Tweet";
             // 
             // lTime
@@ -151,11 +143,36 @@
             this.lTime.Text = "lTime";
             this.lTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // pFavoriIcon
+            // 
+            this.pFavoriIcon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pFavoriIcon.Image = global::TimeLineControl.Properties.Resources.icon_star_full;
+            this.pFavoriIcon.Location = new System.Drawing.Point(277, 43);
+            this.pFavoriIcon.Name = "pFavoriIcon";
+            this.pFavoriIcon.Size = new System.Drawing.Size(16, 16);
+            this.pFavoriIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pFavoriIcon.TabIndex = 12;
+            this.pFavoriIcon.TabStop = false;
+            this.pFavoriIcon.Visible = false;
+            // 
+            // ProfileImage
+            // 
+            this.ProfileImage.BackColor = System.Drawing.Color.Transparent;
+            this.ProfileImage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ProfileImage.Image = global::TimeLineControl.Properties.Resources.default_profile_normal;
+            this.ProfileImage.Location = new System.Drawing.Point(3, 3);
+            this.ProfileImage.Name = "ProfileImage";
+            this.ProfileImage.Size = new System.Drawing.Size(31, 31);
+            this.ProfileImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ProfileImage.TabIndex = 6;
+            this.ProfileImage.TabStop = false;
+            // 
             // TweetItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.Controls.Add(this.pFavoriIcon);
             this.Controls.Add(this.TweetText);
             this.Controls.Add(this.lTime);
             this.Controls.Add(this.FullName);
@@ -166,8 +183,9 @@
             this.MouseLeave += new System.EventHandler(this.TweetItem_MouseLeave);
             this.MouseHover += new System.EventHandler(this.TweetItem_MouseHover);
             this.MouseEnter += new System.EventHandler(this.TweetItem_MouseHover);
-            ((System.ComponentModel.ISupportInitialize)(this.ProfileImage)).EndInit();
             this.ItemMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pFavoriIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ProfileImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -183,8 +201,9 @@
         private System.Windows.Forms.ToolStripMenuItem reTweetToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem messageToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem markAsFavoritesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsFavorite;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.Label lTime;
+        private System.Windows.Forms.PictureBox pFavoriIcon;
     }
 }

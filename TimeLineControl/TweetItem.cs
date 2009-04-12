@@ -17,25 +17,36 @@ namespace TimeLineControl
     public partial class TweetItem : UserControl
     {
         delegate void SetPicture(Bitmap Resim);
+        delegate void SetFavoriteIcon(bool isFavorite);
+
+
         private Tweet ItemTweet;
         private Bitmap Resim;
         private WebClient ResimIstegi;
 
         public TweetItem()
         {
-            InitializeComponent();
-            this.Dispose(false);            
+            InitializeComponent();                      
         }
 
         public TweetItem(Tweet t)
         {
             InitializeComponent();
-            ItemTweet = t;                       
+            ItemTweet = t;
+
+            //ShowFavoriteIcon(t.isFavorite);
         }
 
         void ResimIstegi_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
         {
-            SetProgfileImage(new Bitmap(e.Result));
+            try
+            {
+                SetProgfileImage(new Bitmap(e.Result));
+            }
+            catch
+            {
+
+            }
         }
 
         private void SetControlValues()
@@ -53,11 +64,11 @@ namespace TimeLineControl
             TweetUtils.LinkEkle(TweetText);
 
             // Resim Aliniyor.
-            if (Resim == null)
-            {
+            //if (Resim == null)
+            //{
                 Thread img = new Thread(new ParameterizedThreadStart(ShowProfileImage));
                 img.Start(ItemTweet.ProfilImageUrl);
-            }
+            //}
         }
 
         private void ShowProfileImage(object ImageUrl)
@@ -160,6 +171,39 @@ namespace TimeLineControl
         private void TweetItem_Load(object sender, EventArgs e)
         {
             SetControlValues();
+        }
+
+        private void replyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tsFavorite_Click(object sender, EventArgs e)
+        {
+            Thread th = new Thread(new ThreadStart(CreateFavorite));
+            th.SetApartmentState(ApartmentState.STA);
+            th.IsBackground = true;
+            th.Start();
+        }
+
+        private void CreateFavorite()
+        {
+            using (Twitter t = new Twitter())
+            {
+                t.Favorite(ItemTweet.Id);
+                ShowFavoriteIcon(true);
+            }
+        }
+
+        private void ShowFavoriteIcon(bool isFavorite)
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new SetFavoriteIcon(ShowFavoriteIcon), new object[] { isFavorite});
+                return;
+            }
+
+            pFavoriIcon.Visible = isFavorite;
         }
     }
 }

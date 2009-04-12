@@ -14,6 +14,7 @@ namespace Togi
         public SettingsForm()
         {
             InitializeComponent();
+            LoadValues();
         }
 
         private void nCheckTime_ValueChanged(object sender, EventArgs e)
@@ -75,6 +76,33 @@ namespace Togi
             Regedit.SetKey_("proxy_port", tProxyPort.Text);
             Regedit.SetKey_("proxy_user", tProxyUser.Text);
             Regedit.SetKey_("proxy_pass", tProxyPass.Text);
+        }
+
+        private void LoadValues()
+        {
+            string v_CheckTime = Regedit.GetKey_("check_time");
+            string v_Languages = Regedit.GetKey_("language");
+            string v_ShorUrl = Regedit.GetKey_("short_url");
+            string v_Run = Regedit.GetKey_("run");
+
+            string v_Proxy = Regedit.GetKey_("proxy");
+            string v_Proxy_Pass = Regedit.GetKey_("proxy_pass");
+            string v_Proxy_Port = Regedit.GetKey_("proxy_port");
+            string v_Proxy_Server = Regedit.GetKey_("proxy_server");
+            string v_Proxy_User = Regedit.GetKey_("proxy_user");
+
+
+            nCheckTime.Value = String.IsNullOrEmpty(v_CheckTime) ? 3 : int.Parse(v_CheckTime);
+            cLang.SelectedIndex = cLang.FindString(v_Languages);
+            cShorUrl.SelectedIndex = cShorUrl.FindString(v_ShorUrl);
+            cRun.Checked = String.IsNullOrEmpty(v_Run) ? true : bool.Parse(v_Run);
+
+            cProxy.Checked = String.IsNullOrEmpty(v_Proxy) ? true : bool.Parse(v_Proxy);
+            tProxyPass.Text = v_Proxy_Pass;
+            tProxyPort.Text = v_Proxy_Port;
+            tProxyServer.Text = v_Proxy_Server;
+            tProxyUser.Text = v_Proxy_User;
+
         }
     }
 }

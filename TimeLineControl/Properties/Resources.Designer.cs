@@ -66,5 +66,12 @@ namespace TimeLineControl.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        internal static System.Drawing.Bitmap icon_star_full {
+            get {
+                object obj = ResourceManager.GetObject("icon_star_full", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
