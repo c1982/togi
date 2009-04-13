@@ -8,3 +8,13 @@ C:\Users\Oguzhan\Desktop\Togi\TimeLineControl\obj\Release\TimeLineControl.TweetI
 C:\Users\Oguzhan\Desktop\Togi\TimeLineControl\obj\Release\TimeLineControl.csproj.GenerateResource.Cache
 C:\Users\Oguzhan\Desktop\Togi\TimeLineControl\obj\Release\TimeLineControl.dll
 C:\Users\Oguzhan\Desktop\Togi\TimeLineControl\obj\Release\TimeLineControl.pdb
+C:\togi\13042009\TimeLineControl\bin\Release\TimeLineControl.dll
+C:\togi\13042009\TimeLineControl\bin\Release\TimeLineControl.pdb
+C:\togi\13042009\TimeLineControl\bin\Release\TogiApi.dll
+C:\togi\13042009\TimeLineControl\bin\Release\TogiApi.pdb
+C:\togi\13042009\TimeLineControl\obj\Release\ResolveAssemblyReference.cache
+C:\togi\13042009\TimeLineControl\obj\Release\TimeLineControl.Properties.Resources.resources
+C:\togi\13042009\TimeLineControl\obj\Release\TimeLineControl.TweetItem.resources
+C:\togi\13042009\TimeLineControl\obj\Release\TimeLineControl.csproj.GenerateResource.Cache
+C:\togi\13042009\TimeLineControl\obj\Release\TimeLineControl.dll
+C:\togi\13042009\TimeLineControl\obj\Release\TimeLineControl.pdb

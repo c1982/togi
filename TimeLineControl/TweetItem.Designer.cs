@@ -32,7 +32,7 @@
             this.FullName = new System.Windows.Forms.Label();
             this.TweetText = new System.Windows.Forms.LinkLabel();
             this.ItemMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.replyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsReply = new System.Windows.Forms.ToolStripMenuItem();
             this.reTweetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.messageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,7 +82,7 @@
             // ItemMenu
             // 
             this.ItemMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.replyToolStripMenuItem,
+            this.tsReply,
             this.reTweetToolStripMenuItem,
             this.toolStripSeparator1,
             this.messageToolStripMenuItem,
@@ -92,43 +92,41 @@
             this.ItemMenu.Name = "ItemMenu";
             this.ItemMenu.ShowImageMargin = false;
             this.ItemMenu.ShowItemToolTips = false;
-            this.ItemMenu.Size = new System.Drawing.Size(141, 120);
+            this.ItemMenu.Size = new System.Drawing.Size(136, 142);
             // 
-            // replyToolStripMenuItem
+            // tsReply
             // 
-            this.replyToolStripMenuItem.Name = "replyToolStripMenuItem";
-            this.replyToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
-            this.replyToolStripMenuItem.Text = "Reply";
-            this.replyToolStripMenuItem.Click += new System.EventHandler(this.replyToolStripMenuItem_Click);
+            this.tsReply.Name = "tsReply";
+            this.tsReply.Size = new System.Drawing.Size(135, 22);
+            this.tsReply.Text = "Reply";
             // 
             // reTweetToolStripMenuItem
             // 
             this.reTweetToolStripMenuItem.Name = "reTweetToolStripMenuItem";
-            this.reTweetToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.reTweetToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.reTweetToolStripMenuItem.Text = "Re Tweet";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(137, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(132, 6);
             // 
             // messageToolStripMenuItem
             // 
             this.messageToolStripMenuItem.Name = "messageToolStripMenuItem";
-            this.messageToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.messageToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.messageToolStripMenuItem.Text = "Message User";
             // 
             // tsFavorite
             // 
             this.tsFavorite.Name = "tsFavorite";
-            this.tsFavorite.Size = new System.Drawing.Size(140, 22);
+            this.tsFavorite.Size = new System.Drawing.Size(135, 22);
             this.tsFavorite.Text = "Mark as Favorite";
-            this.tsFavorite.Click += new System.EventHandler(this.tsFavorite_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.deleteToolStripMenuItem.Text = "Delete Tweet";
             // 
             // lTime
@@ -196,14 +194,14 @@
         private System.Windows.Forms.Label FullName;
         private System.Windows.Forms.PictureBox ProfileImage;
         private System.Windows.Forms.LinkLabel TweetText;
-        private System.Windows.Forms.ContextMenuStrip ItemMenu;
-        private System.Windows.Forms.ToolStripMenuItem replyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reTweetToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem messageToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tsFavorite;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.Label lTime;
         private System.Windows.Forms.PictureBox pFavoriIcon;
+        public System.Windows.Forms.ContextMenuStrip ItemMenu;
+        public System.Windows.Forms.ToolStripMenuItem tsFavorite;
+        public System.Windows.Forms.ToolStripMenuItem tsReply;
     }
 }

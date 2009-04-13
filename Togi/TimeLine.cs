@@ -13,7 +13,9 @@ namespace Togi
 {
     public partial class TimeLine : Form
     {        
-        private User TwitterUser;
+        static private User TwitterUser;
+        delegate void SetFavoriteIcon(bool isFavorite);
+
         public IList<TweetItem> FriendsTimeLine { get; set; }
         public IList<TweetItem> RepliesTimeLine { get; set; }
         public IList<TweetItem> MessagesTimeLine { get; set; }
@@ -26,6 +28,7 @@ namespace Togi
         #region Construct
         public TimeLine()
         {
+            
             InitializeComponent();
 
             TableCtor();
@@ -138,7 +141,7 @@ namespace Togi
         {
             if (TwitterUser == null)
                 return;
-
+            
             IList<TweetItem> tmp_list = new List<TweetItem>();
             Twitter t = new Twitter(TwitterUser.UserName, TwitterUser.UserPass);
             lock (this)
@@ -195,8 +198,7 @@ namespace Togi
             Tablo.RowCount = 0;
             Tablo.Visible = false;
             Tablo.Controls.Clear();
-            Tablo.RowStyles.Clear();
-            
+            Tablo.RowStyles.Clear();                       
             
             lock (TweetList)
             {
@@ -216,7 +218,7 @@ namespace Togi
                     }
                 }
             }
-
+                                    
             Tablo.Visible = true;
             Tablo.Focus();
         }
@@ -463,6 +465,44 @@ namespace Togi
             Notification n = new Notification(t);
             n.Notice();
         }
+        #endregion
+
+        #region TweetItemEvents
+        public static void tsFavorite_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem menu_ = (ToolStripMenuItem)sender;
+            if (menu_.Tag != null)
+            {
+                Thread th = new Thread(new ParameterizedThreadStart(CreateFavorite));
+                th.SetApartmentState(ApartmentState.STA);
+                th.IsBackground = true;
+                th.Start(menu_.Tag);
+            }
+        }
+
+        public static void tsReply_Click(object sender, EventArgs e)
+        {
+            //ToolStripMenuItem menu_ = (ToolStripMenuItem)sender;
+            //if (menu_.Tag != null)
+            //{
+            //    Dialog d = new Dialog(TwitterUser);
+            //    d.ShowDialog("replies");
+            //}            
+        }
+
+        public static void ti_ClickReplyMenu(object source, Tweet ItemTweet)
+        {
+
+        }
+
+        public static void CreateFavorite(object TweetId)
+        {
+            using (Twitter t = new Twitter(TwitterUser.UserName, TwitterUser.UserPass))
+            {
+                t.Favorite(TweetId.ToString());
+            }
+        }
+
         #endregion
 
 

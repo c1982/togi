@@ -170,12 +170,16 @@ namespace Togi
             {                
                 foreach (Tweet item in liste)
                 {
-                    fTimeLine_.Add(new TweetItem(item));
+                    TweetItem ti = new TweetItem(item);
+                    ti.tsFavorite.Click += new EventHandler(TimeLine.tsFavorite_Click);
+                    ti.tsReply.Click += new EventHandler(TimeLine.tsReply_Click);                    
+                    fTimeLine_.Add(ti);
                 }
             }
 
             return fTimeLine_;
         }
+
 
         private void cRemember_CheckedChanged(object sender, EventArgs e)
         {

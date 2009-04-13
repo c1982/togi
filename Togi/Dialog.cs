@@ -13,6 +13,8 @@ namespace Togi
     public partial class Dialog : Form
     {
         private User TwitterUser;
+        private Tweet CurrentTweet;
+
         public Dialog(User u)
         {            
             InitializeComponent();
@@ -23,6 +25,35 @@ namespace Togi
                         TwitterUser.Name,
                         TwitterUser.ScreenName);
 
+        }
+        
+        public Dialog(User u, Tweet ct)
+        {
+            InitializeComponent();
+            TwitterUser = u;
+            CurrentTweet = ct;
+
+            pPicture.Image = TwitterUser.ImageNormal;
+            LabelUserName.Text = String.Format("{0} ({1})",
+                        TwitterUser.Name,
+                        TwitterUser.ScreenName);
+
+        }
+
+        internal void ShowDialog(string action_)
+        {
+            switch (action_)
+            {
+                case "reply":
+                    txtGuncelle.Text = "@" + CurrentTweet.UserScreenName + " ";
+                    txtGuncelle.SelectionStart = txtGuncelle.Text.Length;
+
+                    break;
+                case "messages":
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void bClose_Click(object sender, EventArgs e)
@@ -56,5 +87,6 @@ namespace Togi
                 MessageBox.Show(emsg.Message);
             }
         }
+
     }
 }

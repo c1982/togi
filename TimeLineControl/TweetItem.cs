@@ -16,13 +16,16 @@ namespace TimeLineControl
     [Designer("System.Windows.Forms.Design.ParentControlDesigner, System.Design", typeof(IDesigner))] 
     public partial class TweetItem : UserControl
     {
+        public delegate void SendReply(object source, Tweet ItemTweet);
+        public event SendReply ClickReplyMenu; 
+
         delegate void SetPicture(Bitmap Resim);
         delegate void SetFavoriteIcon(bool isFavorite);
 
-
-        private Tweet ItemTweet;
+        public Tweet ItemTweet;
         private Bitmap Resim;
         private WebClient ResimIstegi;
+
 
         public TweetItem()
         {
@@ -32,9 +35,7 @@ namespace TimeLineControl
         public TweetItem(Tweet t)
         {
             InitializeComponent();
-            ItemTweet = t;
-
-            //ShowFavoriteIcon(t.isFavorite);
+            ItemTweet = t;           
         }
 
         void ResimIstegi_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
@@ -62,20 +63,17 @@ namespace TimeLineControl
             SetBackColorDefault(ItemTweet.TweetType);
             Resim = Properties.Resources.default_profile_normal;
             TweetUtils.LinkEkle(TweetText);
+            tsFavorite.Tag = ItemTweet.Id;
+            ShowFavoriteIcon(ItemTweet.isFavorite);
 
             // Resim Aliniyor.
-            //if (Resim == null)
-            //{
-                Thread img = new Thread(new ParameterizedThreadStart(ShowProfileImage));
-                img.Start(ItemTweet.ProfilImageUrl);
-            //}
+            Thread img = new Thread(new ParameterizedThreadStart(ShowProfileImage));
+            img.Start(ItemTweet.ProfilImageUrl);
         }
 
         private void ShowProfileImage(object ImageUrl)
         {
             // Profil Resmi Çağırılıyor.
-            //SetProgfileImage(Utils.GetImage((string)ImageUrl));
-
             ResimIstegi = new WebClient();
             ResimIstegi.OpenReadAsync(new Uri((string)ImageUrl));
             ResimIstegi.OpenReadCompleted += new OpenReadCompletedEventHandler(ResimIstegi_OpenReadCompleted);
@@ -171,28 +169,6 @@ namespace TimeLineControl
         private void TweetItem_Load(object sender, EventArgs e)
         {
             SetControlValues();
-        }
-
-        private void replyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tsFavorite_Click(object sender, EventArgs e)
-        {
-            Thread th = new Thread(new ThreadStart(CreateFavorite));
-            th.SetApartmentState(ApartmentState.STA);
-            th.IsBackground = true;
-            th.Start();
-        }
-
-        private void CreateFavorite()
-        {
-            using (Twitter t = new Twitter())
-            {
-                t.Favorite(ItemTweet.Id);
-                ShowFavoriteIcon(true);
-            }
         }
 
         private void ShowFavoriteIcon(bool isFavorite)
