@@ -171,8 +171,8 @@ namespace Togi
                 foreach (Tweet item in liste)
                 {
                     TweetItem ti = new TweetItem(item);
-                    ti.tsFavorite.Click += new EventHandler(TimeLine.tsFavorite_Click);
-                    ti.tsReply.Click += new EventHandler(TimeLine.tsReply_Click);                    
+                    //ti.tsFavorite.Click += new EventHandler(TimeLine.tsFavorite_Click);
+                    //ti.tsReply.Click += new EventHandler(TimeLine.tsReply_Click);                    
                     fTimeLine_.Add(ti);
                 }
             }

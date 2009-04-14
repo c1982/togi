@@ -53,6 +53,7 @@
             this.txtGuncelle.Name = "txtGuncelle";
             this.txtGuncelle.Size = new System.Drawing.Size(332, 67);
             this.txtGuncelle.TabIndex = 0;
+            this.txtGuncelle.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtGuncelle_KeyDown);
             // 
             // pictureBox2
             // 

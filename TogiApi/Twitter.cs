@@ -138,7 +138,7 @@ namespace TogiApi
             string ApiUri;
 
             ApiUri = String.IsNullOrEmpty(SinceId) ? "http://twitter.com/statuses/friends_timeline.xml" :
-                "http://twitter.com/statuses/friends_timeline.xml?since_id=" + SinceId; //+"&count=50";
+                "http://twitter.com/statuses/friends_timeline.xml?since_id=" + SinceId +"&count=50";
 
             XmlString = Istek(ApiUri, "GET", null);
 

@@ -34,7 +34,7 @@
             this.tsRecents = new System.Windows.Forms.ToolStripButton();
             this.tsReplys = new System.Windows.Forms.ToolStripButton();
             this.tsMessages = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.tsStatus = new System.Windows.Forms.ToolStripLabel();
             this.tsSettings = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsCheckNewVersion = new System.Windows.Forms.ToolStripMenuItem();
             this.tsChangeUser = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,7 +72,7 @@
             this.tsRecents,
             this.tsReplys,
             this.tsMessages,
-            this.toolStripLabel1,
+            this.tsStatus,
             this.tsSettings});
             this.tsDugmeler.Location = new System.Drawing.Point(0, 398);
             this.tsDugmeler.Name = "tsDugmeler";
@@ -124,13 +124,14 @@
             this.tsMessages.ToolTipText = "Messages";
             this.tsMessages.Click += new System.EventHandler(this.tsMessages_Click);
             // 
-            // toolStripLabel1
+            // tsStatus
             // 
-            this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripLabel1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(44, 25);
-            this.toolStripLabel1.Text = "Durum";
+            this.tsStatus.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsStatus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsStatus.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tsStatus.Name = "tsStatus";
+            this.tsStatus.Size = new System.Drawing.Size(38, 25);
+            this.tsStatus.Text = "Durum";
             // 
             // tsSettings
             // 
@@ -155,20 +156,20 @@
             // tsCheckNewVersion
             // 
             this.tsCheckNewVersion.Name = "tsCheckNewVersion";
-            this.tsCheckNewVersion.Size = new System.Drawing.Size(211, 22);
-            this.tsCheckNewVersion.Text = "Checking for New Version";
+            this.tsCheckNewVersion.Size = new System.Drawing.Size(191, 22);
+            this.tsCheckNewVersion.Text = "Check for new version";
             // 
             // tsChangeUser
             // 
             this.tsChangeUser.Name = "tsChangeUser";
-            this.tsChangeUser.Size = new System.Drawing.Size(211, 22);
-            this.tsChangeUser.Text = "Change User";
+            this.tsChangeUser.Size = new System.Drawing.Size(191, 22);
+            this.tsChangeUser.Text = "Change user";
             this.tsChangeUser.Click += new System.EventHandler(this.tsChangeUser_Click);
             // 
             // ts1
             // 
             this.ts1.Name = "ts1";
-            this.ts1.Size = new System.Drawing.Size(208, 6);
+            this.ts1.Size = new System.Drawing.Size(188, 6);
             // 
             // tsCheckTweets
             // 
@@ -178,8 +179,8 @@
             this.tsCheckTweets.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.tsCheckTweets.Name = "tsCheckTweets";
             this.tsCheckTweets.ShowShortcutKeys = false;
-            this.tsCheckTweets.Size = new System.Drawing.Size(211, 22);
-            this.tsCheckTweets.Text = "Checking for new tweets";
+            this.tsCheckTweets.Size = new System.Drawing.Size(191, 22);
+            this.tsCheckTweets.Text = "Check for new tweets";
             this.tsCheckTweets.CheckedChanged += new System.EventHandler(this.tsCheckTweets_CheckedChanged);
             // 
             // tsShorgUrl
@@ -190,8 +191,8 @@
             this.tsShorgUrl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.tsShorgUrl.Name = "tsShorgUrl";
             this.tsShorgUrl.ShowShortcutKeys = false;
-            this.tsShorgUrl.Size = new System.Drawing.Size(211, 22);
-            this.tsShorgUrl.Text = "Shorting Url";
+            this.tsShorgUrl.Size = new System.Drawing.Size(191, 22);
+            this.tsShorgUrl.Text = "Short url";
             this.tsShorgUrl.CheckedChanged += new System.EventHandler(this.tsShorgUrl_CheckedChanged);
             // 
             // tsShowNotice
@@ -202,19 +203,19 @@
             this.tsShowNotice.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.tsShowNotice.Name = "tsShowNotice";
             this.tsShowNotice.ShowShortcutKeys = false;
-            this.tsShowNotice.Size = new System.Drawing.Size(211, 22);
-            this.tsShowNotice.Text = "Show Notifications";
+            this.tsShowNotice.Size = new System.Drawing.Size(191, 22);
+            this.tsShowNotice.Text = "Show notifications";
             this.tsShowNotice.CheckedChanged += new System.EventHandler(this.tsShowNotice_CheckedChanged);
             // 
             // st2
             // 
             this.st2.Name = "st2";
-            this.st2.Size = new System.Drawing.Size(208, 6);
+            this.st2.Size = new System.Drawing.Size(188, 6);
             // 
             // tsAdvanced
             // 
             this.tsAdvanced.Name = "tsAdvanced";
-            this.tsAdvanced.Size = new System.Drawing.Size(211, 22);
+            this.tsAdvanced.Size = new System.Drawing.Size(191, 22);
             this.tsAdvanced.Text = "Advanced";
             this.tsAdvanced.Click += new System.EventHandler(this.tsAdvanced_Click);
             // 
@@ -250,8 +251,7 @@
             this.Tablo.Margin = new System.Windows.Forms.Padding(0);
             this.Tablo.Name = "Tablo";
             this.Tablo.RowCount = 1;
-            this.Tablo.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.Tablo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 368F));
+            this.Tablo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 1F));
             this.Tablo.Size = new System.Drawing.Size(375, 368);
             this.Tablo.TabIndex = 0;
             this.Tablo.TabStop = true;
@@ -340,14 +340,19 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.PowderBlue;
             this.BackgroundImage = global::Togi.Properties.Resources.bg2;
             this.ClientSize = new System.Drawing.Size(379, 426);
+            this.ControlBox = false;
             this.Controls.Add(this.lScreenName);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.Tablo);
             this.Controls.Add(this.lClose);
             this.Controls.Add(this.tsDugmeler);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "TimeLine";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -368,7 +373,7 @@
         private System.Windows.Forms.ToolStripButton tsRecents;
         private System.Windows.Forms.ToolStripButton tsReplys;
         private System.Windows.Forms.ToolStripButton tsMessages;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripLabel tsStatus;
         private System.Windows.Forms.Label lClose;
         private System.Windows.Forms.TableLayoutPanel Tablo;
         private System.Windows.Forms.PictureBox pictureBox1;

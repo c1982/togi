@@ -16,16 +16,12 @@ namespace TimeLineControl
     [Designer("System.Windows.Forms.Design.ParentControlDesigner, System.Design", typeof(IDesigner))] 
     public partial class TweetItem : UserControl
     {
-        public delegate void SendReply(object source, Tweet ItemTweet);
-        public event SendReply ClickReplyMenu; 
-
         delegate void SetPicture(Bitmap Resim);
         delegate void SetFavoriteIcon(bool isFavorite);
 
         public Tweet ItemTweet;
         private Bitmap Resim;
         private WebClient ResimIstegi;
-
 
         public TweetItem()
         {
@@ -35,7 +31,7 @@ namespace TimeLineControl
         public TweetItem(Tweet t)
         {
             InitializeComponent();
-            ItemTweet = t;           
+            ItemTweet = t;            
         }
 
         void ResimIstegi_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
@@ -46,7 +42,7 @@ namespace TimeLineControl
             }
             catch
             {
-
+                
             }
         }
 
@@ -59,16 +55,37 @@ namespace TimeLineControl
                 ItemTweet.UserName,
                 ItemTweet.UserScreenName);
 
-            lTime.Text = TweetUtils.ToRelativeDate(ItemTweet.CreateAt);
+            lTime.Text = String.Format("{0} from {1}",
+                TweetUtils.ToRelativeDate(ItemTweet.CreateAt),
+                TweetUtils.GetSourceFromLink(ItemTweet.Source)
+                );
+
             SetBackColorDefault(ItemTweet.TweetType);
             Resim = Properties.Resources.default_profile_normal;
             TweetUtils.LinkEkle(TweetText);
+
             tsFavorite.Tag = ItemTweet.Id;
+            tsReply.Tag = ItemTweet.Id;
+            tsReTweet.Tag = ItemTweet.Id;
+            tsMessage.Tag = ItemTweet.Id;
+
+            if (ItemTweet.TweetType == Tweet.TweetTypes.Message)
+            {
+                tsFavorite.Enabled = false;
+                tsReply.Enabled = false;
+                tsReTweet.Enabled = false;
+            }
+
             ShowFavoriteIcon(ItemTweet.isFavorite);
 
             // Resim Aliniyor.
             Thread img = new Thread(new ParameterizedThreadStart(ShowProfileImage));
             img.Start(ItemTweet.ProfilImageUrl);
+        }
+
+        private void ChoseType(Tweet t)
+        {
+            
         }
 
         private void ShowProfileImage(object ImageUrl)
@@ -171,7 +188,7 @@ namespace TimeLineControl
             SetControlValues();
         }
 
-        private void ShowFavoriteIcon(bool isFavorite)
+        public void ShowFavoriteIcon(bool isFavorite)
         {
             if (InvokeRequired)
             {
@@ -180,6 +197,20 @@ namespace TimeLineControl
             }
 
             pFavoriIcon.Visible = isFavorite;
+        }
+
+        private void ProfileImage_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(String.Format("http://twitter.com/{0}/statuses/{1}",
+                    ItemTweet.UserScreenName,
+                    ItemTweet.Id));
+            }
+            catch
+            {
+                // Lay lay lom.
+            }
         }
     }
 }

@@ -50,10 +50,19 @@ namespace Togi
 
                     break;
                 case "messages":
+                    txtGuncelle.Text = "D " + CurrentTweet.UserScreenName + " ";
+                    txtGuncelle.SelectionStart = txtGuncelle.Text.Length;
+
+                    break;
+                case "retweet":
+                    txtGuncelle.Text = "RT @" + CurrentTweet.UserScreenName + ": " + CurrentTweet.Text;
+                    txtGuncelle.SelectionStart = txtGuncelle.Text.Length;
                     break;
                 default:
                     break;
             }
+
+            this.ShowDialog();
         }
 
         private void bClose_Click(object sender, EventArgs e)
@@ -85,6 +94,17 @@ namespace Togi
             catch (Exception emsg)
             {
                 MessageBox.Show(emsg.Message);
+            }
+        }
+
+        private void txtGuncelle_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control)
+            {
+                if (e.KeyCode == Keys.A)
+                {
+                    this.txtGuncelle.SelectAll();
+                }
             }
         }
 

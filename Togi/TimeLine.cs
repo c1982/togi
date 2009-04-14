@@ -8,27 +8,29 @@ using System.Windows.Forms;
 using TogiApi;
 using TimeLineControl;
 using System.Threading;
+using System.Collections;
 
 namespace Togi
 {
     public partial class TimeLine : Form
     {        
         static private User TwitterUser;
-        delegate void SetFavoriteIcon(bool isFavorite);
-
+        
         public IList<TweetItem> FriendsTimeLine { get; set; }
         public IList<TweetItem> RepliesTimeLine { get; set; }
         public IList<TweetItem> MessagesTimeLine { get; set; }
 
         private const int WM_HOTKEY = 0x0312;
 
+        private delegate void SetFavoriteIcon(bool isFavorite);
         private delegate void del_OpenNoticeForm(TweetItem t);
-        private delegate void SetTextToolStripButtons(ToolStripButton ts, int Count_);        
+        private delegate void SetTextToolStripButtons(ToolStripButton ts, int Count_);
+        private delegate void SetTextStatusMesage(string text_);
+
 
         #region Construct
         public TimeLine()
-        {
-            
+        {            
             InitializeComponent();
 
             TableCtor();
@@ -40,7 +42,7 @@ namespace Togi
 
         private void TimeLine_Load(object sender, EventArgs e)
         {
-            LoginIn();
+            LoginIn();            
         }
 
         private void LoginIn()
@@ -58,6 +60,7 @@ namespace Togi
                     // Veriler yükleniyor.
                     TwitterUser = lgn.LoginUser;
                     FriendsTimeLine = lgn.FriendsTimeLine;
+                    AddEvents(FriendsTimeLine);
 
                     lScreenName.Text = String.Format("{0} ({1})",
                         TwitterUser.Name,
@@ -83,10 +86,10 @@ namespace Togi
             if (FriendsTimeLine != null)
                 FillTableTweet(FriendsTimeLine);
 
-            // Repliesler yukleniyor.
-            //Thread l_replies = new Thread(new ThreadStart(LoadReplies));
-            //l_replies.SetApartmentState(ApartmentState.STA);
-            //l_replies.Start();  
+            // Repliesler yukleniyor. Since Id Yok
+            Thread l_replies = new Thread(new ParameterizedThreadStart(GetReplies));
+            l_replies.SetApartmentState(ApartmentState.STA);
+            l_replies.Start(String.Empty);  
         }
 
         private void TableCtor()
@@ -114,29 +117,6 @@ namespace Togi
                 bool.Parse(CheckShortUrl);
         }
 
-        private void LoadReplies()
-        {
-            string SinceId;
-
-            SinceId = Regedit.GetKey_("since_reply");
-            SinceId = String.IsNullOrEmpty(SinceId) ? "" : SinceId;
-
-            Thread t_replies = new Thread(new ParameterizedThreadStart(GetReplies));
-            t_replies.SetApartmentState(ApartmentState.STA);
-            t_replies.Start(SinceId);
-        }
-
-        private void LoadMessages()
-        {
-            string SinceId;
-            SinceId = Regedit.GetKey_("since_message");
-            SinceId = String.IsNullOrEmpty(SinceId) ? "" : SinceId;
-
-            Thread t_replies = new Thread(new ParameterizedThreadStart(GetMessages));
-            t_replies.SetApartmentState(ApartmentState.STA);
-            t_replies.Start(SinceId);
-        }
-
         private void GetReplies(object SinceId)
         {
             if (TwitterUser == null)
@@ -151,6 +131,7 @@ namespace Togi
                     tmp_list.Add(new TweetItem(item));
                 }
 
+                AddEvents(tmp_list);
                 RepliesTimeLine = tmp_list;
             }
         }
@@ -169,7 +150,9 @@ namespace Togi
                     tmp_list.Add(new TweetItem(item));
                 }
 
+                AddEvents(tmp_list);
                 MessagesTimeLine = tmp_list;
+                
             }
         }
 
@@ -186,6 +169,7 @@ namespace Togi
             using (SettingsForm s = new SettingsForm())
             {
                 s.ShowDialog();
+                s.Dispose();
             }
         }
 
@@ -243,19 +227,9 @@ namespace Togi
             // Mesajlar yukleniyor.
             if (MessagesTimeLine == null)
             {
-                Thread l_messages = new Thread(new ThreadStart(LoadMessages));
+                Thread l_messages = new Thread(new ParameterizedThreadStart(GetMessages));
                 l_messages.SetApartmentState(ApartmentState.STA);
-                l_messages.Start();
-
-                do
-                {
-                    Thread.Sleep(2000);
-
-                } while (l_messages.IsAlive);
-
-                Thread.Sleep(2000);
-
-                FillTableTweet(MessagesTimeLine);
+                l_messages.Start(String.Empty);
             }
             else
             {
@@ -340,10 +314,14 @@ namespace Togi
 
         private void tsChangeUser_Click(object sender, EventArgs e)
         {
+            
             if (MessageBox.Show("Kullanıcıyı değiştirmek istiyormusun?", "Togi",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question) == DialogResult.Yes)
             {
+                Regedit.SetKey_("login_name", String.Empty);
+                Regedit.SetKey_("login_pass", String.Empty);                
+
                 LoginIn();
             }
         }
@@ -352,42 +330,40 @@ namespace Togi
 
         #region CheckNewTweets
 
+
+        private void SetStatusMsg(string text_)
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new SetTextStatusMesage(SetStatusMsg), new object[] { text_ });
+                return;
+            }
+
+            tsStatus.Text = text_;
+        }
+
         private void CheckNewTweets()
         {
-            Zaman.Stop();
-
             int NewTweetCount;
             NewTweetCount = 0;
 
             using (Tools.CheckTweets chck = new Togi.Tools.CheckTweets(TwitterUser))
             {
-
+                SetStatusMsg("checking tweets...");
                 AddNewTweetInList(chck.CheckTimeLine(), Tweet.TweetTypes.Normal, out NewTweetCount);
                 SetTweetNumber(tsRecents, NewTweetCount);
 
+                SetStatusMsg("checking replies...");
                 AddNewTweetInList(chck.CheckReplies(), Tweet.TweetTypes.Reply, out NewTweetCount);
                 SetTweetNumber(tsReplys, NewTweetCount);
 
+                SetStatusMsg("checking messages...");
                 AddNewTweetInList(chck.CheckMessages(), Tweet.TweetTypes.Message, out NewTweetCount);
                 SetTweetNumber(tsMessages, NewTweetCount);
             }
 
-            Zaman.Start();
-        }
-
-        private IList<TweetItem> LoadTweetItem(IList<Tweet> liste)
-        {
-            IList<TweetItem> fTimeLine_ = new List<TweetItem>();
-
-            lock (liste)
-            {
-                foreach (Tweet item in liste)
-                {
-                    fTimeLine_.Add(new TweetItem(item));
-                }
-            }
-
-            return fTimeLine_;
+            SetStatusMsg(String.Format("check time {0}",DateTime.Now.ToShortTimeString()));
+            
         }
 
         private void AddNewTweetInList(IList<TweetItem> tList_, Tweet.TweetTypes tip, out int NewTweetCount)
@@ -406,6 +382,9 @@ namespace Togi
                     NewTweetCount = tList.Count;
                     foreach (TweetItem item in tList)
                     {
+                        // Olaylar yükleniyor
+                        AddEventsTweetItem(item);
+
                         if (item != null)
                         {
                             switch (tip)
@@ -468,7 +447,69 @@ namespace Togi
         #endregion
 
         #region TweetItemEvents
-        public static void tsFavorite_Click(object sender, EventArgs e)
+
+        private void AddEvents(IList<TweetItem> liste_)
+        {
+            lock (liste_)
+            {
+                foreach (TweetItem item in liste_)
+                {
+                    AddEventsTweetItem(item);
+                }
+            }
+        }
+
+        private void AddEventsTweetItem(TweetItem item)
+        {
+            item.tsReply.Click += new EventHandler(tsReply_Click);
+            item.tsFavorite.Click += new EventHandler(tsFavorite_Click);
+            item.tsReTweet.Click += new EventHandler(tsReTweet_Click);
+            item.tsMessage.Click += new EventHandler(tsMessage_Click);
+        }
+
+        void tsMessage_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem menu_ = (ToolStripMenuItem)sender;
+            if (menu_.Tag != null)
+            {
+                TweetItem ti = GetTweetItemById(menu_.Tag.ToString());
+                if (ti != null)
+                {
+                    Dialog d = new Dialog(TwitterUser, ti.ItemTweet);
+                    d.ShowDialog("messages");
+                    d.Dispose();
+                }
+            }
+        }
+
+        void tsReTweet_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem menu_ = (ToolStripMenuItem)sender;
+            if (menu_.Tag != null)
+            {
+                TweetItem ti = GetTweetItemById(menu_.Tag.ToString());
+                if (ti != null)
+                {
+                    Dialog d = new Dialog(TwitterUser, ti.ItemTweet);
+                    d.ShowDialog("retweet");
+                    d.Dispose();
+                }
+            }
+        }
+
+        void tsReply_Click(object sender, EventArgs e)
+        {            
+            ToolStripMenuItem menu_ = (ToolStripMenuItem)sender;
+            if (menu_.Tag != null)
+            {
+                TweetItem ti = GetTweetItemById(menu_.Tag.ToString());
+                Dialog d = new Dialog(TwitterUser, ti.ItemTweet);
+                d.ShowDialog("reply");
+                d.Dispose();
+            }
+        }
+
+        void tsFavorite_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem menu_ = (ToolStripMenuItem)sender;
             if (menu_.Tag != null)
@@ -480,31 +521,83 @@ namespace Togi
             }
         }
 
-        public static void tsReply_Click(object sender, EventArgs e)
+        private void SetFavoriteById(string TweetId)
         {
-            //ToolStripMenuItem menu_ = (ToolStripMenuItem)sender;
-            //if (menu_.Tag != null)
-            //{
-            //    Dialog d = new Dialog(TwitterUser);
-            //    d.ShowDialog("replies");
-            //}            
+            lock (FriendsTimeLine)
+            {
+                foreach (TweetItem item in FriendsTimeLine)
+                {
+                    if (item.ItemTweet.Id.Equals(TweetId))
+                    {
+                        item.ShowFavoriteIcon(true);
+                        break;
+                    }
+                }
+            }
         }
 
-        public static void ti_ClickReplyMenu(object source, Tweet ItemTweet)
+        private TweetItem GetTweetItemById(string TweetId)
         {
+            TweetItem ti = null;
 
+            if (FriendsTimeLine != null)
+            {
+                lock (FriendsTimeLine)
+                {
+                    foreach (TweetItem item in FriendsTimeLine)
+                    {
+                        if (item.ItemTweet.Id.Equals(TweetId))
+                        {
+                            ti = item;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (RepliesTimeLine != null)
+            {
+                lock (RepliesTimeLine)
+                {
+
+                    foreach (TweetItem item in RepliesTimeLine)
+                    {
+                        if (item.ItemTweet.Id.Equals(TweetId))
+                        {
+                            ti = item;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (MessagesTimeLine != null)
+            {
+                lock (MessagesTimeLine)
+                {
+                    foreach (TweetItem item in MessagesTimeLine)
+                    {
+                        if (item.ItemTweet.Id.Equals(TweetId))
+                        {
+                            ti = item;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return ti;
         }
 
-        public static void CreateFavorite(object TweetId)
+        public void CreateFavorite(object TweetId)
         {
             using (Twitter t = new Twitter(TwitterUser.UserName, TwitterUser.UserPass))
             {
                 t.Favorite(TweetId.ToString());
+                SetFavoriteById(TweetId.ToString());
             }
         }
 
         #endregion
-
-
     }
 }
