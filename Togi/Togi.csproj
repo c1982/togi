@@ -112,6 +112,7 @@
     </Compile>
     <Compile Include="Tools\CheckTweets.cs" />
     <Compile Include="Tools\HandleKeys.cs" />
+    <Compile Include="Tools\Setup.cs" />
     <Compile Include="Tools\WinAPI.cs" />
   </ItemGroup>
   <ItemGroup>

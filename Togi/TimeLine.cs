@@ -13,7 +13,7 @@ using System.Collections;
 namespace Togi
 {
     public partial class TimeLine : Form
-    {        
+    {
         static private User TwitterUser;
         
         public IList<TweetItem> FriendsTimeLine { get; set; }
@@ -27,8 +27,8 @@ namespace Togi
         private delegate void SetTextToolStripButtons(ToolStripButton ts, int Count_);
         private delegate void SetTextStatusMesage(string text_);
 
-
         #region Construct
+
         public TimeLine()
         {            
             InitializeComponent();
@@ -38,7 +38,7 @@ namespace Togi
 
             // Togi is Offline;
             TogiNotify.Icon = Properties.Resources.favicon_offline;
-        }        
+        }
 
         private void TimeLine_Load(object sender, EventArgs e)
         {
@@ -74,6 +74,8 @@ namespace Togi
 
                     // Check Schedule
                     SetZamanTimer();
+
+
                 }
                 else
                 {
@@ -85,6 +87,9 @@ namespace Togi
             // TimeLine yükleniyor.
             if (FriendsTimeLine != null)
                 FillTableTweet(FriendsTimeLine);
+
+            // Okunmayanların Sayısı
+            SetTweetNumber(tsRecents, GetUnreadItem(FriendsTimeLine));
 
             // Repliesler yukleniyor. Since Id Yok
             Thread l_replies = new Thread(new ParameterizedThreadStart(GetReplies));
@@ -134,6 +139,8 @@ namespace Togi
                 AddEvents(tmp_list);
                 RepliesTimeLine = tmp_list;
             }
+
+            SetTweetNumber(tsReplys, GetUnreadItem(RepliesTimeLine));
         }
 
         private void GetMessages(object SinceId)
@@ -152,8 +159,24 @@ namespace Togi
 
                 AddEvents(tmp_list);
                 MessagesTimeLine = tmp_list;
-                
             }
+
+            SetTweetNumber(tsMessages, GetUnreadItem(MessagesTimeLine));
+        }
+
+        private int GetUnreadItem(IList<TweetItem> liste_)
+        {
+            int UnreadItem = 0;
+            lock (liste_)
+            {
+                foreach (TweetItem item in liste_)
+                {
+                    if (item.ItemTweet.isRead == false)
+                        UnreadItem++;
+                }
+            }
+
+            return UnreadItem;
         }
 
         #endregion
@@ -208,28 +231,32 @@ namespace Togi
         }
 
         private void tsRecents_Click(object sender, EventArgs e)
-        {
-            tsRecents.Text = String.Empty;
-
+        {            
             FillTableTweet(FriendsTimeLine);
         }
 
         private void tsReplys_Click(object sender, EventArgs e)
-        {
-            tsReplys.Text = String.Empty;
+        {            
             FillTableTweet(RepliesTimeLine);
         }
 
         private void tsMessages_Click(object sender, EventArgs e)
-        {
-            tsMessages.Text = String.Empty;
-
+        {            
             // Mesajlar yukleniyor.
             if (MessagesTimeLine == null)
             {
-                Thread l_messages = new Thread(new ParameterizedThreadStart(GetMessages));
-                l_messages.SetApartmentState(ApartmentState.STA);
+                Thread l_messages = new Thread(new ParameterizedThreadStart(GetMessages));                
+                l_messages.SetApartmentState(ApartmentState.STA);                
                 l_messages.Start(String.Empty);
+
+                SetStatusMsg("Mesajlar alınıyor...");
+                do
+                {
+                    Thread.Sleep(3000);
+                } while (l_messages.IsAlive == true);
+
+                SetStatusMsg("Mesajlar alındı.");
+                tsMessages_Click(sender, e);               
             }
             else
             {
@@ -428,8 +455,7 @@ namespace Togi
                 return;
             }
 
-            if(Count_ > 0)
-                ts.Text = Count_.ToString();
+            ts.Text = Count_.Equals(0) ? String.Empty : Count_.ToString();
 
         }
 
@@ -476,6 +502,46 @@ namespace Togi
             item.TweetAllowDelete_ += new TweetItem.AllowDelete(item_TweetAllowDelete_);
             item_TweetAllowDelete_(item, new EventArgs());
             
+            //Okundu.
+            item.TweetText.Click += new EventHandler(TweetText_Click);
+        }
+
+        void TweetText_Click(object sender, EventArgs e)
+        {
+            LinkLabel link_ = (LinkLabel)sender;
+            if (link_.Tag != null)
+            {
+                TweetItem ti = GetTweetItemById(link_.Tag.ToString());
+                if (ti != null)
+                {
+                    // Okundu;
+                    ti.ItemTweet.isRead = true;
+                    ti.SetBackColorDefault(ti.ItemTweet.TweetType);
+
+                    // Buton sayıları güncelleniyor.
+                    RefreshReadItem(ti.ItemTweet.TweetType);
+                }
+            }
+        }
+
+        private void RefreshReadItem(Tweet.TweetTypes tip)
+        {
+            switch (tip)
+            {
+                case Tweet.TweetTypes.Normal:
+                    SetTweetNumber(tsRecents, GetUnreadItem(FriendsTimeLine));
+                    break;
+                case Tweet.TweetTypes.Reply:
+                    SetTweetNumber(tsReplys, GetUnreadItem(RepliesTimeLine));
+                    break;
+                case Tweet.TweetTypes.Message:
+                    SetTweetNumber(tsMessages, GetUnreadItem(MessagesTimeLine));
+                    break;
+                case Tweet.TweetTypes.Deleted:
+                    break;
+                default:
+                    break;
+            }
         }
 
         void item_TweetAllowDelete_(object sender, EventArgs e)
@@ -496,7 +562,14 @@ namespace Togi
                 TweetItem ti = GetTweetItemById(menu_.Tag.ToString());
                 if (ti != null)
                 {
-                    Thread th = new Thread(new ParameterizedThreadStart(DestroyStatus));
+                    if (ti.ItemTweet.TweetType == Tweet.TweetTypes.Deleted)
+                        return;
+
+                    ParameterizedThreadStart DestroyAction = ti.ItemTweet.TweetType == Tweet.TweetTypes.Message ?
+                        new ParameterizedThreadStart(DestroyMessages) :
+                        new ParameterizedThreadStart(DestroyStatus);
+
+                    Thread th = new Thread(new ParameterizedThreadStart(DestroyAction));
                     th.SetApartmentState(ApartmentState.STA);
                     th.IsBackground = true;
                     th.Start(menu_.Tag);
@@ -509,8 +582,9 @@ namespace Togi
             TweetItem ti = (TweetItem)sender;
             if (ti != null)
             {
-                if (ti.ItemTweet.ReplyScreenName.Equals(TwitterUser.ScreenName))
-                    ti.ItemTweet.TweetType = Tweet.TweetTypes.Reply;
+                if(ti.ItemTweet.TweetType != Tweet.TweetTypes.Message)
+                    if (ti.ItemTweet.ReplyScreenName.Equals(TwitterUser.ScreenName))
+                        ti.ItemTweet.TweetType = Tweet.TweetTypes.Reply;
             }
         }
 
@@ -592,6 +666,18 @@ namespace Togi
                     }
                 }
             }
+
+            lock (RepliesTimeLine)
+            {
+                foreach (TweetItem item in RepliesTimeLine)
+                {
+                    if (item.ItemTweet.Id.Equals(TweetId))
+                    {
+                        item.ShowFavoriteIcon(isFavorite);
+                        break;
+                    }
+                }
+            }
         }
 
         private void SetDestroyById(string TweetId)
@@ -605,7 +691,40 @@ namespace Togi
                         item.ItemTweet.TweetType = Tweet.TweetTypes.Deleted;
 
                         //Silindiği zaman arka planı grip yapan olay.
-                        item.SetBackColorDefault(Tweet.TweetTypes.Deleted);   
+                        item.SetBackColorDefault(Tweet.TweetTypes.Deleted);
+                        item.SetDeletedStatusText();
+                        break;
+                    }
+                }
+            }
+
+            lock (RepliesTimeLine)
+            {
+                foreach (TweetItem item in RepliesTimeLine)
+                {
+                    if (item.ItemTweet.Id.Equals(TweetId))
+                    {
+                        item.ItemTweet.TweetType = Tweet.TweetTypes.Deleted;
+
+                        //Silindiği zaman arka planı grip yapan olay.
+                        item.SetBackColorDefault(Tweet.TweetTypes.Deleted);
+                        item.SetDeletedStatusText();
+                        break;
+                    }
+                }
+            }
+
+            lock (MessagesTimeLine)
+            {
+                foreach (TweetItem item in MessagesTimeLine)
+                {
+                    if (item.ItemTweet.Id.Equals(TweetId))
+                    {
+                        item.ItemTweet.TweetType = Tweet.TweetTypes.Deleted;
+
+                        //Silindiği zaman arka planı grip yapan olay.
+                        item.SetBackColorDefault(Tweet.TweetTypes.Deleted);
+                        item.SetDeletedStatusText();
                         break;
                     }
                 }
@@ -691,6 +810,17 @@ namespace Togi
                 SetDestroyById(TweetId.ToString());
             }
         }
+
+        public void DestroyMessages(object TweetId)
+        {
+            using (Twitter t = new Twitter(TwitterUser.UserName, TwitterUser.UserPass))
+            {
+                t.DestroyMessages(TweetId.ToString());
+                SetDestroyById(TweetId.ToString());
+            }
+        }
+
+        
 
         #endregion
     }

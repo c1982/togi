@@ -162,7 +162,6 @@
             this.cRemember.TabIndex = 1;
             this.cRemember.Text = "Remember me.";
             this.cRemember.UseVisualStyleBackColor = false;
-            this.cRemember.CheckedChanged += new System.EventHandler(this.cRemember_CheckedChanged);
             // 
             // lClose
             // 

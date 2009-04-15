@@ -29,6 +29,10 @@ namespace Togi
         {
             InitializeComponent();
 
+            // Registry Check
+            Tools.Setup ChkSetup = new Togi.Tools.Setup();
+            ChkSetup.LoadRegistry();
+
             if (isSave(out ScreenName, out Password))
             {
                 LoginStart();
@@ -67,21 +71,21 @@ namespace Togi
 
         private void TwitterLogin()
         {
-            //try
-            //{
-            string SinceRecent = Regedit.GetKey_("since_recent");
+            try
+            {
+                string SinceRecent = Regedit.GetKey_("since_recent");
                 Thread.Sleep(1000);
                 Twitter login = new Twitter(ScreenName, Password);
 
                 // TimeLine geliyor
-                SetTextBoxText("Getting Timeline...", lLoading);
+                SetTextBoxText("Loading Timeline...", lLoading);
                 FriendsTimeLine = LoadTweetItem(login.FriendsTimeLine(SinceRecent));
 
-            if(FriendsTimeLine == null || FriendsTimeLine.Count < 20)
-                FriendsTimeLine = LoadTweetItem(login.FriendsTimeLine(""));
+                if(FriendsTimeLine == null || FriendsTimeLine.Count < 20)
+                    FriendsTimeLine = LoadTweetItem(login.FriendsTimeLine(""));
 
                 // User bilgileri geliyor
-                SetTextBoxText("Opening Session...", lLoading);
+                SetTextBoxText("Loading Session...", lLoading);
                 LoginUser = login.ShowUser(ScreenName);
                 LoginUser.UserName = ScreenName;
                 LoginUser.UserPass = Password;
@@ -91,15 +95,15 @@ namespace Togi
                     RememberThisAccount(ScreenName, Password);
 
                 DialogResult = DialogResult.OK;
-            //}
-            //catch
-            //{
-            //    SetTextBoxText("Incorrect Login", lLoading);
-            //    Thread.Sleep(2000);
+            }
+            catch(Exception ex)
+            {
+                SetTextBoxText(ex.Message , lLoading);
+                Thread.Sleep(2000);
 
-            //    SetPanelVisibility(P1, true);
-            //    SetPanelVisibility(P2, false);
-            //}
+                SetPanelVisibility(P1, true);
+                SetPanelVisibility(P2, false);
+            }
         }
 
         private void lClose_Click(object sender, EventArgs e)
@@ -170,9 +174,7 @@ namespace Togi
             {                
                 foreach (Tweet item in liste)
                 {
-                    TweetItem ti = new TweetItem(item);
-                    //ti.tsFavorite.Click += new EventHandler(TimeLine.tsFavorite_Click);
-                    //ti.tsReply.Click += new EventHandler(TimeLine.tsReply_Click);                    
+                    TweetItem ti = new TweetItem(item);           
                     fTimeLine_.Add(ti);
                 }
             }
@@ -180,10 +182,5 @@ namespace Togi
             return fTimeLine_;
         }
 
-
-        private void cRemember_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

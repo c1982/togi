@@ -123,6 +123,19 @@ namespace TogiApi
                 Postlar);
         }
 
+        public void DestroyMessages(string StatusId)
+        {
+            if (String.IsNullOrEmpty(StatusId))
+                return;
+
+            NameValueCollection Postlar = new NameValueCollection();
+            Postlar.Add("id", StatusId);
+
+            Istek(String.Format("http://twitter.com/direct_messages/destroy/{0}.xml", StatusId),
+                "POST",
+                Postlar);
+        }
+
         public void Favorite(string StatusId)
         {
             if (String.IsNullOrEmpty(StatusId))

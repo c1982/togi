@@ -92,42 +92,42 @@
             this.ItemMenu.Name = "ItemMenu";
             this.ItemMenu.ShowImageMargin = false;
             this.ItemMenu.ShowItemToolTips = false;
-            this.ItemMenu.Size = new System.Drawing.Size(141, 120);
+            this.ItemMenu.Size = new System.Drawing.Size(136, 120);
             // 
             // tsReply
             // 
             this.tsReply.Name = "tsReply";
-            this.tsReply.Size = new System.Drawing.Size(140, 22);
+            this.tsReply.Size = new System.Drawing.Size(135, 22);
             this.tsReply.Text = "Reply";
             // 
             // tsReTweet
             // 
             this.tsReTweet.Name = "tsReTweet";
-            this.tsReTweet.Size = new System.Drawing.Size(140, 22);
+            this.tsReTweet.Size = new System.Drawing.Size(135, 22);
             this.tsReTweet.Text = "Re Tweet";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(137, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(132, 6);
             // 
             // tsMessage
             // 
             this.tsMessage.Name = "tsMessage";
-            this.tsMessage.Size = new System.Drawing.Size(140, 22);
+            this.tsMessage.Size = new System.Drawing.Size(135, 22);
             this.tsMessage.Text = "Message User";
             // 
             // tsFavorite
             // 
             this.tsFavorite.Name = "tsFavorite";
-            this.tsFavorite.Size = new System.Drawing.Size(140, 22);
+            this.tsFavorite.Size = new System.Drawing.Size(135, 22);
             this.tsFavorite.Text = "Mark as Favorite";
             // 
             // tsDelete
             // 
             this.tsDelete.Enabled = false;
             this.tsDelete.Name = "tsDelete";
-            this.tsDelete.Size = new System.Drawing.Size(140, 22);
+            this.tsDelete.Size = new System.Drawing.Size(135, 22);
             this.tsDelete.Text = "Delete Tweet";
             // 
             // lTime
@@ -197,7 +197,6 @@
 
         private System.Windows.Forms.Label FullName;
         private System.Windows.Forms.PictureBox ProfileImage;
-        private System.Windows.Forms.LinkLabel TweetText;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.PictureBox pFavoriIcon;
         public System.Windows.Forms.ContextMenuStrip ItemMenu;
@@ -207,5 +206,6 @@
         public System.Windows.Forms.ToolStripMenuItem tsReTweet;
         public System.Windows.Forms.ToolStripMenuItem tsMessage;
         public System.Windows.Forms.ToolStripMenuItem tsDelete;
+        public System.Windows.Forms.LinkLabel TweetText;
     }
 }
