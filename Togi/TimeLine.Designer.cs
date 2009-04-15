@@ -129,6 +129,7 @@
             this.tsStatus.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.tsStatus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.tsStatus.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tsStatus.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.tsStatus.Name = "tsStatus";
             this.tsStatus.Size = new System.Drawing.Size(38, 25);
             this.tsStatus.Text = "Durum";
@@ -156,20 +157,20 @@
             // tsCheckNewVersion
             // 
             this.tsCheckNewVersion.Name = "tsCheckNewVersion";
-            this.tsCheckNewVersion.Size = new System.Drawing.Size(191, 22);
+            this.tsCheckNewVersion.Size = new System.Drawing.Size(192, 22);
             this.tsCheckNewVersion.Text = "Check for new version";
             // 
             // tsChangeUser
             // 
             this.tsChangeUser.Name = "tsChangeUser";
-            this.tsChangeUser.Size = new System.Drawing.Size(191, 22);
+            this.tsChangeUser.Size = new System.Drawing.Size(192, 22);
             this.tsChangeUser.Text = "Change user";
             this.tsChangeUser.Click += new System.EventHandler(this.tsChangeUser_Click);
             // 
             // ts1
             // 
             this.ts1.Name = "ts1";
-            this.ts1.Size = new System.Drawing.Size(188, 6);
+            this.ts1.Size = new System.Drawing.Size(189, 6);
             // 
             // tsCheckTweets
             // 
@@ -179,7 +180,7 @@
             this.tsCheckTweets.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.tsCheckTweets.Name = "tsCheckTweets";
             this.tsCheckTweets.ShowShortcutKeys = false;
-            this.tsCheckTweets.Size = new System.Drawing.Size(191, 22);
+            this.tsCheckTweets.Size = new System.Drawing.Size(192, 22);
             this.tsCheckTweets.Text = "Check for new tweets";
             this.tsCheckTweets.CheckedChanged += new System.EventHandler(this.tsCheckTweets_CheckedChanged);
             // 
@@ -191,7 +192,7 @@
             this.tsShorgUrl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.tsShorgUrl.Name = "tsShorgUrl";
             this.tsShorgUrl.ShowShortcutKeys = false;
-            this.tsShorgUrl.Size = new System.Drawing.Size(191, 22);
+            this.tsShorgUrl.Size = new System.Drawing.Size(192, 22);
             this.tsShorgUrl.Text = "Short url";
             this.tsShorgUrl.CheckedChanged += new System.EventHandler(this.tsShorgUrl_CheckedChanged);
             // 
@@ -203,19 +204,19 @@
             this.tsShowNotice.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.tsShowNotice.Name = "tsShowNotice";
             this.tsShowNotice.ShowShortcutKeys = false;
-            this.tsShowNotice.Size = new System.Drawing.Size(191, 22);
+            this.tsShowNotice.Size = new System.Drawing.Size(192, 22);
             this.tsShowNotice.Text = "Show notifications";
             this.tsShowNotice.CheckedChanged += new System.EventHandler(this.tsShowNotice_CheckedChanged);
             // 
             // st2
             // 
             this.st2.Name = "st2";
-            this.st2.Size = new System.Drawing.Size(188, 6);
+            this.st2.Size = new System.Drawing.Size(189, 6);
             // 
             // tsAdvanced
             // 
             this.tsAdvanced.Name = "tsAdvanced";
-            this.tsAdvanced.Size = new System.Drawing.Size(191, 22);
+            this.tsAdvanced.Size = new System.Drawing.Size(192, 22);
             this.tsAdvanced.Text = "Advanced";
             this.tsAdvanced.Click += new System.EventHandler(this.tsAdvanced_Click);
             // 
@@ -251,7 +252,7 @@
             this.Tablo.Margin = new System.Windows.Forms.Padding(0);
             this.Tablo.Name = "Tablo";
             this.Tablo.RowCount = 1;
-            this.Tablo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 1F));
+            this.Tablo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 368F));
             this.Tablo.Size = new System.Drawing.Size(375, 368);
             this.Tablo.TabIndex = 0;
             this.Tablo.TabStop = true;
@@ -297,38 +298,38 @@
             this.tsExit});
             this.NotifyMenu.Name = "NotifyMenu";
             this.NotifyMenu.ShowImageMargin = false;
-            this.NotifyMenu.Size = new System.Drawing.Size(151, 98);
+            this.NotifyMenu.Size = new System.Drawing.Size(152, 98);
             // 
             // changeUserToolStripMenuItem
             // 
             this.changeUserToolStripMenuItem.Name = "changeUserToolStripMenuItem";
-            this.changeUserToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.changeUserToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.changeUserToolStripMenuItem.Text = "Change User";
             this.changeUserToolStripMenuItem.Click += new System.EventHandler(this.tsChangeUser_Click);
             // 
             // tsCheckTweetsNow
             // 
             this.tsCheckTweetsNow.Name = "tsCheckTweetsNow";
-            this.tsCheckTweetsNow.Size = new System.Drawing.Size(150, 22);
+            this.tsCheckTweetsNow.Size = new System.Drawing.Size(151, 22);
             this.tsCheckTweetsNow.Text = "Check Tweets Now";
             this.tsCheckTweetsNow.Click += new System.EventHandler(this.Zaman_Tick);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(147, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(148, 6);
             // 
             // tsShow
             // 
             this.tsShow.Name = "tsShow";
-            this.tsShow.Size = new System.Drawing.Size(150, 22);
+            this.tsShow.Size = new System.Drawing.Size(151, 22);
             this.tsShow.Text = "Show";
             this.tsShow.Click += new System.EventHandler(this.tsShow_Click);
             // 
             // tsExit
             // 
             this.tsExit.Name = "tsExit";
-            this.tsExit.Size = new System.Drawing.Size(150, 22);
+            this.tsExit.Size = new System.Drawing.Size(151, 22);
             this.tsExit.Text = "Exit";
             this.tsExit.Click += new System.EventHandler(this.tsExit_Click);
             // 

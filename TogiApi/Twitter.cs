@@ -184,6 +184,19 @@ namespace TogiApi
             return FriendsTimeLineParser(XmlString, Tweet.TweetTypes.Normal);
         }
 
+        public IList<Tweet> FriendsTimeLine(string SinceId, bool Max)
+        {
+            string XmlString;
+            string ApiUri;
+
+            ApiUri = String.IsNullOrEmpty(SinceId) ? "http://twitter.com/statuses/friends_timeline.xml" :
+                "http://twitter.com/statuses/friends_timeline.xml?max_id=" + SinceId;
+
+            XmlString = Istek(ApiUri, "GET", null);
+
+            return FriendsTimeLineParser(XmlString, Tweet.TweetTypes.Normal);
+        }
+
         public IList<Tweet> RepliesTimeLine(string SinceId)
         {
             string XmlString;
@@ -197,6 +210,19 @@ namespace TogiApi
             return FriendsTimeLineParser(XmlString, Tweet.TweetTypes.Reply);
         }
 
+        public IList<Tweet> RepliesTimeLine(string SinceId, bool Max)
+        {
+            string XmlString;
+            string ApiUri;
+
+            ApiUri = String.IsNullOrEmpty(SinceId) ? "http://twitter.com/statuses/replies.xml" :
+                "http://twitter.com/statuses/replies.xml?max_id=" + SinceId;
+
+            XmlString = Istek(ApiUri, "GET", null);
+
+            return FriendsTimeLineParser(XmlString, Tweet.TweetTypes.Reply);
+        }
+
         public IList<Tweet> MessageTimeLine(string SinceId)
         {
             string XmlString;
@@ -204,6 +230,19 @@ namespace TogiApi
 
             ApiUri = String.IsNullOrEmpty(SinceId) ? "http://twitter.com/direct_messages.xml" :
                 "http://twitter.com/direct_messages.xml?since_id=" + SinceId;
+
+            XmlString = Istek(ApiUri, "GET", null);
+
+            return MessageTimeLineParser(XmlString);
+        }
+
+        public IList<Tweet> MessageTimeLine(string SinceId, bool Max)
+        {
+            string XmlString;
+            string ApiUri;
+
+            ApiUri = String.IsNullOrEmpty(SinceId) ? "http://twitter.com/direct_messages.xml" :
+                "http://twitter.com/direct_messages.xml?max_id=" + SinceId;
 
             XmlString = Istek(ApiUri, "GET", null);
 
@@ -232,9 +271,6 @@ namespace TogiApi
                 }
             }
 
-            if (TimeLine != null && TimeLine.Count > 0)
-                SetSinceId(TimeLine[0]);
-
             return TimeLine;
         }
 
@@ -259,9 +295,6 @@ namespace TogiApi
                     TimeLine.Add(CreateMessage(Liste[i]));
                 }
             }
-
-            if(TimeLine != null && TimeLine.Count > 0)
-                SetSinceId(TimeLine[0]);
 
             return TimeLine;
         }
@@ -309,7 +342,7 @@ namespace TogiApi
             return t;
         }
         
-        private void SetSinceId(Tweet t)
+        public void SetSinceId(Tweet t)
         {
             switch (t.TweetType)
             {

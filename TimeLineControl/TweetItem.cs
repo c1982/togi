@@ -159,23 +159,27 @@ namespace TimeLineControl
             TweetText.Font = new System.Drawing.Font("Arial", 8.25F, 
                 System.Drawing.FontStyle.Strikeout, 
                 System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+
+            //Delete ise menü gösterme.
+            ItemMenu.Enabled = false;
+            
+
         }
 
         private void TweetText_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            //try
-            //{
+            try
+            {
                 System.Diagnostics.Process.Start(e.Link.LinkData.ToString());
-            //}
-            //catch
-            //{                
-            //    // Lay Lay Lom...
-            //}
+            }
+            catch
+            {                
+                // Lay Lay Lom...
+            }
         }
 
         private void TweetItem_MouseHover(object sender, EventArgs e)
         {
-            //this.BackColor = Color.FromArgb(115, 229, 229); 
             if (ItemTweet.isRead)
             {
                 SetBackColorIsRead(ItemTweet.TweetType);
@@ -184,7 +188,6 @@ namespace TimeLineControl
 
         private void TweetItem_MouseLeave(object sender, EventArgs e)
         {
-            //this.BackColor = Color.PaleTurquoise;
             if (ItemTweet.isRead)
             {
                 SetBackColorDefault(ItemTweet.TweetType);

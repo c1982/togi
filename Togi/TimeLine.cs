@@ -42,7 +42,12 @@ namespace Togi
 
         private void TimeLine_Load(object sender, EventArgs e)
         {
-            LoginIn();            
+            LoginIn();
+
+            //Replies ve Messages
+            Thread get_tweets = new Thread(new ThreadStart(LoadRepliesAndMessages));
+            get_tweets.SetApartmentState(ApartmentState.STA);
+            get_tweets.Start();  
         }
 
         private void LoginIn()
@@ -74,8 +79,6 @@ namespace Togi
 
                     // Check Schedule
                     SetZamanTimer();
-
-
                 }
                 else
                 {
@@ -86,15 +89,12 @@ namespace Togi
 
             // TimeLine yükleniyor.
             if (FriendsTimeLine != null)
+            {
                 FillTableTweet(FriendsTimeLine);
 
-            // Okunmayanların Sayısı
-            SetTweetNumber(tsRecents, GetUnreadItem(FriendsTimeLine));
-
-            // Repliesler yukleniyor. Since Id Yok
-            Thread l_replies = new Thread(new ParameterizedThreadStart(GetReplies));
-            l_replies.SetApartmentState(ApartmentState.STA);
-            l_replies.Start(String.Empty);  
+                // Okunmayanların Sayısı
+                SetTweetNumber(tsRecents, GetUnreadItem(FriendsTimeLine));
+            }
         }
 
         private void TableCtor()
@@ -122,50 +122,11 @@ namespace Togi
                 bool.Parse(CheckShortUrl);
         }
 
-        private void GetReplies(object SinceId)
-        {
-            if (TwitterUser == null)
-                return;
-            
-            IList<TweetItem> tmp_list = new List<TweetItem>();
-            Twitter t = new Twitter(TwitterUser.UserName, TwitterUser.UserPass);
-            lock (this)
-            {
-                foreach (Tweet item in t.RepliesTimeLine((string)SinceId))
-                {
-                    tmp_list.Add(new TweetItem(item));
-                }
-
-                AddEvents(tmp_list);
-                RepliesTimeLine = tmp_list;
-            }
-
-            SetTweetNumber(tsReplys, GetUnreadItem(RepliesTimeLine));
-        }
-
-        private void GetMessages(object SinceId)
-        {
-            if (TwitterUser == null)
-                return;
-
-            IList<TweetItem> tmp_list = new List<TweetItem>();
-            Twitter t = new Twitter(TwitterUser.UserName, TwitterUser.UserPass);
-            lock (this)
-            {
-                foreach (Tweet item in t.MessageTimeLine((string)SinceId))
-                {
-                    tmp_list.Add(new TweetItem(item));
-                }
-
-                AddEvents(tmp_list);
-                MessagesTimeLine = tmp_list;
-            }
-
-            SetTweetNumber(tsMessages, GetUnreadItem(MessagesTimeLine));
-        }
-
         private int GetUnreadItem(IList<TweetItem> liste_)
         {
+            if (liste_ == null)
+                return 0;
+
             int UnreadItem = 0;
             lock (liste_)
             {
@@ -177,6 +138,20 @@ namespace Togi
             }
 
             return UnreadItem;
+        }
+
+        private void LoadRepliesAndMessages()
+        {
+            using (Tools.CheckTweets get_tweets = new Togi.Tools.CheckTweets(TwitterUser))
+            {
+                RepliesTimeLine = get_tweets.CheckRepliesFirsTime();
+                AddEvents(RepliesTimeLine);
+                SetTweetNumber(tsReplys, GetUnreadItem(RepliesTimeLine));
+
+                MessagesTimeLine = get_tweets.CheckMessagesFirsTime();
+                AddEvents(MessagesTimeLine);
+                SetTweetNumber(tsMessages, GetUnreadItem(MessagesTimeLine));
+            }
         }
 
         #endregion
@@ -241,27 +216,8 @@ namespace Togi
         }
 
         private void tsMessages_Click(object sender, EventArgs e)
-        {            
-            // Mesajlar yukleniyor.
-            if (MessagesTimeLine == null)
-            {
-                Thread l_messages = new Thread(new ParameterizedThreadStart(GetMessages));                
-                l_messages.SetApartmentState(ApartmentState.STA);                
-                l_messages.Start(String.Empty);
-
-                SetStatusMsg("Mesajlar alınıyor...");
-                do
-                {
-                    Thread.Sleep(3000);
-                } while (l_messages.IsAlive == true);
-
-                SetStatusMsg("Mesajlar alındı.");
-                tsMessages_Click(sender, e);               
-            }
-            else
-            {
-                FillTableTweet(MessagesTimeLine);
-            }
+        {
+            FillTableTweet(MessagesTimeLine);
         }
 
         private void tsShowNotice_CheckedChanged(object sender, EventArgs e)
@@ -357,7 +313,6 @@ namespace Togi
 
         #region CheckNewTweets
 
-
         private void SetStatusMsg(string text_)
         {
             if (InvokeRequired)
@@ -371,29 +326,26 @@ namespace Togi
 
         private void CheckNewTweets()
         {
-            int NewTweetCount;
-            NewTweetCount = 0;
-
             using (Tools.CheckTweets chck = new Togi.Tools.CheckTweets(TwitterUser))
             {
                 SetStatusMsg("checking tweets...");
-                AddNewTweetInList(chck.CheckTimeLine(), Tweet.TweetTypes.Normal, out NewTweetCount);
-                SetTweetNumber(tsRecents, NewTweetCount);
+                AddNewTweetInList(chck.CheckTimeLine(), Tweet.TweetTypes.Normal);
+                SetTweetNumber(tsRecents, GetUnreadItem(FriendsTimeLine));
 
                 SetStatusMsg("checking replies...");
-                AddNewTweetInList(chck.CheckReplies(), Tweet.TweetTypes.Reply, out NewTweetCount);
-                SetTweetNumber(tsReplys, NewTweetCount);
+                AddNewTweetInList(chck.CheckReplies(), Tweet.TweetTypes.Reply);
+                SetTweetNumber(tsReplys, GetUnreadItem(RepliesTimeLine));
 
                 SetStatusMsg("checking messages...");
-                AddNewTweetInList(chck.CheckMessages(), Tweet.TweetTypes.Message, out NewTweetCount);
-                SetTweetNumber(tsMessages, NewTweetCount);
+                AddNewTweetInList(chck.CheckMessages(), Tweet.TweetTypes.Message);
+                SetTweetNumber(tsMessages, GetUnreadItem(MessagesTimeLine));
             }
 
-            SetStatusMsg(String.Format("check time {0}",DateTime.Now.ToShortTimeString()));
-            
+            SetStatusMsg(String.Format("last check time {0}", DateTime.Now.ToShortTimeString()));                        
         }
 
-        private void AddNewTweetInList(IList<TweetItem> tList_, Tweet.TweetTypes tip, out int NewTweetCount)
+        private void AddNewTweetInList(IList<TweetItem> tList_, 
+            Tweet.TweetTypes tip)
         {
             string ShotNoticeStr_ = Regedit.GetKey_("check_notice");
             bool ShowNotice = String.IsNullOrEmpty(ShotNoticeStr_) ? true : 
@@ -401,19 +353,18 @@ namespace Togi
 
             IList<TweetItem> tList = tList_;
 
-            NewTweetCount = 0;
+            
             lock (this)
             {
                 if (tList != null)
                 {                    
-                    NewTweetCount = tList.Count;
                     foreach (TweetItem item in tList)
                     {
-                        // Olaylar yükleniyor
-                        AddEventsTweetItem(item);
-
                         if (item != null)
                         {
+                            // Olaylar yükleniyor
+                            AddEventsTweetItem(item);
+
                             switch (tip)
                             {
                                 case Tweet.TweetTypes.Normal:
@@ -437,6 +388,7 @@ namespace Togi
                                 default:
                                     break;
                             }
+
 
                             // Show Notice
                             //if (ShowNotice)                            
@@ -492,7 +444,7 @@ namespace Togi
             item.tsReTweet.Click += new EventHandler(tsReTweet_Click);
             item.tsMessage.Click += new EventHandler(tsMessage_Click);
 
-            // TeetType'ı denetleniyor.
+            // TweetType'ı denetleniyor.
             item.TweetTypeSec_ += new TweetItem.SetTweetType(item_TweetTypeSec_);
             item_TweetTypeSec_(item, new EventArgs());
 
@@ -520,6 +472,18 @@ namespace Togi
 
                     // Buton sayıları güncelleniyor.
                     RefreshReadItem(ti.ItemTweet.TweetType);
+
+                    //FriendsTimeLine'da Replies olanlar.
+                    if (ti.ItemTweet.TweetType == Tweet.TweetTypes.Reply)
+                    {
+                        TweetItem sub_ti = GetTweetItemByIdPrivate(link_.Tag.ToString());
+                        if (sub_ti != null)
+                        {
+                            sub_ti.ItemTweet.isRead = true;
+                            sub_ti.SetBackColorDefault(ti.ItemTweet.TweetType);
+                            RefreshReadItem(Tweet.TweetTypes.Normal);
+                        }                        
+                    }
                 }
             }
         }
@@ -655,26 +619,32 @@ namespace Togi
 
         private void SetFavoriteById(string TweetId, bool isFavorite)
         {
-            lock (FriendsTimeLine)
+            if (FriendsTimeLine != null)
             {
-                foreach (TweetItem item in FriendsTimeLine)
+                lock (FriendsTimeLine)
                 {
-                    if (item.ItemTweet.Id.Equals(TweetId))
+                    foreach (TweetItem item in FriendsTimeLine)
                     {
-                        item.ShowFavoriteIcon(isFavorite);                        
-                        break;
+                        if (item.ItemTweet.Id.Equals(TweetId))
+                        {
+                            item.ShowFavoriteIcon(isFavorite);
+                            break;
+                        }
                     }
                 }
             }
 
-            lock (RepliesTimeLine)
+            if (RepliesTimeLine != null)
             {
-                foreach (TweetItem item in RepliesTimeLine)
+                lock (RepliesTimeLine)
                 {
-                    if (item.ItemTweet.Id.Equals(TweetId))
+                    foreach (TweetItem item in RepliesTimeLine)
                     {
-                        item.ShowFavoriteIcon(isFavorite);
-                        break;
+                        if (item.ItemTweet.Id.Equals(TweetId))
+                        {
+                            item.ShowFavoriteIcon(isFavorite);
+                            break;
+                        }
                     }
                 }
             }
@@ -682,53 +652,83 @@ namespace Togi
 
         private void SetDestroyById(string TweetId)
         {
-            lock (FriendsTimeLine)
+            if (FriendsTimeLine != null)
             {
-                foreach (TweetItem item in FriendsTimeLine)
+                lock (FriendsTimeLine)
                 {
-                    if (item.ItemTweet.Id.Equals(TweetId))
+                    foreach (TweetItem item in FriendsTimeLine)
                     {
-                        item.ItemTweet.TweetType = Tweet.TweetTypes.Deleted;
+                        if (item.ItemTweet.Id.Equals(TweetId))
+                        {
+                            item.ItemTweet.TweetType = Tweet.TweetTypes.Deleted;
 
-                        //Silindiği zaman arka planı grip yapan olay.
-                        item.SetBackColorDefault(Tweet.TweetTypes.Deleted);
-                        item.SetDeletedStatusText();
-                        break;
+                            //Silindiği zaman arka planı grip yapan olay.
+                            item.SetBackColorDefault(Tweet.TweetTypes.Deleted);
+                            item.SetDeletedStatusText();
+                            break;
+                        }
                     }
                 }
             }
 
-            lock (RepliesTimeLine)
+            if (RepliesTimeLine != null)
             {
-                foreach (TweetItem item in RepliesTimeLine)
+                lock (RepliesTimeLine)
                 {
-                    if (item.ItemTweet.Id.Equals(TweetId))
+                    foreach (TweetItem item in RepliesTimeLine)
                     {
-                        item.ItemTweet.TweetType = Tweet.TweetTypes.Deleted;
+                        if (item.ItemTweet.Id.Equals(TweetId))
+                        {
+                            item.ItemTweet.TweetType = Tweet.TweetTypes.Deleted;
 
-                        //Silindiği zaman arka planı grip yapan olay.
-                        item.SetBackColorDefault(Tweet.TweetTypes.Deleted);
-                        item.SetDeletedStatusText();
-                        break;
+                            //Silindiği zaman arka planı grip yapan olay.
+                            item.SetBackColorDefault(Tweet.TweetTypes.Deleted);
+                            item.SetDeletedStatusText();
+                            break;
+                        }
                     }
                 }
             }
 
-            lock (MessagesTimeLine)
+            if (MessagesTimeLine != null)
             {
-                foreach (TweetItem item in MessagesTimeLine)
+                lock (MessagesTimeLine)
                 {
-                    if (item.ItemTweet.Id.Equals(TweetId))
+                    foreach (TweetItem item in MessagesTimeLine)
                     {
-                        item.ItemTweet.TweetType = Tweet.TweetTypes.Deleted;
+                        if (item.ItemTweet.Id.Equals(TweetId))
+                        {
+                            item.ItemTweet.TweetType = Tweet.TweetTypes.Deleted;
 
-                        //Silindiği zaman arka planı grip yapan olay.
-                        item.SetBackColorDefault(Tweet.TweetTypes.Deleted);
-                        item.SetDeletedStatusText();
-                        break;
+                            //Silindiği zaman arka planı grip yapan olay.
+                            item.SetBackColorDefault(Tweet.TweetTypes.Deleted);
+                            item.SetDeletedStatusText();
+                            break;
+                        }
                     }
                 }
             }
+        }
+
+        private TweetItem GetTweetItemByIdPrivate(string TweetId)
+        {
+            TweetItem ti = null;
+
+            if (FriendsTimeLine != null)
+            {
+                lock (FriendsTimeLine)
+                {
+                    foreach (TweetItem item in FriendsTimeLine)
+                    {
+                        if (item.ItemTweet.Id.Equals(TweetId))
+                        {
+                            ti = item;
+                            break;
+                        }
+                    }
+                }
+            }
+            return ti;
         }
 
         private TweetItem GetTweetItemById(string TweetId)

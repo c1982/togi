@@ -28,8 +28,9 @@ namespace Togi
         public Login()
         {
             InitializeComponent();
+            FriendsTimeLine = new List<TweetItem>();
 
-            // Registry Check
+            //Write registry default values
             Tools.Setup ChkSetup = new Togi.Tools.Setup();
             ChkSetup.LoadRegistry();
 
@@ -71,20 +72,27 @@ namespace Togi
 
         private void TwitterLogin()
         {
-            try
-            {
-                string SinceRecent = Regedit.GetKey_("since_recent");
+            //try
+            //{
+                string SinceId = Regedit.GetKey_("since_recent");
                 Thread.Sleep(1000);
+
                 Twitter login = new Twitter(ScreenName, Password);
 
                 // TimeLine geliyor
                 SetTextBoxText("Loading Timeline...", lLoading);
-                FriendsTimeLine = LoadTweetItem(login.FriendsTimeLine(SinceRecent));
 
-                if(FriendsTimeLine == null || FriendsTimeLine.Count < 20)
-                    FriendsTimeLine = LoadTweetItem(login.FriendsTimeLine(""));
+                //1. Okunmamislar Aliniyor. Since_id
+                LoadTweetItem(login.FriendsTimeLine(SinceId), false);
 
-                // User bilgileri geliyor
+                //2. SinceId Yenileniyor
+                if(FriendsTimeLine.Count > 0)
+                    login.SetSinceId(FriendsTimeLine[0].ItemTweet);
+
+                //3. Okunmuslar Aliniyor. Max_id
+                LoadTweetItem(login.FriendsTimeLine(SinceId, true), true);                
+
+                //4. User Bilgileri Aliniyor.
                 SetTextBoxText("Loading Session...", lLoading);
                 LoginUser = login.ShowUser(ScreenName);
                 LoginUser.UserName = ScreenName;
@@ -95,14 +103,27 @@ namespace Togi
                     RememberThisAccount(ScreenName, Password);
 
                 DialogResult = DialogResult.OK;
-            }
-            catch(Exception ex)
-            {
-                SetTextBoxText(ex.Message , lLoading);
-                Thread.Sleep(2000);
+            //}
+            //catch(Exception ex)
+            //{
+            //    SetTextBoxText(ex.Message , lLoading);
+            //    Thread.Sleep(2000);
 
-                SetPanelVisibility(P1, true);
-                SetPanelVisibility(P2, false);
+            //    SetPanelVisibility(P1, true);
+            //    SetPanelVisibility(P2, false);
+            //}
+        }
+
+        private void LoadTweetItem(IList<Tweet> liste,bool isRead)
+        {
+            lock (this)
+            {
+                foreach (Tweet item in liste)
+                {
+                    item.isRead = isRead;
+                    TweetItem ti = new TweetItem(item);
+                    FriendsTimeLine.Add(ti);
+                }
             }
         }
 
@@ -166,21 +187,7 @@ namespace Togi
             return CheckSave;
         }
 
-        private IList<TweetItem> LoadTweetItem(IList<Tweet> liste)
-        {
-            IList<TweetItem> fTimeLine_ = new List<TweetItem>();
 
-            lock (this)
-            {                
-                foreach (Tweet item in liste)
-                {
-                    TweetItem ti = new TweetItem(item);           
-                    fTimeLine_.Add(ti);
-                }
-            }
-
-            return fTimeLine_;
-        }
 
     }
 }
