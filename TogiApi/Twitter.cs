@@ -110,6 +110,19 @@ namespace TogiApi
                 Postlar);
         }
 
+        public void Destroy(string StatusId)
+        {
+            if (String.IsNullOrEmpty(StatusId))
+                return;
+
+            NameValueCollection Postlar = new NameValueCollection();
+            Postlar.Add("id", StatusId);
+
+            Istek(String.Format("http://twitter.com/statuses/destroy/{0}.xml", StatusId),
+                "POST",
+                Postlar);
+        }
+
         public void Favorite(string StatusId)
         {
             if (String.IsNullOrEmpty(StatusId))
@@ -119,6 +132,19 @@ namespace TogiApi
             Postlar.Add("id", StatusId);
 
             Istek(String.Format("http://twitter.com/favorites/create/{0}.xml",StatusId),
+                "POST",
+                Postlar);
+        }
+
+        public void UnFavorite(string StatusId)
+        {
+            if (String.IsNullOrEmpty(StatusId))
+                return;
+
+            NameValueCollection Postlar = new NameValueCollection();
+            Postlar.Add("id", StatusId);
+
+            Istek(String.Format("http://twitter.com/favorites/destroy/{0}.xml", StatusId),
                 "POST",
                 Postlar);
         }

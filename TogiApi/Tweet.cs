@@ -35,7 +35,8 @@ namespace TogiApi
         {
             Normal,
             Reply,
-            Message
+            Message,
+            Deleted
         }
     }
 }

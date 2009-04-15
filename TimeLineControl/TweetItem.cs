@@ -13,15 +13,24 @@ using System.ComponentModel.Design;
 
 namespace TimeLineControl
 {
+
     [Designer("System.Windows.Forms.Design.ParentControlDesigner, System.Design", typeof(IDesigner))] 
     public partial class TweetItem : UserControl
     {
+        public delegate void SetTweetType(object sender, EventArgs e);
+        public delegate void AllowDelete(object sender, EventArgs e);
+
         delegate void SetPicture(Bitmap Resim);
         delegate void SetFavoriteIcon(bool isFavorite);
+        delegate void SetMenuTextDelegate(ToolStripMenuItem tmenu, string text_);
+
+        public event SetTweetType TweetTypeSec_;
+        public event AllowDelete TweetAllowDelete_;
 
         public Tweet ItemTweet;
         private Bitmap Resim;
         private WebClient ResimIstegi;
+
 
         public TweetItem()
         {
@@ -68,7 +77,9 @@ namespace TimeLineControl
             tsReply.Tag = ItemTweet.Id;
             tsReTweet.Tag = ItemTweet.Id;
             tsMessage.Tag = ItemTweet.Id;
+            tsDelete.Tag = ItemTweet.Id;
 
+            // Mesaj'da menüler kapatılır.
             if (ItemTweet.TweetType == Tweet.TweetTypes.Message)
             {
                 tsFavorite.Enabled = false;
@@ -76,17 +87,19 @@ namespace TimeLineControl
                 tsReTweet.Enabled = false;
             }
 
+            // Favori ise yıldızı göster.
             ShowFavoriteIcon(ItemTweet.isFavorite);
+
+            // Favori ise favoriyi sil yaz.
+            if (ItemTweet.isFavorite)
+                SetMenuText(tsFavorite, "Un-Favorite");
 
             // Resim Aliniyor.
             Thread img = new Thread(new ParameterizedThreadStart(ShowProfileImage));
             img.Start(ItemTweet.ProfilImageUrl);
+
         }
 
-        private void ChoseType(Tweet t)
-        {
-            
-        }
 
         private void ShowProfileImage(object ImageUrl)
         {
@@ -105,6 +118,17 @@ namespace TimeLineControl
             }
 
             ProfileImage.Image = Resim;
+        }
+
+        private void SetMenuText(ToolStripMenuItem tmenu, string text_)
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new SetMenuTextDelegate(SetMenuText), new object[] { tmenu, text_ });
+                return;
+            }
+
+            tmenu.Text = text_;
         }
 
         private void TweetText_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -152,12 +176,16 @@ namespace TimeLineControl
                     this.BackColor = Color.FromArgb(171, 229, 113);                     
                     break;
 
+                case TogiApi.Tweet.TweetTypes.Deleted:
+                    this.BackColor = Color.WhiteSmoke;
+                    break;
+
                 default:
                     break;
             }
         }
 
-        private void SetBackColorDefault(Tweet.TweetTypes tp)
+        public void SetBackColorDefault(Tweet.TweetTypes tp)
         {
             this.TweetText.ForeColor = Color.Gray;
             this.TweetText.LinkColor = Color.RoyalBlue;
@@ -178,6 +206,10 @@ namespace TimeLineControl
                     this.BackColor = Color.FromArgb(195, 238, 190);
                     break;
 
+                case TogiApi.Tweet.TweetTypes.Deleted:
+                    this.BackColor = Color.WhiteSmoke;
+                    break;
+
                 default:
                     break;
             }
@@ -195,7 +227,7 @@ namespace TimeLineControl
                 BeginInvoke(new SetFavoriteIcon(ShowFavoriteIcon), new object[] { isFavorite});
                 return;
             }
-
+            
             pFavoriIcon.Visible = isFavorite;
         }
 

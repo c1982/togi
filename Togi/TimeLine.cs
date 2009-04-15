@@ -454,7 +454,7 @@ namespace Togi
             {
                 foreach (TweetItem item in liste_)
                 {
-                    AddEventsTweetItem(item);
+                    AddEventsTweetItem(item);                    
                 }
             }
         }
@@ -465,6 +465,53 @@ namespace Togi
             item.tsFavorite.Click += new EventHandler(tsFavorite_Click);
             item.tsReTweet.Click += new EventHandler(tsReTweet_Click);
             item.tsMessage.Click += new EventHandler(tsMessage_Click);
+
+            // TeetType'ı denetleniyor.
+            item.TweetTypeSec_ += new TweetItem.SetTweetType(item_TweetTypeSec_);
+            item_TweetTypeSec_(item, new EventArgs());
+
+            item.tsDelete.Click += new EventHandler(tsDelete_Click);
+
+            //Silinebilirliği denetleniyor.
+            item.TweetAllowDelete_ += new TweetItem.AllowDelete(item_TweetAllowDelete_);
+            item_TweetAllowDelete_(item, new EventArgs());
+            
+        }
+
+        void item_TweetAllowDelete_(object sender, EventArgs e)
+        {
+            TweetItem ti = (TweetItem)sender;
+            if (ti != null)
+            {
+                if (ti.ItemTweet.UserScreenName.Equals(TwitterUser.ScreenName))
+                    ti.tsDelete.Enabled = true;
+            }
+        }
+
+        void tsDelete_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem menu_ = (ToolStripMenuItem)sender;
+            if (menu_.Tag != null)
+            {
+                TweetItem ti = GetTweetItemById(menu_.Tag.ToString());
+                if (ti != null)
+                {
+                    Thread th = new Thread(new ParameterizedThreadStart(DestroyStatus));
+                    th.SetApartmentState(ApartmentState.STA);
+                    th.IsBackground = true;
+                    th.Start(menu_.Tag);
+                }
+            }
+        }
+
+        void item_TweetTypeSec_(object sender, EventArgs e)
+        {
+            TweetItem ti = (TweetItem)sender;
+            if (ti != null)
+            {
+                if (ti.ItemTweet.ReplyScreenName.Equals(TwitterUser.ScreenName))
+                    ti.ItemTweet.TweetType = Tweet.TweetTypes.Reply;
+            }
         }
 
         void tsMessage_Click(object sender, EventArgs e)
@@ -503,9 +550,12 @@ namespace Togi
             if (menu_.Tag != null)
             {
                 TweetItem ti = GetTweetItemById(menu_.Tag.ToString());
-                Dialog d = new Dialog(TwitterUser, ti.ItemTweet);
-                d.ShowDialog("reply");
-                d.Dispose();
+                if (ti != null)
+                {
+                    Dialog d = new Dialog(TwitterUser, ti.ItemTweet);
+                    d.ShowDialog("reply");
+                    d.Dispose();
+                }
             }
         }
 
@@ -514,14 +564,22 @@ namespace Togi
             ToolStripMenuItem menu_ = (ToolStripMenuItem)sender;
             if (menu_.Tag != null)
             {
-                Thread th = new Thread(new ParameterizedThreadStart(CreateFavorite));
-                th.SetApartmentState(ApartmentState.STA);
-                th.IsBackground = true;
-                th.Start(menu_.Tag);
+                TweetItem ti = GetTweetItemById(menu_.Tag.ToString());
+                if (ti != null)
+                {
+                    ParameterizedThreadStart FavoriteAction = ti.ItemTweet.isFavorite ? 
+                        new ParameterizedThreadStart(DestroyFavorite) :
+                        new ParameterizedThreadStart(CreateFavorite);
+
+                    Thread th = new Thread(new ParameterizedThreadStart(FavoriteAction));
+                    th.SetApartmentState(ApartmentState.STA);
+                    th.IsBackground = true;
+                    th.Start(menu_.Tag);
+                }
             }
         }
 
-        private void SetFavoriteById(string TweetId)
+        private void SetFavoriteById(string TweetId, bool isFavorite)
         {
             lock (FriendsTimeLine)
             {
@@ -529,7 +587,25 @@ namespace Togi
                 {
                     if (item.ItemTweet.Id.Equals(TweetId))
                     {
-                        item.ShowFavoriteIcon(true);
+                        item.ShowFavoriteIcon(isFavorite);                        
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void SetDestroyById(string TweetId)
+        {
+            lock (FriendsTimeLine)
+            {
+                foreach (TweetItem item in FriendsTimeLine)
+                {
+                    if (item.ItemTweet.Id.Equals(TweetId))
+                    {
+                        item.ItemTweet.TweetType = Tweet.TweetTypes.Deleted;
+
+                        //Silindiği zaman arka planı grip yapan olay.
+                        item.SetBackColorDefault(Tweet.TweetTypes.Deleted);   
                         break;
                     }
                 }
@@ -594,7 +670,25 @@ namespace Togi
             using (Twitter t = new Twitter(TwitterUser.UserName, TwitterUser.UserPass))
             {
                 t.Favorite(TweetId.ToString());
-                SetFavoriteById(TweetId.ToString());
+                SetFavoriteById(TweetId.ToString(),true);
+            }
+        }
+
+        public void DestroyFavorite(object TweetId)
+        {
+            using (Twitter t = new Twitter(TwitterUser.UserName, TwitterUser.UserPass))
+            {
+                t.UnFavorite(TweetId.ToString());
+                SetFavoriteById(TweetId.ToString(),false);
+            }
+        }
+
+        public void DestroyStatus(object TweetId)
+        {
+            using (Twitter t = new Twitter(TwitterUser.UserName, TwitterUser.UserPass))
+            {
+                t.Destroy(TweetId.ToString());
+                SetDestroyById(TweetId.ToString());
             }
         }
 
