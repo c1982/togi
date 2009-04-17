@@ -56,9 +56,16 @@
             this.tsShow = new System.Windows.Forms.ToolStripMenuItem();
             this.tsExit = new System.Windows.Forms.ToolStripMenuItem();
             this.Zaman = new System.Windows.Forms.Timer(this.components);
+            this.ToolsMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.allReadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showFavoritesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.tsDugmeler.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.NotifyMenu.SuspendLayout();
+            this.ToolsMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // tsDugmeler
@@ -229,7 +236,7 @@
             this.lClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lClose.ForeColor = System.Drawing.Color.White;
             this.lClose.Location = new System.Drawing.Point(361, 7);
-            this.lClose.Margin = new System.Windows.Forms.Padding(3);
+            this.lClose.Margin = new System.Windows.Forms.Padding(0);
             this.lClose.Name = "lClose";
             this.lClose.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lClose.Size = new System.Drawing.Size(15, 13);
@@ -337,6 +344,45 @@
             // 
             this.Zaman.Tick += new System.EventHandler(this.Zaman_Tick);
             // 
+            // ToolsMenu
+            // 
+            this.ToolsMenu.BackColor = System.Drawing.Color.Transparent;
+            this.ToolsMenu.BackgroundImage = global::Togi.Properties.Resources.bg2;
+            this.ToolsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.allReadToolStripMenuItem,
+            this.showFavoritesToolStripMenuItem,
+            this.toolStripTextBox1});
+            this.ToolsMenu.Name = "ToolsMenu";
+            this.ToolsMenu.ShowImageMargin = false;
+            this.ToolsMenu.Size = new System.Drawing.Size(136, 93);
+            // 
+            // allReadToolStripMenuItem
+            // 
+            this.allReadToolStripMenuItem.Name = "allReadToolStripMenuItem";
+            this.allReadToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.allReadToolStripMenuItem.Text = "All Read";
+            // 
+            // showFavoritesToolStripMenuItem
+            // 
+            this.showFavoritesToolStripMenuItem.Name = "showFavoritesToolStripMenuItem";
+            this.showFavoritesToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.showFavoritesToolStripMenuItem.Text = "Show Favorites";
+            // 
+            // toolStripTextBox1
+            // 
+            this.toolStripTextBox1.Name = "toolStripTextBox1";
+            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 21);
+            this.toolStripTextBox1.Text = "Search";
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.ContextMenuStrip = this.ToolsMenu;
+            this.pictureBox2.Location = new System.Drawing.Point(258, 7);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(100, 13);
+            this.pictureBox2.TabIndex = 11;
+            this.pictureBox2.TabStop = false;
+            // 
             // TimeLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -347,6 +393,7 @@
             this.ControlBox = false;
             this.Controls.Add(this.lScreenName);
             this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.Tablo);
             this.Controls.Add(this.lClose);
             this.Controls.Add(this.tsDugmeler);
@@ -358,11 +405,15 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.TimeLine_Load);
             this.tsDugmeler.ResumeLayout(false);
             this.tsDugmeler.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.NotifyMenu.ResumeLayout(false);
+            this.ToolsMenu.ResumeLayout(false);
+            this.ToolsMenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -396,6 +447,11 @@
         private System.Windows.Forms.ToolStripMenuItem changeUserToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem tsCheckTweetsNow;
+        private System.Windows.Forms.ContextMenuStrip ToolsMenu;
+        private System.Windows.Forms.ToolStripMenuItem allReadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showFavoritesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
 
     }
 }

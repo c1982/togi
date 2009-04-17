@@ -147,8 +147,6 @@ C:\togi\15042009\Togi\obj\Debug\Togi.Properties.Resources.resources
 C:\togi\15042009\Togi\obj\Debug\Togi.SettingsForm.resources
 C:\togi\15042009\Togi\obj\Debug\Togi.TimeLine.resources
 C:\togi\15042009\Togi\obj\Debug\Togi.csproj.GenerateResource.Cache
-C:\togi\16042009\Togi\obj\Debug\Togi.exe
-C:\togi\16042009\Togi\obj\Debug\Togi.pdb
 C:\togi\16042009\Togi\bin\Debug\Togi.exe
 C:\togi\16042009\Togi\bin\Debug\Togi.pdb
 C:\togi\16042009\Togi\bin\Debug\TimeLineControl.dll
@@ -157,9 +155,12 @@ C:\togi\16042009\Togi\bin\Debug\TogiApi.pdb
 C:\togi\16042009\Togi\bin\Debug\TimeLineControl.pdb
 C:\togi\16042009\Togi\obj\Debug\ResolveAssemblyReference.cache
 C:\togi\16042009\Togi\obj\Debug\Togi.Dialog.resources
+C:\togi\16042009\Togi\obj\Debug\Togi.Info.resources
 C:\togi\16042009\Togi\obj\Debug\Togi.Login.resources
 C:\togi\16042009\Togi\obj\Debug\Togi.Notification.resources
 C:\togi\16042009\Togi\obj\Debug\Togi.Properties.Resources.resources
 C:\togi\16042009\Togi\obj\Debug\Togi.SettingsForm.resources
 C:\togi\16042009\Togi\obj\Debug\Togi.TimeLine.resources
 C:\togi\16042009\Togi\obj\Debug\Togi.csproj.GenerateResource.Cache
+C:\togi\16042009\Togi\obj\Debug\Togi.exe
+C:\togi\16042009\Togi\obj\Debug\Togi.pdb

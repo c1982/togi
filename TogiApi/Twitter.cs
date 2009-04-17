@@ -16,8 +16,11 @@ namespace TogiApi
         public Twitter()
         {
             Crypto decode_ = new Crypto();
-            UserName = decode_.DecryptString(Regedit.GetKey_("login_name"));
-            Password = decode_.DecryptString(Regedit.GetKey_("login_pass"));
+            if(!String.IsNullOrEmpty(Regedit.GetKey_("login_name")))
+                UserName = decode_.DecryptString(Regedit.GetKey_("login_name"));
+
+            if (!String.IsNullOrEmpty(Regedit.GetKey_("login_pass")))
+                Password = decode_.DecryptString(Regedit.GetKey_("login_pass"));
         }
 
         public Twitter(string user, string pass)

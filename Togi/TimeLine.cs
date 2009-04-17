@@ -45,9 +45,12 @@ namespace Togi
             LoginIn();
 
             //Replies ve Messages
-            Thread get_tweets = new Thread(new ThreadStart(LoadRepliesAndMessages));
-            get_tweets.SetApartmentState(ApartmentState.STA);
-            get_tweets.Start();  
+            if (TwitterUser != null)
+            {
+                Thread get_tweets = new Thread(new ThreadStart(LoadRepliesAndMessages));
+                get_tweets.SetApartmentState(ApartmentState.STA);
+                get_tweets.Start();
+            }
         }
 
         private void LoginIn()
@@ -439,6 +442,7 @@ namespace Togi
 
         private void AddEventsTweetItem(TweetItem item)
         {
+            
             item.tsReply.Click += new EventHandler(tsReply_Click);
             item.tsFavorite.Click += new EventHandler(tsFavorite_Click);
             item.tsReTweet.Click += new EventHandler(tsReTweet_Click);
@@ -456,6 +460,27 @@ namespace Togi
             
             //Okundu.
             item.TweetText.Click += new EventHandler(TweetText_Click);
+
+            //Info
+            item.tsUserInfo.Click += new EventHandler(tsUserInfo_Click);
+            
+        }
+
+        void tsUserInfo_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem menu_ = (ToolStripMenuItem)sender;
+            if (menu_.Tag != null)
+            {
+                TweetItem ti = GetTweetItemById(menu_.Tag.ToString());
+                if (ti != null)
+                {
+                    using (Info fo = new Info(ti.ItemTweet.UserScreenName))
+                    {
+                        fo.ShowDialog();
+                        fo.Dispose();
+                    }
+                }
+            }
         }
 
         void TweetText_Click(object sender, EventArgs e)

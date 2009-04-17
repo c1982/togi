@@ -93,6 +93,7 @@ namespace TimeLineControl
             tsMessage.Tag = ItemTweet.Id;
             tsDelete.Tag = ItemTweet.Id;
             TweetText.Tag = ItemTweet.Id;
+            tsUserInfo.Tag = ItemTweet.Id;
 
             // Mesaj'da menüler kapatılır.
             if (ItemTweet.TweetType == Tweet.TweetTypes.Message)
@@ -283,5 +284,6 @@ namespace TimeLineControl
                 // Lay lay lom.
             }
         }
+
     }
 }

@@ -60,6 +60,13 @@ namespace TimeLineControl.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap bg2 {
+            get {
+                object obj = ResourceManager.GetObject("bg2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap default_profile_normal {
             get {
                 object obj = ResourceManager.GetObject("default_profile_normal", resourceCulture);

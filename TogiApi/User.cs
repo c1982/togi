@@ -16,6 +16,7 @@ namespace TogiApi
         public string ScreenName { get; set; }
         public string Location { get; set; }
         public string Url { get; set; }
+        public string Bio { get; set; }
         public Bitmap ImageNormal { get; set; }
         
         public short FollowersCnt { get; set; }
@@ -46,6 +47,8 @@ namespace TogiApi
             FollowersCnt = Convert.ToInt16(Utils.GetValueFromNode(xdoc.SelectSingleNode("/user/followers_count")));
             FriendsCnt = Convert.ToInt16(Utils.GetValueFromNode(xdoc.SelectSingleNode("/user/friends_count")));
             StatusCnt = Convert.ToInt16(Utils.GetValueFromNode(xdoc.SelectSingleNode("/user/statuses_count")));
+
+            Bio = Utils.GetValueFromNode(xdoc.SelectSingleNode("/user/description"));
         }
     }
 }
