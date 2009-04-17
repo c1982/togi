@@ -61,6 +61,7 @@
             this.showFavoritesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.filterUnreadsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsDugmeler.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.NotifyMenu.SuspendLayout();
@@ -351,22 +352,23 @@
             this.ToolsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.allReadToolStripMenuItem,
             this.showFavoritesToolStripMenuItem,
+            this.filterUnreadsToolStripMenuItem,
             this.toolStripTextBox1});
             this.ToolsMenu.Name = "ToolsMenu";
             this.ToolsMenu.ShowImageMargin = false;
-            this.ToolsMenu.Size = new System.Drawing.Size(136, 93);
+            this.ToolsMenu.Size = new System.Drawing.Size(144, 93);
             // 
             // allReadToolStripMenuItem
             // 
             this.allReadToolStripMenuItem.Name = "allReadToolStripMenuItem";
-            this.allReadToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.allReadToolStripMenuItem.Text = "All Read";
+            this.allReadToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.allReadToolStripMenuItem.Text = "Mark As  Read All";
             // 
             // showFavoritesToolStripMenuItem
             // 
             this.showFavoritesToolStripMenuItem.Name = "showFavoritesToolStripMenuItem";
-            this.showFavoritesToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.showFavoritesToolStripMenuItem.Text = "Show Favorites";
+            this.showFavoritesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.showFavoritesToolStripMenuItem.Text = "Filter Favorites";
             // 
             // toolStripTextBox1
             // 
@@ -376,12 +378,20 @@
             // 
             // pictureBox2
             // 
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox2.ContextMenuStrip = this.ToolsMenu;
             this.pictureBox2.Location = new System.Drawing.Point(258, 7);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(100, 13);
             this.pictureBox2.TabIndex = 11;
             this.pictureBox2.TabStop = false;
+            // 
+            // filterUnreadsToolStripMenuItem
+            // 
+            this.filterUnreadsToolStripMenuItem.Name = "filterUnreadsToolStripMenuItem";
+            this.filterUnreadsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.filterUnreadsToolStripMenuItem.Text = "Filter Unreads";
             // 
             // TimeLine
             // 
@@ -452,6 +462,7 @@
         private System.Windows.Forms.ToolStripMenuItem showFavoritesToolStripMenuItem;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.ToolStripMenuItem filterUnreadsToolStripMenuItem;
 
     }
 }
