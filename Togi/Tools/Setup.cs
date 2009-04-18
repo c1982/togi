@@ -15,7 +15,7 @@ namespace Togi.Tools
         public void LoadRegistry()
         {
             SetKey("check_time", "3");
-            SetKey("language", "Türkçe");
+            SetKey("language", "en-US");
             SetKey("proxy", "false");
             SetKey("short_url", "tinyurl.com");
             SetKey("check_notice", "true");

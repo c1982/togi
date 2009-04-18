@@ -56,6 +56,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.link_language = new System.Windows.Forms.LinkLabel();
             this.tabControl1.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -147,6 +148,7 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox2.Controls.Add(this.link_language);
             this.groupBox2.Controls.Add(this.cLang);
             this.groupBox2.Location = new System.Drawing.Point(8, 64);
             this.groupBox2.Name = "groupBox2";
@@ -162,7 +164,7 @@
             this.cLang.FormattingEnabled = true;
             this.cLang.Items.AddRange(new object[] {
             "tr-TR"});
-            this.cLang.Location = new System.Drawing.Point(22, 32);
+            this.cLang.Location = new System.Drawing.Point(23, 24);
             this.cLang.Name = "cLang";
             this.cLang.Size = new System.Drawing.Size(254, 21);
             this.cLang.TabIndex = 0;
@@ -419,6 +421,17 @@
             this.label1.Text = "Oğuzhan YILMAZ\r\naspsrc@gmail.com\r\nwww.oguzhan.info/togi\r\nwww.twitter.com/c1982\r\n";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // link_language
+            // 
+            this.link_language.Location = new System.Drawing.Point(45, 48);
+            this.link_language.Name = "link_language";
+            this.link_language.Size = new System.Drawing.Size(232, 15);
+            this.link_language.TabIndex = 1;
+            this.link_language.TabStop = true;
+            this.link_language.Text = "check for new language";
+            this.link_language.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.link_language.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_language_LinkClicked);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -427,7 +440,10 @@
             this.ClientSize = new System.Drawing.Size(316, 288);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SettingsForm";
+            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.TopMost = true;
@@ -483,5 +499,6 @@
         private System.Windows.Forms.Label lUserName;
         private System.Windows.Forms.Button bProxySave;
         private System.Windows.Forms.Label lMinutes;
+        private System.Windows.Forms.LinkLabel link_language;
     }
 }

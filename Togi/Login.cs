@@ -1,40 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using System.Threading;
-using TogiApi;
-using System.Collections;
-using TogiApi.Tools;
-using TimeLineControl;
 using System.Resources;
 using System.Globalization;
 using System.Reflection;
+using TogiApi;
+using TogiApi.Tools;
+using TimeLineControl;
 
 namespace Togi
 {
     public partial class Login : Form
     {
-        public User LoginUser { get; set; }
-        public IList<TweetItem> FriendsTimeLine { get; set; }
+
+        public User LoginUser{get;set;}
+        public IList<TweetItem> FriendsTimeLine{get;set;}
 
         private Thread lng;
         private ResourceManager dil_;
         private CultureInfo cInfo_;
 
+        private bool _ChangeUser;
         private string ScreenName;
         private string Password;
 
         delegate void SetText(string Yazi, Label Kontrol);
         delegate void SetVisible(Panel p, bool Display);
 
-        public Login()
+        public Login(bool changeuser)
         {
-            InitializeComponent();
+            _ChangeUser = changeuser;
 
+            InitializeComponent();
             string CultureName = Regedit.GetKey_("language");
 
             cInfo_ = new CultureInfo(String.IsNullOrEmpty(CultureName) ?
@@ -45,6 +43,8 @@ namespace Togi
 
             dil_ = new ResourceManager("Togi.Lang.Language",
                 Assembly.GetExecutingAssembly());
+
+            LanguageCtor();
 
             FriendsTimeLine = new List<TweetItem>();
 
@@ -75,6 +75,7 @@ namespace Togi
             ScreenName = tSname.Text;
             Password = tPass.Text;
 
+            ChangeUserFlow();
             LoginStart();
         }
 
@@ -90,8 +91,8 @@ namespace Togi
 
         private void TwitterLogin()
         {
-            //try
-            //{
+            try
+            {
                 string SinceId = Regedit.GetKey_("since_recent");
                 Thread.Sleep(1000);
 
@@ -113,6 +114,7 @@ namespace Togi
 
                 //4. User Bilgileri Aliniyor.
                 SetTextBoxText(dil_.GetString("LOGIN_LOADING_2", cInfo_), lLoading);
+
                 LoginUser = login.ShowUser(ScreenName);
                 LoginUser.UserName = ScreenName;
                 LoginUser.UserPass = Password;
@@ -122,15 +124,15 @@ namespace Togi
                     RememberThisAccount(ScreenName, Password);
 
                 DialogResult = DialogResult.OK;
-            //}
-            //catch(Exception ex)
-            //{
-            //    SetTextBoxText(ex.Message , lLoading);
-            //    Thread.Sleep(2000);
+            }
+            catch(Exception ex)
+            {
+                SetTextBoxText(ex.Message , lLoading);
+                Thread.Sleep(2000);
 
-            //    SetPanelVisibility(P1, true);
-            //    SetPanelVisibility(P2, false);
-            //}
+                SetPanelVisibility(P1, true);
+                SetPanelVisibility(P2, false);
+            }
         }
 
         private void LanguageCtor()
@@ -157,7 +159,16 @@ namespace Togi
 
         private void lClose_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Abort;
+            if (_ChangeUser)
+            {
+                // Change User Cancel
+                this.DialogResult = DialogResult.Cancel;                
+            }
+            else
+            {
+                // Sonlandır
+                this.DialogResult = DialogResult.Abort;
+            }
         }
 
         private void SetTextBoxText(string Yazi, Label Kontrol)
@@ -213,6 +224,16 @@ namespace Togi
             }
 
             return CheckSave;
+        }
+
+        private void ChangeUserFlow()
+        {
+            Regedit.SetKey_("login_name", String.Empty);
+            Regedit.SetKey_("login_pass", String.Empty);
+
+            Regedit.SetKey_("since_message", String.Empty);
+            Regedit.SetKey_("since_recent", String.Empty);
+            Regedit.SetKey_("since_reply", String.Empty);
         }
 
 

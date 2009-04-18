@@ -61,13 +61,13 @@ namespace Togi
 
         private void TimeLine_Load(object sender, EventArgs e)
         {
-            LoginIn();
+            LoginIn(false);
         }
 
-        private void LoginIn()
+        private void LoginIn(bool ChangeUser)
         {
             // Login Prosedürü.
-            using (Login lgn = new Login())
+            using (Login lgn = new Login(ChangeUser))
             {
                 if (lgn.ShowDialog() == DialogResult.OK)
                 {
@@ -79,6 +79,7 @@ namespace Togi
                     // Veriler yükleniyor.
                     TwitterUser = lgn.LoginUser;
                     FriendsTimeLine = lgn.FriendsTimeLine;
+
                     AddEvents(FriendsTimeLine);
 
                     lScreenName.Text = String.Format("{0} ({1})",
@@ -88,7 +89,7 @@ namespace Togi
                     // Togi is Online;
                     TogiNotify.Icon = Properties.Resources.favicon_online;
 
-                    //WndProc'u çalıştırır.
+                    // WndProc'u çalıştırır.
                     Tools.HandleKeys.RegisterRecordKey(this.Handle);
 
                     // Check Schedule
@@ -96,8 +97,8 @@ namespace Togi
                 }
                 else
                 {
-                    if(TwitterUser == null)
-                        Application.Exit();
+                    if (lgn.DialogResult == DialogResult.Abort)
+                            Application.Exit();
                 }
             }
 
@@ -124,6 +125,7 @@ namespace Togi
             Padding p = Tablo.Padding;
             Tablo.Padding = new Padding(p.Left, p.Top - 10,
                 SystemInformation.VerticalScrollBarWidth - 15, p.Bottom - 15);
+
             Tablo.RowStyles.Clear();
             this.Tablo.Focus();
         }
@@ -219,7 +221,8 @@ namespace Togi
             if (favorites_ != null && favorites_.Count > 0)
             {
                 FillTableTweet(favorites_);
-                SetStatusMsg(String.Format(dil_.GetString("TIME_LINE_MESAJ_2_1", cInfo_),
+
+                SetStatusMsg(String.Format(dil_.GetString("TIME_LINE_MESAJ_1_1", cInfo_),
                     favorites_.Count));
             }
             else
@@ -479,14 +482,7 @@ namespace Togi
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                Regedit.SetKey_("login_name", String.Empty);
-                Regedit.SetKey_("login_pass", String.Empty);
-
-                Regedit.SetKey_("since_message", String.Empty);
-                Regedit.SetKey_("since_recent", String.Empty);
-                Regedit.SetKey_("since_reply", String.Empty);
-
-                LoginIn();
+                LoginIn(true);
             }
         }
 

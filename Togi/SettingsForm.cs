@@ -141,5 +141,10 @@ namespace Togi
 
             dil_.ReleaseAllResources();
         }
+
+        private void link_language_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.oguzhan.info/togi");
+        }
     }
 }
