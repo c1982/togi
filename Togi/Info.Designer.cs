@@ -70,42 +70,50 @@
             // l_Name
             // 
             this.l_Name.AutoSize = true;
+            this.l_Name.Dock = System.Windows.Forms.DockStyle.Fill;
             this.l_Name.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.l_Name.Location = new System.Drawing.Point(3, 0);
             this.l_Name.Name = "l_Name";
-            this.l_Name.Size = new System.Drawing.Size(34, 14);
+            this.l_Name.Size = new System.Drawing.Size(57, 18);
             this.l_Name.TabIndex = 1;
             this.l_Name.Text = "Name";
+            this.l_Name.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // l_Location
             // 
             this.l_Location.AutoSize = true;
+            this.l_Location.Dock = System.Windows.Forms.DockStyle.Fill;
             this.l_Location.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.l_Location.Location = new System.Drawing.Point(3, 18);
             this.l_Location.Name = "l_Location";
-            this.l_Location.Size = new System.Drawing.Size(48, 14);
+            this.l_Location.Size = new System.Drawing.Size(57, 18);
             this.l_Location.TabIndex = 2;
             this.l_Location.Text = "Location";
+            this.l_Location.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // l_Web
             // 
             this.l_Web.AutoSize = true;
+            this.l_Web.Dock = System.Windows.Forms.DockStyle.Fill;
             this.l_Web.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.l_Web.Location = new System.Drawing.Point(3, 36);
             this.l_Web.Name = "l_Web";
-            this.l_Web.Size = new System.Drawing.Size(29, 14);
+            this.l_Web.Size = new System.Drawing.Size(57, 18);
             this.l_Web.TabIndex = 3;
             this.l_Web.Text = "Web";
+            this.l_Web.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // l_Bio
             // 
             this.l_Bio.AutoSize = true;
+            this.l_Bio.Dock = System.Windows.Forms.DockStyle.Fill;
             this.l_Bio.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.l_Bio.Location = new System.Drawing.Point(3, 54);
             this.l_Bio.Name = "l_Bio";
-            this.l_Bio.Size = new System.Drawing.Size(22, 14);
+            this.l_Bio.Size = new System.Drawing.Size(57, 19);
             this.l_Bio.TabIndex = 4;
             this.l_Bio.Text = "Bio";
+            this.l_Bio.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label5
             // 
@@ -114,7 +122,7 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label5.Location = new System.Drawing.Point(3, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(97, 13);
+            this.label5.Size = new System.Drawing.Size(86, 13);
             this.label5.TabIndex = 5;
             this.label5.Text = "Fallowing";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -124,9 +132,9 @@
             this.label6.AutoSize = true;
             this.label6.Dock = System.Windows.Forms.DockStyle.Top;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label6.Location = new System.Drawing.Point(106, 0);
+            this.label6.Location = new System.Drawing.Point(95, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(97, 13);
+            this.label6.Size = new System.Drawing.Size(86, 13);
             this.label6.TabIndex = 6;
             this.label6.Text = "Fallowers";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -136,9 +144,9 @@
             this.label7.AutoSize = true;
             this.label7.Dock = System.Windows.Forms.DockStyle.Top;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label7.Location = new System.Drawing.Point(209, 0);
+            this.label7.Location = new System.Drawing.Point(187, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(67, 13);
+            this.label7.Size = new System.Drawing.Size(89, 13);
             this.label7.TabIndex = 7;
             this.label7.Text = "Updates";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -165,56 +173,59 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 73);
-            this.tableLayoutPanel1.TabIndex = 8;
+            this.tableLayoutPanel1.TabIndex = 0;
             // 
             // l_Name_Value
             // 
             this.l_Name_Value.AutoSize = true;
+            this.l_Name_Value.Dock = System.Windows.Forms.DockStyle.Fill;
             this.l_Name_Value.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.l_Name_Value.Location = new System.Drawing.Point(66, 0);
             this.l_Name_Value.Name = "l_Name_Value";
-            this.l_Name_Value.Size = new System.Drawing.Size(16, 14);
+            this.l_Name_Value.Size = new System.Drawing.Size(131, 18);
             this.l_Name_Value.TabIndex = 5;
-            this.l_Name_Value.Text = "...";
+            this.l_Name_Value.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // l_Location_Value
             // 
             this.l_Location_Value.AutoSize = true;
+            this.l_Location_Value.Dock = System.Windows.Forms.DockStyle.Fill;
             this.l_Location_Value.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.l_Location_Value.Location = new System.Drawing.Point(66, 18);
             this.l_Location_Value.Name = "l_Location_Value";
-            this.l_Location_Value.Size = new System.Drawing.Size(16, 14);
+            this.l_Location_Value.Size = new System.Drawing.Size(131, 18);
             this.l_Location_Value.TabIndex = 6;
-            this.l_Location_Value.Text = "...";
+            this.l_Location_Value.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // l_Web_Value
             // 
             this.l_Web_Value.AutoSize = true;
+            this.l_Web_Value.Dock = System.Windows.Forms.DockStyle.Fill;
             this.l_Web_Value.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.l_Web_Value.Location = new System.Drawing.Point(66, 36);
             this.l_Web_Value.Name = "l_Web_Value";
-            this.l_Web_Value.Size = new System.Drawing.Size(16, 14);
+            this.l_Web_Value.Size = new System.Drawing.Size(131, 18);
             this.l_Web_Value.TabIndex = 7;
-            this.l_Web_Value.TabStop = true;
-            this.l_Web_Value.Text = "...";
+            this.l_Web_Value.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // l_Bio_Value
             // 
             this.l_Bio_Value.AutoSize = true;
+            this.l_Bio_Value.Dock = System.Windows.Forms.DockStyle.Fill;
             this.l_Bio_Value.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.l_Bio_Value.Location = new System.Drawing.Point(66, 54);
             this.l_Bio_Value.Name = "l_Bio_Value";
-            this.l_Bio_Value.Size = new System.Drawing.Size(16, 14);
+            this.l_Bio_Value.Size = new System.Drawing.Size(131, 19);
             this.l_Bio_Value.TabIndex = 8;
-            this.l_Bio_Value.Text = "...";
+            this.l_Bio_Value.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.BackColor = System.Drawing.Color.Transparent;
             this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 73F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.Controls.Add(this.label5, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label6, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.label7, 2, 0);
@@ -227,7 +238,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 41.46341F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 58.53659F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(279, 41);
-            this.tableLayoutPanel2.TabIndex = 9;
+            this.tableLayoutPanel2.TabIndex = 1;
             // 
             // l_Fallowing
             // 
@@ -235,7 +246,7 @@
             this.l_Fallowing.Dock = System.Windows.Forms.DockStyle.Fill;
             this.l_Fallowing.Location = new System.Drawing.Point(3, 16);
             this.l_Fallowing.Name = "l_Fallowing";
-            this.l_Fallowing.Size = new System.Drawing.Size(97, 25);
+            this.l_Fallowing.Size = new System.Drawing.Size(86, 25);
             this.l_Fallowing.TabIndex = 8;
             this.l_Fallowing.Text = "0";
             this.l_Fallowing.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -244,9 +255,9 @@
             // 
             this.l_Fallowers.AutoSize = true;
             this.l_Fallowers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.l_Fallowers.Location = new System.Drawing.Point(106, 16);
+            this.l_Fallowers.Location = new System.Drawing.Point(95, 16);
             this.l_Fallowers.Name = "l_Fallowers";
-            this.l_Fallowers.Size = new System.Drawing.Size(97, 25);
+            this.l_Fallowers.Size = new System.Drawing.Size(86, 25);
             this.l_Fallowers.TabIndex = 9;
             this.l_Fallowers.Text = "0";
             this.l_Fallowers.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -255,9 +266,9 @@
             // 
             this.l_Updates.AutoSize = true;
             this.l_Updates.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.l_Updates.Location = new System.Drawing.Point(209, 16);
+            this.l_Updates.Location = new System.Drawing.Point(187, 16);
             this.l_Updates.Name = "l_Updates";
-            this.l_Updates.Size = new System.Drawing.Size(67, 25);
+            this.l_Updates.Size = new System.Drawing.Size(89, 25);
             this.l_Updates.TabIndex = 10;
             this.l_Updates.Text = "0";
             this.l_Updates.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -269,7 +280,7 @@
             this.groupBox1.Location = new System.Drawing.Point(6, 139);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(279, 57);
-            this.groupBox1.TabIndex = 11;
+            this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Togi Points";
             // 
@@ -295,7 +306,7 @@
             this.lClose.Name = "lClose";
             this.lClose.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lClose.Size = new System.Drawing.Size(78, 19);
-            this.lClose.TabIndex = 12;
+            this.lClose.TabIndex = 0;
             this.lClose.Text = "OK";
             this.lClose.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lClose.Click += new System.EventHandler(this.lClose_Click);
@@ -310,7 +321,7 @@
             this.panel1.Location = new System.Drawing.Point(5, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(291, 200);
-            this.panel1.TabIndex = 13;
+            this.panel1.TabIndex = 1;
             // 
             // Info
             // 

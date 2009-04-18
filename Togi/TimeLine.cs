@@ -9,6 +9,9 @@ using TogiApi;
 using TimeLineControl;
 using System.Threading;
 using System.Collections;
+using System.Globalization;
+using System.Reflection;
+using System.Resources;
 
 namespace Togi
 {
@@ -23,6 +26,8 @@ namespace Togi
         private const int WM_HOTKEY = 0x0312;
         private bool mouse_is_down;
         private Point mouse_pos;
+        private ResourceManager dil_;
+        private CultureInfo cInfo_;
 
         private delegate void SetFavoriteIcon(bool isFavorite);
         private delegate void del_OpenNoticeForm(TweetItem t);
@@ -35,6 +40,18 @@ namespace Togi
         {            
             InitializeComponent();
 
+            string CultureName = Regedit.GetKey_("language");
+
+            cInfo_ = new CultureInfo(String.IsNullOrEmpty(CultureName) ? 
+                "en-US":
+                CultureName);
+
+            Thread.CurrentThread.CurrentUICulture = cInfo_;
+            
+            dil_ = new ResourceManager("Togi.Lang.Language",
+                Assembly.GetExecutingAssembly());
+
+            LanguageCtor();
             TableCtor();
             MenuCtor();
 
@@ -174,7 +191,7 @@ namespace Togi
             SetTweetNumber(tsRecents, 0);
             SetTweetNumber(tsMessages, 0);
 
-            SetStatusMsg("Read All Tweets");            
+            SetStatusMsg(dil_.GetString("TIME_LINE_MESAJ_3", cInfo_));                                 
         }
 
 
@@ -202,12 +219,12 @@ namespace Togi
             if (favorites_ != null && favorites_.Count > 0)
             {
                 FillTableTweet(favorites_);
-                SetStatusMsg(String.Format("{0} Favorites",
+                SetStatusMsg(String.Format(dil_.GetString("TIME_LINE_MESAJ_2_1", cInfo_),
                     favorites_.Count));
             }
             else
-            {
-                SetStatusMsg("No favorites");
+            { 
+                SetStatusMsg(dil_.GetString("TIME_LINE_MESAJ_2", cInfo_)); 
             }
 
         }
@@ -235,9 +252,14 @@ namespace Togi
             AddUnreadItems(MessagesTimeLine, unreads_);
 
             if (unreads_ != null && unreads_.Count > 0)
+            {
                 FillTableTweet(unreads_);
+
+                SetStatusMsg(String.Format(dil_.GetString("TIME_LINE_MESAJ_3_1", cInfo_),
+                    unreads_.Count));
+            }
             else
-                SetStatusMsg("No Unread Tweets");
+            { SetStatusMsg(dil_.GetString("TIME_LINE_MESAJ_1", cInfo_)); }
         }
 
         private void AddUnreadItems(IList<TweetItem> source_, IList<TweetItem> destination_)
@@ -298,7 +320,36 @@ namespace Togi
             Zaman.Enabled = true;
             Zaman.Interval = IntTime;
             Zaman.Start();
-        }  
+        }
+
+        private void LanguageCtor()
+        {            
+            //Set controls value from resource file;
+            lTools.Text = dil_.GetString("TIME_LINE_TOOLS");
+            tsRecents.ToolTipText = dil_.GetString("TIME_LINE_RECENTS_BUTTON");
+            tsReplys.ToolTipText = dil_.GetString("TIME_LINE_REPLIES_BUTTON");
+            tsMessages.ToolTipText = dil_.GetString("TIME_LINE_MESSAGES_BUTTON");
+            tsSettings.ToolTipText = dil_.GetString("TIME_LINE_MENU_1");
+
+            tsStatus.Text = dil_.GetString("TIME_LINE_STATUS_TEXT_DEFAULT");
+            
+            tsCheckNewVersion.Text = dil_.GetString("TIME_LINE_MENU_6");            
+            tsChangeUser.Text = dil_.GetString("TIME_LINE_MENU_5");
+            tsCheckTweets.Text = dil_.GetString("TIME_LINE_MENU_4");
+            tsShorgUrl.Text = dil_.GetString("TIME_LINE_MENU_3");
+            tsShowNotice.Text = dil_.GetString("TIME_LINE_MENU_2");
+            tsAdvanced.Text = dil_.GetString("TIME_LINE_MENU_1");
+
+            tsShowFavorites.Text = dil_.GetString("TIME_LINE_TOOLS_MENU_1");
+            tsUnreads.Text = dil_.GetString("TIME_LINE_TOOLS_MENU_2");
+            tsReadAll.Text = dil_.GetString("TIME_LINE_TOOLS_MENU_3");
+
+            tsExit.Text = dil_.GetString("TIME_LINE_NOTIFY_MENU_1");
+            tsShow.Text = dil_.GetString("TIME_LINE_NOTIFY_MENU_2");
+            tsChangeUserNow.Text = dil_.GetString("TIME_LINE_MENU_5");
+            tsCheckTweetsNow.Text = dil_.GetString("TIME_LINE_MENU_4");
+
+        }
 
         #endregion
 
@@ -424,7 +475,7 @@ namespace Togi
 
         private void tsChangeUser_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Kullanıcıyı değiştirmek istiyormusun?", "Togi",
+            if (MessageBox.Show(dil_.GetString("TIME_LINE_MESAJ_11", cInfo_), "Togi",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question) == DialogResult.Yes)
             {
@@ -434,7 +485,6 @@ namespace Togi
                 Regedit.SetKey_("since_message", String.Empty);
                 Regedit.SetKey_("since_recent", String.Empty);
                 Regedit.SetKey_("since_reply", String.Empty);
-
 
                 LoginIn();
             }
@@ -481,20 +531,21 @@ namespace Togi
         {
             using (Tools.CheckTweets chck = new Togi.Tools.CheckTweets(TwitterUser))
             {
-                SetStatusMsg("checking tweets...");
+                SetStatusMsg(dil_.GetString("TIME_LINE_MESAJ_4", cInfo_));
                 AddNewTweetInList(chck.CheckTimeLine(), Tweet.TweetTypes.Normal);
                 SetTweetNumber(tsRecents, GetUnreadItem(FriendsTimeLine));
 
-                SetStatusMsg("checking replies...");
+                SetStatusMsg(dil_.GetString("TIME_LINE_MESAJ_5", cInfo_));
                 AddNewTweetInList(chck.CheckReplies(), Tweet.TweetTypes.Reply);
                 SetTweetNumber(tsReplys, GetUnreadItem(RepliesTimeLine));
 
-                SetStatusMsg("checking messages...");
+                SetStatusMsg(dil_.GetString("TIME_LINE_MESAJ_6", cInfo_));
                 AddNewTweetInList(chck.CheckMessages(), Tweet.TweetTypes.Message);
                 SetTweetNumber(tsMessages, GetUnreadItem(MessagesTimeLine));
             }
 
-            SetStatusMsg(String.Format("last check time {0}", DateTime.Now.ToShortTimeString()));                        
+            SetStatusMsg(String.Format(dil_.GetString("TIME_LINE_MESAJ_7", cInfo_), 
+                DateTime.Now.ToShortTimeString()));                        
         }
 
         private void AddNewTweetInList(IList<TweetItem> tList_, 
@@ -505,7 +556,6 @@ namespace Togi
                 bool.Parse(ShotNoticeStr_);
 
             IList<TweetItem> tList = tList_;
-
             
             lock (this)
             {
@@ -542,12 +592,11 @@ namespace Togi
                                     break;
                             }
 
-
                             // Show Notice
                             //if (ShowNotice)                            
                             //    OpenNoticeForm(item);                            
                         }
-                    }                   
+                    }
                 }
             }
         }
@@ -664,25 +713,7 @@ namespace Togi
             }
         }
 
-        private void RefreshReadItem(Tweet.TweetTypes tip)
-        {
-            switch (tip)
-            {
-                case Tweet.TweetTypes.Normal:
-                    SetTweetNumber(tsRecents, GetUnreadItem(FriendsTimeLine));
-                    break;
-                case Tweet.TweetTypes.Reply:
-                    SetTweetNumber(tsReplys, GetUnreadItem(RepliesTimeLine));
-                    break;
-                case Tweet.TweetTypes.Message:
-                    SetTweetNumber(tsMessages, GetUnreadItem(MessagesTimeLine));
-                    break;
-                case Tweet.TweetTypes.Deleted:
-                    break;
-                default:
-                    break;
-            }
-        }
+
 
         void item_TweetAllowDelete_(object sender, EventArgs e)
         {
@@ -790,6 +821,26 @@ namespace Togi
                     th.IsBackground = true;
                     th.Start(menu_.Tag);
                 }
+            }
+        }
+
+        private void RefreshReadItem(Tweet.TweetTypes tip)
+        {
+            switch (tip)
+            {
+                case Tweet.TweetTypes.Normal:
+                    SetTweetNumber(tsRecents, GetUnreadItem(FriendsTimeLine));
+                    break;
+                case Tweet.TweetTypes.Reply:
+                    SetTweetNumber(tsReplys, GetUnreadItem(RepliesTimeLine));
+                    break;
+                case Tweet.TweetTypes.Message:
+                    SetTweetNumber(tsMessages, GetUnreadItem(MessagesTimeLine));
+                    break;
+                case Tweet.TweetTypes.Deleted:
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -967,6 +1018,8 @@ namespace Togi
             {
                 t.Favorite(TweetId.ToString());
                 SetFavoriteById(TweetId.ToString(),true);
+
+                SetStatusMsg(dil_.GetString("TIME_LINE_MESAJ_8_0", cInfo_));
             }
         }
 
@@ -976,6 +1029,8 @@ namespace Togi
             {
                 t.UnFavorite(TweetId.ToString());
                 SetFavoriteById(TweetId.ToString(),false);
+
+                SetStatusMsg(dil_.GetString("TIME_LINE_MESAJ_8_1", cInfo_));
             }
         }
 
@@ -985,6 +1040,8 @@ namespace Togi
             {
                 t.Destroy(TweetId.ToString());
                 SetDestroyById(TweetId.ToString());
+
+                SetStatusMsg(dil_.GetString("TIME_LINE_MESAJ_9", cInfo_));
             }
         }
 
@@ -994,10 +1051,10 @@ namespace Togi
             {
                 t.DestroyMessages(TweetId.ToString());
                 SetDestroyById(TweetId.ToString());
+
+                SetStatusMsg(dil_.GetString("TIME_LINE_MESAJ_10", cInfo_));
             }
         }
-
-        
 
         #endregion
 

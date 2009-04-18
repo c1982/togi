@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{5E848B29-C7A7-4ED3-9CBE-D2E153380BF9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -73,6 +73,9 @@
     <EmbeddedResource Include="Info.resx">
       <DependentUpon>Info.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\Language.en-US.resx" />
+    <EmbeddedResource Include="Lang\Language.tr-TR.resx">
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

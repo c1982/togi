@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
+using System.Globalization;
+using System.Resources;
+using System.Threading;
+using System.Reflection;
 using TogiApi;
 
 namespace Togi
@@ -14,6 +13,7 @@ namespace Togi
         public SettingsForm()
         {
             InitializeComponent();
+            LanguageCtor();
             LoadValues();
         }
 
@@ -103,6 +103,43 @@ namespace Togi
             tProxyServer.Text = v_Proxy_Server;
             tProxyUser.Text = v_Proxy_User;
 
+        }
+
+        private void LanguageCtor()
+        {
+            string CultureName = Regedit.GetKey_("language");
+
+            CultureInfo cInfo_ = new CultureInfo(String.IsNullOrEmpty(CultureName) ?
+                "en-US" :
+                CultureName);
+
+            Thread.CurrentThread.CurrentUICulture = cInfo_;
+
+            ResourceManager dil_ = new ResourceManager("Togi.Lang.Language",
+                Assembly.GetExecutingAssembly());
+
+            groupBox1.Text = dil_.GetString("SETTINGS_BOX_1");
+            groupBox2.Text = dil_.GetString("SETTINGS_BOX_2");
+            groupBox3.Text = dil_.GetString("SETTINGS_BOX_3");
+            groupBox4.Text = dil_.GetString("SETTINGS_BOX_4");
+            groupBox5.Text = dil_.GetString("SETTINGS_BOX_5");
+
+            cRun.Text = dil_.GetString("SETTINGS_CHECK_1");
+            cProxy.Text = dil_.GetString("SETTINGS_CHECK_2");
+
+            lMinutes.Text = dil_.GetString("SETTINGS_BOX_1_1");
+            IpAdresi.Text = dil_.GetString("SETTINGS_LABEL_1");
+            l_Port.Text = dil_.GetString("SETTINGS_LABEL_2");
+            lUserName.Text = dil_.GetString("LOGIN_LABEL_1");
+            lPassword.Text = dil_.GetString("LOGIN_LABEL_2");
+
+            bProxySave.Text = dil_.GetString("SETTINGS_BUTTON_1");
+
+            tpGeneral.Text = dil_.GetString("SETTINGS_MENU_1");
+            tpAbout.Text = dil_.GetString("SETTINGS_MENU_3");
+            tpProxy.Text = dil_.GetString("SETTINGS_MENU_2");
+
+            dil_.ReleaseAllResources();
         }
     }
 }

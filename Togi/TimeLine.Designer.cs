@@ -50,7 +50,7 @@
             this.lScreenName = new System.Windows.Forms.Label();
             this.TogiNotify = new System.Windows.Forms.NotifyIcon(this.components);
             this.NotifyMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.changeUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsChangeUserNow = new System.Windows.Forms.ToolStripMenuItem();
             this.tsCheckTweetsNow = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsShow = new System.Windows.Forms.ToolStripMenuItem();
@@ -138,11 +138,11 @@
             this.tsStatus.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.tsStatus.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.tsStatus.Name = "tsStatus";
-            this.tsStatus.Size = new System.Drawing.Size(179, 25);
-            this.tsStatus.Text = "Tweet\'lemek için CTRL+ALT+ENTER";
+            this.tsStatus.Size = new System.Drawing.Size(0, 25);
             // 
             // tsSettings
             // 
+            this.tsSettings.BackColor = System.Drawing.Color.Transparent;
             this.tsSettings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsCheckNewVersion,
             this.tsChangeUser,
@@ -152,6 +152,7 @@
             this.tsShowNotice,
             this.st2,
             this.tsAdvanced});
+            this.tsSettings.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.tsSettings.Image = global::Togi.Properties.Resources.Settings1;
             this.tsSettings.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -164,20 +165,22 @@
             // tsCheckNewVersion
             // 
             this.tsCheckNewVersion.Name = "tsCheckNewVersion";
-            this.tsCheckNewVersion.Size = new System.Drawing.Size(192, 22);
+            this.tsCheckNewVersion.Size = new System.Drawing.Size(185, 22);
             this.tsCheckNewVersion.Text = "Check for new version";
             // 
             // tsChangeUser
             // 
             this.tsChangeUser.Name = "tsChangeUser";
-            this.tsChangeUser.Size = new System.Drawing.Size(192, 22);
+            this.tsChangeUser.Size = new System.Drawing.Size(185, 22);
             this.tsChangeUser.Text = "Change user";
             this.tsChangeUser.Click += new System.EventHandler(this.tsChangeUser_Click);
             // 
             // ts1
             // 
+            this.ts1.BackColor = System.Drawing.Color.PowderBlue;
+            this.ts1.ForeColor = System.Drawing.Color.PowderBlue;
             this.ts1.Name = "ts1";
-            this.ts1.Size = new System.Drawing.Size(189, 6);
+            this.ts1.Size = new System.Drawing.Size(182, 6);
             // 
             // tsCheckTweets
             // 
@@ -187,7 +190,7 @@
             this.tsCheckTweets.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.tsCheckTweets.Name = "tsCheckTweets";
             this.tsCheckTweets.ShowShortcutKeys = false;
-            this.tsCheckTweets.Size = new System.Drawing.Size(192, 22);
+            this.tsCheckTweets.Size = new System.Drawing.Size(185, 22);
             this.tsCheckTweets.Text = "Check for new tweets";
             this.tsCheckTweets.CheckedChanged += new System.EventHandler(this.tsCheckTweets_CheckedChanged);
             // 
@@ -199,7 +202,7 @@
             this.tsShorgUrl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.tsShorgUrl.Name = "tsShorgUrl";
             this.tsShorgUrl.ShowShortcutKeys = false;
-            this.tsShorgUrl.Size = new System.Drawing.Size(192, 22);
+            this.tsShorgUrl.Size = new System.Drawing.Size(185, 22);
             this.tsShorgUrl.Text = "Short url";
             this.tsShorgUrl.CheckedChanged += new System.EventHandler(this.tsShorgUrl_CheckedChanged);
             // 
@@ -211,19 +214,21 @@
             this.tsShowNotice.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.tsShowNotice.Name = "tsShowNotice";
             this.tsShowNotice.ShowShortcutKeys = false;
-            this.tsShowNotice.Size = new System.Drawing.Size(192, 22);
+            this.tsShowNotice.Size = new System.Drawing.Size(185, 22);
             this.tsShowNotice.Text = "Show notifications";
             this.tsShowNotice.CheckedChanged += new System.EventHandler(this.tsShowNotice_CheckedChanged);
             // 
             // st2
             // 
+            this.st2.BackColor = System.Drawing.Color.PowderBlue;
+            this.st2.ForeColor = System.Drawing.Color.PowderBlue;
             this.st2.Name = "st2";
-            this.st2.Size = new System.Drawing.Size(189, 6);
+            this.st2.Size = new System.Drawing.Size(182, 6);
             // 
             // tsAdvanced
             // 
             this.tsAdvanced.Name = "tsAdvanced";
-            this.tsAdvanced.Size = new System.Drawing.Size(192, 22);
+            this.tsAdvanced.Size = new System.Drawing.Size(185, 22);
             this.tsAdvanced.Text = "Advanced";
             this.tsAdvanced.Click += new System.EventHandler(this.tsAdvanced_Click);
             // 
@@ -298,46 +303,47 @@
             // NotifyMenu
             // 
             this.NotifyMenu.BackgroundImage = global::Togi.Properties.Resources.bg2;
+            this.NotifyMenu.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.NotifyMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.changeUserToolStripMenuItem,
+            this.tsChangeUserNow,
             this.tsCheckTweetsNow,
             this.toolStripSeparator1,
             this.tsShow,
             this.tsExit});
             this.NotifyMenu.Name = "NotifyMenu";
             this.NotifyMenu.ShowImageMargin = false;
-            this.NotifyMenu.Size = new System.Drawing.Size(152, 98);
+            this.NotifyMenu.Size = new System.Drawing.Size(146, 98);
             // 
-            // changeUserToolStripMenuItem
+            // tsChangeUserNow
             // 
-            this.changeUserToolStripMenuItem.Name = "changeUserToolStripMenuItem";
-            this.changeUserToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
-            this.changeUserToolStripMenuItem.Text = "Change User";
-            this.changeUserToolStripMenuItem.Click += new System.EventHandler(this.tsChangeUser_Click);
+            this.tsChangeUserNow.Name = "tsChangeUserNow";
+            this.tsChangeUserNow.Size = new System.Drawing.Size(145, 22);
+            this.tsChangeUserNow.Text = "Change User";
+            this.tsChangeUserNow.Click += new System.EventHandler(this.tsChangeUser_Click);
             // 
             // tsCheckTweetsNow
             // 
             this.tsCheckTweetsNow.Name = "tsCheckTweetsNow";
-            this.tsCheckTweetsNow.Size = new System.Drawing.Size(151, 22);
+            this.tsCheckTweetsNow.Size = new System.Drawing.Size(145, 22);
             this.tsCheckTweetsNow.Text = "Check Tweets Now";
             this.tsCheckTweetsNow.Click += new System.EventHandler(this.Zaman_Tick);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(148, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(142, 6);
             // 
             // tsShow
             // 
             this.tsShow.Name = "tsShow";
-            this.tsShow.Size = new System.Drawing.Size(151, 22);
+            this.tsShow.Size = new System.Drawing.Size(145, 22);
             this.tsShow.Text = "Show";
             this.tsShow.Click += new System.EventHandler(this.tsShow_Click);
             // 
             // tsExit
             // 
             this.tsExit.Name = "tsExit";
-            this.tsExit.Size = new System.Drawing.Size(151, 22);
+            this.tsExit.Size = new System.Drawing.Size(145, 22);
             this.tsExit.Text = "Exit";
             this.tsExit.Click += new System.EventHandler(this.tsExit_Click);
             // 
@@ -357,46 +363,45 @@
             this.tsReadAll});
             this.ToolsMenu.Name = "ToolsMenu";
             this.ToolsMenu.ShowImageMargin = false;
-            this.ToolsMenu.Size = new System.Drawing.Size(144, 76);
+            this.ToolsMenu.Size = new System.Drawing.Size(136, 76);
             // 
             // tsShowFavorites
             // 
             this.tsShowFavorites.Name = "tsShowFavorites";
-            this.tsShowFavorites.Size = new System.Drawing.Size(143, 22);
+            this.tsShowFavorites.Size = new System.Drawing.Size(135, 22);
             this.tsShowFavorites.Text = "Filter Favorites";
             this.tsShowFavorites.Click += new System.EventHandler(this.tsShowFavorites_Click);
             // 
             // tsUnreads
             // 
             this.tsUnreads.Name = "tsUnreads";
-            this.tsUnreads.Size = new System.Drawing.Size(143, 22);
+            this.tsUnreads.Size = new System.Drawing.Size(135, 22);
             this.tsUnreads.Text = "Filter Unreads";
             this.tsUnreads.Click += new System.EventHandler(this.tsUnreads_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(140, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(132, 6);
             // 
             // tsReadAll
             // 
             this.tsReadAll.Name = "tsReadAll";
-            this.tsReadAll.Size = new System.Drawing.Size(143, 22);
+            this.tsReadAll.Size = new System.Drawing.Size(135, 22);
             this.tsReadAll.Text = "Mark As  Read All";
             this.tsReadAll.Click += new System.EventHandler(this.tsReadAll_Click);
             // 
             // lTools
             // 
             this.lTools.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lTools.AutoSize = true;
-            this.lTools.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.lTools.BackColor = System.Drawing.Color.MediumAquamarine;
             this.lTools.ContextMenuStrip = this.ToolsMenu;
             this.lTools.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lTools.ForeColor = System.Drawing.Color.White;
-            this.lTools.Location = new System.Drawing.Point(321, 7);
+            this.lTools.Location = new System.Drawing.Point(299, 7);
             this.lTools.Margin = new System.Windows.Forms.Padding(0);
             this.lTools.Name = "lTools";
-            this.lTools.Size = new System.Drawing.Size(38, 13);
+            this.lTools.Size = new System.Drawing.Size(60, 13);
             this.lTools.TabIndex = 2;
             this.lTools.Text = "Tools";
             this.lTools.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -410,12 +415,12 @@
             this.BackgroundImage = global::Togi.Properties.Resources.bg2;
             this.ClientSize = new System.Drawing.Size(379, 432);
             this.ControlBox = false;
+            this.Controls.Add(this.lClose);
             this.Controls.Add(this.tsDugmeler);
             this.Controls.Add(this.lScreenName);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.lTools);
-            this.Controls.Add(this.lClose);
             this.Controls.Add(this.Tablo);
+            this.Controls.Add(this.lTools);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -463,7 +468,7 @@
         private System.Windows.Forms.ContextMenuStrip NotifyMenu;
         private System.Windows.Forms.ToolStripMenuItem tsShow;
         private System.Windows.Forms.ToolStripMenuItem tsExit;
-        private System.Windows.Forms.ToolStripMenuItem changeUserToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsChangeUserNow;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem tsCheckTweetsNow;
         private System.Windows.Forms.ContextMenuStrip ToolsMenu;

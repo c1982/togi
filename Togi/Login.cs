@@ -10,6 +10,9 @@ using TogiApi;
 using System.Collections;
 using TogiApi.Tools;
 using TimeLineControl;
+using System.Resources;
+using System.Globalization;
+using System.Reflection;
 
 namespace Togi
 {
@@ -19,6 +22,9 @@ namespace Togi
         public IList<TweetItem> FriendsTimeLine { get; set; }
 
         private Thread lng;
+        private ResourceManager dil_;
+        private CultureInfo cInfo_;
+
         private string ScreenName;
         private string Password;
 
@@ -28,6 +34,18 @@ namespace Togi
         public Login()
         {
             InitializeComponent();
+
+            string CultureName = Regedit.GetKey_("language");
+
+            cInfo_ = new CultureInfo(String.IsNullOrEmpty(CultureName) ?
+                "en-US" :
+                CultureName);
+
+            Thread.CurrentThread.CurrentUICulture = cInfo_;
+
+            dil_ = new ResourceManager("Togi.Lang.Language",
+                Assembly.GetExecutingAssembly());
+
             FriendsTimeLine = new List<TweetItem>();
 
             //Write registry default values
@@ -80,7 +98,7 @@ namespace Togi
                 Twitter login = new Twitter(ScreenName, Password);
 
                 // TimeLine geliyor
-                SetTextBoxText("Loading Timeline...", lLoading);
+                SetTextBoxText(dil_.GetString("LOGIN_LOADING_1", cInfo_), lLoading);
 
                 //1. Okunmamislar Aliniyor. Since_id
                 LoadTweetItem(login.FriendsTimeLine(SinceId), false);
@@ -94,7 +112,7 @@ namespace Togi
                     LoadTweetItem(login.FriendsTimeLine(SinceId, true), true);                
 
                 //4. User Bilgileri Aliniyor.
-                SetTextBoxText("Loading Session...", lLoading);
+                SetTextBoxText(dil_.GetString("LOGIN_LOADING_2", cInfo_), lLoading);
                 LoginUser = login.ShowUser(ScreenName);
                 LoginUser.UserName = ScreenName;
                 LoginUser.UserPass = Password;
@@ -115,6 +133,14 @@ namespace Togi
             //}
         }
 
+        private void LanguageCtor()
+        {
+            lScreenName.Text = dil_.GetString("LOGIN_LABEL_1");
+            lPassword.Text = dil_.GetString("LOGIN_LABEL_2");
+            cRemember.Text = dil_.GetString("LOGIN_LABEL_3");
+            btLogin.Text = dil_.GetString("LOGIN_BUTTON_1");
+        }
+
         private void LoadTweetItem(IList<Tweet> liste,bool isRead)
         {
             lock (this)
@@ -125,6 +151,7 @@ namespace Togi
                     TweetItem ti = new TweetItem(item);
                     FriendsTimeLine.Add(ti);
                 }
+
             }
         }
 

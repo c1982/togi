@@ -36,20 +36,20 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cLang = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lMinutes = new System.Windows.Forms.Label();
             this.nCheckTime = new System.Windows.Forms.NumericUpDown();
             this.tpProxy = new System.Windows.Forms.TabPage();
             this.bProxySave = new System.Windows.Forms.Button();
             this.cProxy = new System.Windows.Forms.CheckBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lUserName = new System.Windows.Forms.Label();
             this.tProxyPass = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lPassword = new System.Windows.Forms.Label();
             this.tProxyUser = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.l_Port = new System.Windows.Forms.Label();
+            this.IpAdresi = new System.Windows.Forms.Label();
             this.tProxyServer = new System.Windows.Forms.TextBox();
             this.tProxyPort = new System.Windows.Forms.TextBox();
             this.tpAbout = new System.Windows.Forms.TabPage();
@@ -161,9 +161,7 @@
             this.cLang.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cLang.FormattingEnabled = true;
             this.cLang.Items.AddRange(new object[] {
-            "Türkçe",
-            "English",
-            "German"});
+            "tr-TR"});
             this.cLang.Location = new System.Drawing.Point(22, 32);
             this.cLang.Name = "cLang";
             this.cLang.Size = new System.Drawing.Size(254, 21);
@@ -173,7 +171,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.lMinutes);
             this.groupBox1.Controls.Add(this.nCheckTime);
             this.groupBox1.Location = new System.Drawing.Point(8, 6);
             this.groupBox1.Name = "groupBox1";
@@ -182,14 +180,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Checking Time";
             // 
-            // label7
+            // lMinutes
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(81, 25);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(44, 13);
-            this.label7.TabIndex = 3;
-            this.label7.Text = "Minutes";
+            this.lMinutes.AutoSize = true;
+            this.lMinutes.Location = new System.Drawing.Point(81, 25);
+            this.lMinutes.Name = "lMinutes";
+            this.lMinutes.Size = new System.Drawing.Size(44, 13);
+            this.lMinutes.TabIndex = 3;
+            this.lMinutes.Text = "Minutes";
             // 
             // nCheckTime
             // 
@@ -208,8 +206,9 @@
             this.nCheckTime.Name = "nCheckTime";
             this.nCheckTime.Size = new System.Drawing.Size(52, 20);
             this.nCheckTime.TabIndex = 2;
+            this.nCheckTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nCheckTime.Value = new decimal(new int[] {
-            1,
+            3,
             0,
             0,
             0});
@@ -271,9 +270,9 @@
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.label5, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lUserName, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tProxyPass, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label6, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lPassword, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.tProxyUser, 0, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(29, 19);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -285,14 +284,14 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(230, 79);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
-            // label5
+            // lUserName
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(55, 13);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "Username";
+            this.lUserName.AutoSize = true;
+            this.lUserName.Location = new System.Drawing.Point(3, 0);
+            this.lUserName.Name = "lUserName";
+            this.lUserName.Size = new System.Drawing.Size(55, 13);
+            this.lUserName.TabIndex = 3;
+            this.lUserName.Text = "Username";
             // 
             // tProxyPass
             // 
@@ -304,14 +303,14 @@
             this.tProxyPass.TabIndex = 2;
             this.tProxyPass.UseSystemPasswordChar = true;
             // 
-            // label6
+            // lPassword
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 39);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 13);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "Password";
+            this.lPassword.AutoSize = true;
+            this.lPassword.Location = new System.Drawing.Point(3, 39);
+            this.lPassword.Name = "lPassword";
+            this.lPassword.Size = new System.Drawing.Size(53, 13);
+            this.lPassword.TabIndex = 4;
+            this.lPassword.Text = "Password";
             // 
             // tProxyUser
             // 
@@ -325,8 +324,8 @@
             // groupBox4
             // 
             this.groupBox4.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox4.Controls.Add(this.label4);
-            this.groupBox4.Controls.Add(this.label3);
+            this.groupBox4.Controls.Add(this.l_Port);
+            this.groupBox4.Controls.Add(this.IpAdresi);
             this.groupBox4.Controls.Add(this.tProxyServer);
             this.groupBox4.Controls.Add(this.tProxyPort);
             this.groupBox4.Location = new System.Drawing.Point(8, 30);
@@ -336,23 +335,23 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Proxy Server";
             // 
-            // label4
+            // l_Port
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(175, 26);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(66, 13);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Port Number";
+            this.l_Port.AutoSize = true;
+            this.l_Port.Location = new System.Drawing.Point(175, 26);
+            this.l_Port.Name = "l_Port";
+            this.l_Port.Size = new System.Drawing.Size(66, 13);
+            this.l_Port.TabIndex = 5;
+            this.l_Port.Text = "Port Number";
             // 
-            // label3
+            // IpAdresi
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(30, 26);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(57, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Ip Address";
+            this.IpAdresi.AutoSize = true;
+            this.IpAdresi.Location = new System.Drawing.Point(30, 26);
+            this.IpAdresi.Name = "IpAdresi";
+            this.IpAdresi.Size = new System.Drawing.Size(57, 13);
+            this.IpAdresi.TabIndex = 4;
+            this.IpAdresi.Text = "Ip Address";
             // 
             // tProxyServer
             // 
@@ -471,8 +470,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label l_Port;
+        private System.Windows.Forms.Label IpAdresi;
         private System.Windows.Forms.TextBox tProxyServer;
         private System.Windows.Forms.TextBox tProxyPort;
         private System.Windows.Forms.TextBox tProxyPass;
@@ -480,9 +479,9 @@
         private System.Windows.Forms.CheckBox cProxy;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lPassword;
+        private System.Windows.Forms.Label lUserName;
         private System.Windows.Forms.Button bProxySave;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lMinutes;
     }
 }

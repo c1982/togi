@@ -7,6 +7,9 @@ using System.Text;
 using System.Windows.Forms;
 using TogiApi;
 using System.Threading;
+using System.Globalization;
+using System.Resources;
+using System.Reflection;
 
 namespace Togi
 {
@@ -20,11 +23,13 @@ namespace Togi
         public Info()
         {
             InitializeComponent();
+            LanguageCtor();
         }
 
         public Info(string sn_)
         {
             InitializeComponent();
+            LanguageCtor();
             ScreenName = sn_;
         }
 
@@ -60,6 +65,34 @@ namespace Togi
             SetText(l_Web_Value, User_.Url);
             SetText(l_Updates, User_.StatusCnt.ToString());
             SetImage(User_.ImageNormal);
+        }
+
+        private void LanguageCtor()
+        {
+            string CultureName = Regedit.GetKey_("language");
+
+            CultureInfo cInfo_ = new CultureInfo(String.IsNullOrEmpty(CultureName) ?
+                "en-US" :
+                CultureName);
+
+            Thread.CurrentThread.CurrentUICulture = cInfo_;
+
+            ResourceManager dil_ = new ResourceManager("Togi.Lang.Language",
+                Assembly.GetExecutingAssembly());
+
+            l_Name.Text = dil_.GetString("INFO_LABEL_1");            
+            l_Location.Text = dil_.GetString("INFO_LABEL_2");
+            l_Web.Text = dil_.GetString("INFO_LABEL_3");
+            l_Bio.Text = dil_.GetString("INFO_LABEL_4");
+
+            label5.Text = dil_.GetString("INFO_LABEL_5");
+            label6.Text = dil_.GetString("INFO_LABEL_6");
+            label7.Text = dil_.GetString("INFO_LABEL_7");
+
+            groupBox1.Text = dil_.GetString("INFO_LABEL_8");
+            lClose.Text = dil_.GetString("INFO_BUTTON_1");
+
+            dil_.ReleaseAllResources();
         }
 
         private void SetText(Label label_, string text_)

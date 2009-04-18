@@ -103,8 +103,6 @@
             this.bClose.BackColor = System.Drawing.Color.Transparent;
             this.bClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.bClose.FlatAppearance.BorderSize = 0;
-            this.bClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.YellowGreen;
-            this.bClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.YellowGreen;
             this.bClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bClose.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.bClose.ForeColor = System.Drawing.Color.White;
@@ -126,7 +124,7 @@
             this.bUpdate.FlatAppearance.BorderSize = 0;
             this.bUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bUpdate.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.bUpdate.ForeColor = System.Drawing.Color.LightGray;
+            this.bUpdate.ForeColor = System.Drawing.Color.PowderBlue;
             this.bUpdate.Location = new System.Drawing.Point(287, 100);
             this.bUpdate.Margin = new System.Windows.Forms.Padding(0);
             this.bUpdate.Name = "bUpdate";

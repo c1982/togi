@@ -32,8 +32,8 @@
             this.tPass = new System.Windows.Forms.TextBox();
             this.btLogin = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lScreenName = new System.Windows.Forms.Label();
+            this.lPassword = new System.Windows.Forms.Label();
             this.T1 = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.cRemember = new System.Windows.Forms.CheckBox();
@@ -102,32 +102,32 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Togi";
             // 
-            // label2
+            // lScreenName
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Location = new System.Drawing.Point(3, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 12);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Screen Name";
+            this.lScreenName.AutoSize = true;
+            this.lScreenName.BackColor = System.Drawing.Color.Transparent;
+            this.lScreenName.Location = new System.Drawing.Point(3, 0);
+            this.lScreenName.Name = "lScreenName";
+            this.lScreenName.Size = new System.Drawing.Size(72, 12);
+            this.lScreenName.TabIndex = 4;
+            this.lScreenName.Text = "Screen Name";
             // 
-            // label3
+            // lPassword
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 53);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Password";
+            this.lPassword.AutoSize = true;
+            this.lPassword.Location = new System.Drawing.Point(3, 53);
+            this.lPassword.Name = "lPassword";
+            this.lPassword.Size = new System.Drawing.Size(53, 13);
+            this.lPassword.TabIndex = 5;
+            this.lPassword.Text = "Password";
             // 
             // T1
             // 
             this.T1.BackColor = System.Drawing.Color.Transparent;
             this.T1.ColumnCount = 1;
             this.T1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.T1.Controls.Add(this.label2, 0, 0);
-            this.T1.Controls.Add(this.label3, 0, 2);
+            this.T1.Controls.Add(this.lScreenName, 0, 0);
+            this.T1.Controls.Add(this.lPassword, 0, 2);
             this.T1.Controls.Add(this.tPass, 0, 3);
             this.T1.Controls.Add(this.tSname, 1, 0);
             this.T1.Location = new System.Drawing.Point(3, 3);
@@ -158,9 +158,9 @@
             this.cRemember.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cRemember.Location = new System.Drawing.Point(6, 122);
             this.cRemember.Name = "cRemember";
-            this.cRemember.Size = new System.Drawing.Size(94, 17);
+            this.cRemember.Size = new System.Drawing.Size(91, 17);
             this.cRemember.TabIndex = 1;
-            this.cRemember.Text = "Remember me.";
+            this.cRemember.Text = "Remember me";
             this.cRemember.UseVisualStyleBackColor = false;
             // 
             // lClose
@@ -226,7 +226,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.BackColor = System.Drawing.Color.PowderBlue;
             this.ClientSize = new System.Drawing.Size(245, 260);
             this.ControlBox = false;
             this.Controls.Add(this.lClose);
@@ -259,8 +259,8 @@
         private System.Windows.Forms.TextBox tPass;
         private System.Windows.Forms.Button btLogin;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lScreenName;
+        private System.Windows.Forms.Label lPassword;
         private System.Windows.Forms.TableLayoutPanel T1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox cRemember;
