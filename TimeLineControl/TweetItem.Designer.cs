@@ -71,10 +71,11 @@
             this.TweetText.ForeColor = System.Drawing.Color.Gray;
             this.TweetText.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.TweetText.LinkColor = System.Drawing.Color.RoyalBlue;
-            this.TweetText.Location = new System.Drawing.Point(40, 17);
+            this.TweetText.Location = new System.Drawing.Point(39, 16);
             this.TweetText.Name = "TweetText";
-            this.TweetText.Size = new System.Drawing.Size(253, 44);
-            this.TweetText.TabIndex = 9;
+            this.TweetText.Size = new System.Drawing.Size(253, 42);
+            this.TweetText.TabIndex = 0;
+            this.TweetText.UseCompatibleTextRendering = true;
             this.TweetText.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.TweetText.MouseLeave += new System.EventHandler(this.TweetItem_MouseLeave);
             this.TweetText.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.TweetText_LinkClicked);
@@ -97,7 +98,7 @@
             this.ItemMenu.Name = "ItemMenu";
             this.ItemMenu.ShowImageMargin = false;
             this.ItemMenu.ShowItemToolTips = false;
-            this.ItemMenu.Size = new System.Drawing.Size(141, 170);
+            this.ItemMenu.Size = new System.Drawing.Size(141, 148);
             // 
             // tsReply
             // 
@@ -155,7 +156,7 @@
             this.lTime.Margin = new System.Windows.Forms.Padding(0);
             this.lTime.Name = "lTime";
             this.lTime.Size = new System.Drawing.Size(148, 13);
-            this.lTime.TabIndex = 11;
+            this.lTime.TabIndex = 2;
             this.lTime.Text = "28 dakika önce";
             this.lTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -190,9 +191,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.Controls.Add(this.FullName);
             this.Controls.Add(this.pFavoriIcon);
             this.Controls.Add(this.TweetText);
+            this.Controls.Add(this.FullName);
             this.Controls.Add(this.ProfileImage);
             this.Controls.Add(this.lTime);
             this.Name = "TweetItem";

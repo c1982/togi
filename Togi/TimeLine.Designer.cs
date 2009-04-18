@@ -57,16 +57,15 @@
             this.tsExit = new System.Windows.Forms.ToolStripMenuItem();
             this.Zaman = new System.Windows.Forms.Timer(this.components);
             this.ToolsMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.allReadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showFavoritesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.filterUnreadsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsShowFavorites = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsUnreads = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsReadAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.lTools = new System.Windows.Forms.Label();
             this.tsDugmeler.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.NotifyMenu.SuspendLayout();
             this.ToolsMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // tsDugmeler
@@ -82,7 +81,7 @@
             this.tsMessages,
             this.tsStatus,
             this.tsSettings});
-            this.tsDugmeler.Location = new System.Drawing.Point(0, 398);
+            this.tsDugmeler.Location = new System.Drawing.Point(0, 404);
             this.tsDugmeler.Name = "tsDugmeler";
             this.tsDugmeler.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.tsDugmeler.Size = new System.Drawing.Size(379, 28);
@@ -139,8 +138,8 @@
             this.tsStatus.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.tsStatus.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.tsStatus.Name = "tsStatus";
-            this.tsStatus.Size = new System.Drawing.Size(38, 25);
-            this.tsStatus.Text = "Durum";
+            this.tsStatus.Size = new System.Drawing.Size(179, 25);
+            this.tsStatus.Text = "Tweet\'lemek için CTRL+ALT+ENTER";
             // 
             // tsSettings
             // 
@@ -241,7 +240,7 @@
             this.lClose.Name = "lClose";
             this.lClose.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lClose.Size = new System.Drawing.Size(15, 13);
-            this.lClose.TabIndex = 2;
+            this.lClose.TabIndex = 4;
             this.lClose.Text = "X";
             this.lClose.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lClose.Click += new System.EventHandler(this.lClose_Click_1);
@@ -260,8 +259,8 @@
             this.Tablo.Margin = new System.Windows.Forms.Padding(0);
             this.Tablo.Name = "Tablo";
             this.Tablo.RowCount = 1;
-            this.Tablo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 368F));
-            this.Tablo.Size = new System.Drawing.Size(375, 368);
+            this.Tablo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 374F));
+            this.Tablo.Size = new System.Drawing.Size(374, 374);
             this.Tablo.TabIndex = 0;
             this.Tablo.TabStop = true;
             // 
@@ -285,7 +284,7 @@
             this.lScreenName.Location = new System.Drawing.Point(19, 6);
             this.lScreenName.Name = "lScreenName";
             this.lScreenName.Size = new System.Drawing.Size(37, 14);
-            this.lScreenName.TabIndex = 8;
+            this.lScreenName.TabIndex = 3;
             this.lScreenName.Text = "c1982";
             // 
             // TogiNotify
@@ -294,6 +293,7 @@
             this.TogiNotify.Icon = ((System.Drawing.Icon)(resources.GetObject("TogiNotify.Icon")));
             this.TogiNotify.Text = "Togi Twitter Client";
             this.TogiNotify.Visible = true;
+            this.TogiNotify.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TogiNotify_MouseDoubleClick);
             // 
             // NotifyMenu
             // 
@@ -349,49 +349,58 @@
             // 
             this.ToolsMenu.BackColor = System.Drawing.Color.Transparent;
             this.ToolsMenu.BackgroundImage = global::Togi.Properties.Resources.bg2;
+            this.ToolsMenu.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.ToolsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.allReadToolStripMenuItem,
-            this.showFavoritesToolStripMenuItem,
-            this.filterUnreadsToolStripMenuItem,
-            this.toolStripTextBox1});
+            this.tsShowFavorites,
+            this.tsUnreads,
+            this.toolStripSeparator2,
+            this.tsReadAll});
             this.ToolsMenu.Name = "ToolsMenu";
             this.ToolsMenu.ShowImageMargin = false;
-            this.ToolsMenu.Size = new System.Drawing.Size(144, 93);
+            this.ToolsMenu.Size = new System.Drawing.Size(144, 76);
             // 
-            // allReadToolStripMenuItem
+            // tsShowFavorites
             // 
-            this.allReadToolStripMenuItem.Name = "allReadToolStripMenuItem";
-            this.allReadToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.allReadToolStripMenuItem.Text = "Mark As  Read All";
+            this.tsShowFavorites.Name = "tsShowFavorites";
+            this.tsShowFavorites.Size = new System.Drawing.Size(143, 22);
+            this.tsShowFavorites.Text = "Filter Favorites";
+            this.tsShowFavorites.Click += new System.EventHandler(this.tsShowFavorites_Click);
             // 
-            // showFavoritesToolStripMenuItem
+            // tsUnreads
             // 
-            this.showFavoritesToolStripMenuItem.Name = "showFavoritesToolStripMenuItem";
-            this.showFavoritesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.showFavoritesToolStripMenuItem.Text = "Filter Favorites";
+            this.tsUnreads.Name = "tsUnreads";
+            this.tsUnreads.Size = new System.Drawing.Size(143, 22);
+            this.tsUnreads.Text = "Filter Unreads";
+            this.tsUnreads.Click += new System.EventHandler(this.tsUnreads_Click);
             // 
-            // toolStripTextBox1
+            // toolStripSeparator2
             // 
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 21);
-            this.toolStripTextBox1.Text = "Search";
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(140, 6);
             // 
-            // pictureBox2
+            // tsReadAll
             // 
-            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox2.ContextMenuStrip = this.ToolsMenu;
-            this.pictureBox2.Location = new System.Drawing.Point(258, 7);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(100, 13);
-            this.pictureBox2.TabIndex = 11;
-            this.pictureBox2.TabStop = false;
+            this.tsReadAll.Name = "tsReadAll";
+            this.tsReadAll.Size = new System.Drawing.Size(143, 22);
+            this.tsReadAll.Text = "Mark As  Read All";
+            this.tsReadAll.Click += new System.EventHandler(this.tsReadAll_Click);
             // 
-            // filterUnreadsToolStripMenuItem
+            // lTools
             // 
-            this.filterUnreadsToolStripMenuItem.Name = "filterUnreadsToolStripMenuItem";
-            this.filterUnreadsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.filterUnreadsToolStripMenuItem.Text = "Filter Unreads";
+            this.lTools.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lTools.AutoSize = true;
+            this.lTools.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.lTools.ContextMenuStrip = this.ToolsMenu;
+            this.lTools.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lTools.ForeColor = System.Drawing.Color.White;
+            this.lTools.Location = new System.Drawing.Point(321, 7);
+            this.lTools.Margin = new System.Windows.Forms.Padding(0);
+            this.lTools.Name = "lTools";
+            this.lTools.Size = new System.Drawing.Size(38, 13);
+            this.lTools.TabIndex = 2;
+            this.lTools.Text = "Tools";
+            this.lTools.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lTools.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lTools_MouseDown);
             // 
             // TimeLine
             // 
@@ -399,14 +408,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PowderBlue;
             this.BackgroundImage = global::Togi.Properties.Resources.bg2;
-            this.ClientSize = new System.Drawing.Size(379, 426);
+            this.ClientSize = new System.Drawing.Size(379, 432);
             this.ControlBox = false;
+            this.Controls.Add(this.tsDugmeler);
             this.Controls.Add(this.lScreenName);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.Tablo);
+            this.Controls.Add(this.lTools);
             this.Controls.Add(this.lClose);
-            this.Controls.Add(this.tsDugmeler);
+            this.Controls.Add(this.Tablo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -417,13 +426,14 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.TopMost = true;
             this.Load += new System.EventHandler(this.TimeLine_Load);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TimeLine_MouseUp);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TimeLine_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TimeLine_MouseMove);
             this.tsDugmeler.ResumeLayout(false);
             this.tsDugmeler.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.NotifyMenu.ResumeLayout(false);
             this.ToolsMenu.ResumeLayout(false);
-            this.ToolsMenu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -437,7 +447,6 @@
         private System.Windows.Forms.ToolStripButton tsMessages;
         private System.Windows.Forms.ToolStripLabel tsStatus;
         private System.Windows.Forms.Label lClose;
-        private System.Windows.Forms.TableLayoutPanel Tablo;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lScreenName;
         private System.Windows.Forms.ToolStripDropDownButton tsSettings;
@@ -458,11 +467,12 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem tsCheckTweetsNow;
         private System.Windows.Forms.ContextMenuStrip ToolsMenu;
-        private System.Windows.Forms.ToolStripMenuItem allReadToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem showFavoritesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.ToolStripMenuItem filterUnreadsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsReadAll;
+        private System.Windows.Forms.ToolStripMenuItem tsShowFavorites;
+        private System.Windows.Forms.ToolStripMenuItem tsUnreads;
+        private System.Windows.Forms.Label lTools;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.TableLayoutPanel Tablo;
 
     }
 }

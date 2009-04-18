@@ -72,13 +72,16 @@ namespace TogiApi.Tools
                     Url = "http://" + Url;
                 }
 
+                string text;
+
                 var request = WebRequest.Create(ApiUrl + Url);
                 var res = request.GetResponse();
-                string text;
+                
                 using (var reader = new StreamReader(res.GetResponseStream()))
                 {
                     text = reader.ReadToEnd();
                 }
+
                 return text;
             }
             catch (Exception)

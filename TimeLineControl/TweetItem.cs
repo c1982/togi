@@ -42,7 +42,12 @@ namespace TimeLineControl
         public TweetItem(Tweet t)
         {
             InitializeComponent();
-            ItemTweet = t;            
+            ItemTweet = t;
+        }
+
+        private void TweetItem_Load(object sender, EventArgs e)
+        {
+            SetControlValues();
         }
 
         void ResimIstegi_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
@@ -62,9 +67,9 @@ namespace TimeLineControl
         }
 
         private void SetControlValues()
-        {
-            TweetText.Links.Clear();
+        {                        
             TweetText.Text = System.Web.HttpUtility.HtmlDecode(ItemTweet.Text.Trim());
+            TweetUtils.LinkEkle(TweetText);
 
             FullName.Text = String.Format("{0} ({1})",
                 ItemTweet.UserName,
@@ -85,7 +90,7 @@ namespace TimeLineControl
             } 
 
             Resim = Properties.Resources.default_profile_normal;
-            TweetUtils.LinkEkle(TweetText);
+
 
             tsFavorite.Tag = ItemTweet.Id;
             tsReply.Tag = ItemTweet.Id;
@@ -101,7 +106,7 @@ namespace TimeLineControl
                 tsFavorite.Enabled = false;
                 tsReply.Enabled = false;
                 tsReTweet.Enabled = false;
-                tsDelete.Tag = true;
+                tsDelete.Enabled = true;
             }
 
             // Favori ise yıldızı göster.
@@ -116,7 +121,6 @@ namespace TimeLineControl
             img.Start(ItemTweet.ProfilImageUrl);
 
         }
-
 
         private void ShowProfileImage(object ImageUrl)
         {
@@ -169,14 +173,15 @@ namespace TimeLineControl
 
         private void TweetText_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            try
-            {
+            e.Link.Visited = true;
+            //try
+            //{
                 System.Diagnostics.Process.Start(e.Link.LinkData.ToString());
-            }
-            catch
-            {                
-                // Lay Lay Lom...
-            }
+            //}
+            //catch
+            //{                
+            //    // Lay Lay Lom...
+            //}
         }
 
         private void TweetItem_MouseHover(object sender, EventArgs e)
@@ -253,11 +258,6 @@ namespace TimeLineControl
                 default:
                     break;
             }
-        }
-
-        private void TweetItem_Load(object sender, EventArgs e)
-        {
-            SetControlValues();
         }
 
         public void ShowFavoriteIcon(bool isFavorite)

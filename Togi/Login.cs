@@ -90,7 +90,8 @@ namespace Togi
                     login.SetSinceId(FriendsTimeLine[0].ItemTweet);
 
                 //3. Okunmuslar Aliniyor. Max_id
-                LoadTweetItem(login.FriendsTimeLine(SinceId, true), true);                
+                if(!String.IsNullOrEmpty(SinceId))
+                    LoadTweetItem(login.FriendsTimeLine(SinceId, true), true);                
 
                 //4. User Bilgileri Aliniyor.
                 SetTextBoxText("Loading Session...", lLoading);

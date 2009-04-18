@@ -400,22 +400,25 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Location = new System.Drawing.Point(8, 10);
+            this.label2.Location = new System.Drawing.Point(6, 7);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 13);
+            this.label2.Size = new System.Drawing.Size(148, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Version: 1.0";
+            this.label2.Text = "Togi Twitter Client Version 1.0";
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Location = new System.Drawing.Point(96, 110);
+            this.label1.Location = new System.Drawing.Point(94, 103);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(117, 39);
+            this.label1.Size = new System.Drawing.Size(120, 52);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Oğuzhan YILMAZ\r\naspsrc@gmail.com\r\nwww.oguzhan.info/togi\r\n";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label1.Text = "Oğuzhan YILMAZ\r\naspsrc@gmail.com\r\nwww.oguzhan.info/togi\r\nwww.twitter.com/c1982\r\n";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // SettingsForm
             // 

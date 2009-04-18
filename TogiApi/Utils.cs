@@ -19,9 +19,7 @@ namespace TogiApi
                 using (WebClient istek = new WebClient())
                 {
                     using (Stream Strm = istek.OpenRead(Uri_))
-                    {
-                        //istek.OpenReadAsync(new Uri(Uri_));
-
+                    {                        
                         Resim = new Bitmap(Strm);                        
                         Strm.Dispose();
                     }

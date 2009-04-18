@@ -21,6 +21,8 @@ namespace Togi
         public IList<TweetItem> MessagesTimeLine { get; set; }
 
         private const int WM_HOTKEY = 0x0312;
+        private bool mouse_is_down;
+        private Point mouse_pos;
 
         private delegate void SetFavoriteIcon(bool isFavorite);
         private delegate void del_OpenNoticeForm(TweetItem t);
@@ -43,14 +45,6 @@ namespace Togi
         private void TimeLine_Load(object sender, EventArgs e)
         {
             LoginIn();
-
-            //Replies ve Messages
-            if (TwitterUser != null)
-            {
-                Thread get_tweets = new Thread(new ThreadStart(LoadRepliesAndMessages));
-                get_tweets.SetApartmentState(ApartmentState.STA);
-                get_tweets.Start();
-            }
         }
 
         private void LoginIn()
@@ -97,6 +91,14 @@ namespace Togi
 
                 // Okunmayanların Sayısı
                 SetTweetNumber(tsRecents, GetUnreadItem(FriendsTimeLine));
+            }
+
+            //Replies ve Messages
+            if (TwitterUser != null)
+            {
+                Thread get_tweets = new Thread(new ThreadStart(LoadRepliesAndMessages));
+                get_tweets.SetApartmentState(ApartmentState.STA);
+                get_tweets.Start();
             }
         }
 
@@ -157,20 +159,99 @@ namespace Togi
             }
         }
 
-        #endregion
-
-        #region Events
-        private void lClose_Click_1(object sender, EventArgs e)
+        private void ReadAllItems()
         {
-            this.Hide();
+            if(FriendsTimeLine != null)
+                MarkAsReadItem(FriendsTimeLine);
+
+            if(RepliesTimeLine != null)
+                MarkAsReadItem(RepliesTimeLine);
+
+            if(MessagesTimeLine != null)
+                MarkAsReadItem(MessagesTimeLine);
+
+            SetTweetNumber(tsReplys, 0);
+            SetTweetNumber(tsRecents, 0);
+            SetTweetNumber(tsMessages, 0);
+
+            SetStatusMsg("Read All Tweets");            
         }
 
-        private void tsAdvanced_Click(object sender, EventArgs e)
+
+        private void MarkAsReadItem(IList<TweetItem> liste_)
         {
-            using (SettingsForm s = new SettingsForm())
+            lock (liste_)
             {
-                s.ShowDialog();
-                s.Dispose();
+                foreach (TweetItem item in liste_)
+                {
+                    item.ItemTweet.isRead = true;
+                }
+            }
+        }
+
+        private void ShowFavorites()
+        {
+            IList<TweetItem> favorites_ = new List<TweetItem>();
+
+            if(FriendsTimeLine !=null)
+                AddFavorites(FriendsTimeLine, favorites_);
+
+            if(RepliesTimeLine !=null)
+                AddFavorites(RepliesTimeLine, favorites_);
+
+            if (favorites_ != null && favorites_.Count > 0)
+            {
+                FillTableTweet(favorites_);
+                SetStatusMsg(String.Format("{0} Favorites",
+                    favorites_.Count));
+            }
+            else
+            {
+                SetStatusMsg("No favorites");
+            }
+
+        }
+
+        private void AddFavorites(IList<TweetItem> source_, IList<TweetItem> destination_)
+        {
+            if (source_ == null)
+                return;
+
+            lock (source_)
+            {
+                foreach (TweetItem item in source_)
+                {
+                    if (item.ItemTweet.isFavorite)
+                        destination_.Add(item);
+                }
+            }
+        }
+
+        private void ShowUnreadItems()
+        {
+            IList<TweetItem> unreads_ = new List<TweetItem>();
+            AddUnreadItems(FriendsTimeLine, unreads_);
+            AddUnreadItems(RepliesTimeLine, unreads_);
+            AddUnreadItems(MessagesTimeLine, unreads_);
+
+            if (unreads_ != null && unreads_.Count > 0)
+                FillTableTweet(unreads_);
+            else
+                SetStatusMsg("No Unread Tweets");
+        }
+
+        private void AddUnreadItems(IList<TweetItem> source_, IList<TweetItem> destination_)
+        {
+            if (source_ == null)
+                return;
+
+            lock (source_)
+            {
+                foreach (TweetItem item in source_)
+                {
+                    if (!item.ItemTweet.isRead)
+                        destination_.Add(item);
+                }
             }
         }
 
@@ -183,8 +264,8 @@ namespace Togi
             Tablo.RowCount = 0;
             Tablo.Visible = false;
             Tablo.Controls.Clear();
-            Tablo.RowStyles.Clear();                       
-            
+            Tablo.RowStyles.Clear();
+
             lock (TweetList)
             {
                 IList<TweetItem> tmpList = TweetList;
@@ -195,17 +276,71 @@ namespace Togi
                     {
                         //if (!item.IsDisposed)
                         //{
-                            item.Dock = DockStyle.Bottom;
-                            Tablo.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-                            Tablo.Controls.Add(item, 1, TableRowIndex);
-                            TableRowIndex++;
+                        item.Dock = DockStyle.Bottom;
+                        Tablo.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+                        Tablo.Controls.Add(item, 1, TableRowIndex);
+                        TableRowIndex++;
                         //}
                     }
                 }
             }
-                                    
+
             Tablo.Visible = true;
             Tablo.Focus();
+        }
+
+        private void SetZamanTimer()
+        {
+            string IntTimeString = Regedit.GetKey_("check_time");
+            int IntTime = String.IsNullOrEmpty(IntTimeString) ? 3 : int.Parse(IntTimeString);
+            IntTime = (IntTime * 60) * 1000;
+
+            Zaman.Enabled = true;
+            Zaman.Interval = IntTime;
+            Zaman.Start();
+        }  
+
+        #endregion
+
+        #region Events
+
+        private void TogiNotify_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            this.Show();
+        }
+
+        private void tsUnreads_Click(object sender, EventArgs e)
+        {
+            ShowUnreadItems();
+        }
+
+        private void tsShowFavorites_Click(object sender, EventArgs e)
+        {
+            ShowFavorites();
+        }
+
+        private void lTools_MouseDown(object sender, MouseEventArgs e)
+        {
+            ToolsMenu.Show((Label)sender, new Point(e.X, e.Y));
+        }
+
+        private void tsReadAll_Click(object sender, EventArgs e)
+        {
+            ReadAllItems();
+        }
+
+        private void lClose_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void tsAdvanced_Click(object sender, EventArgs e)
+        {
+            using (SettingsForm s = new SettingsForm())
+            {
+                s.ShowDialog();
+                s.Dispose();
+            }
         }
 
         private void tsRecents_Click(object sender, EventArgs e)
@@ -268,18 +403,7 @@ namespace Togi
                 dForm.ShowDialog();
                 dForm.Dispose();
             }
-        }
-
-        private void SetZamanTimer()
-        {
-            string IntTimeString = Regedit.GetKey_("check_time");
-            int IntTime = String.IsNullOrEmpty(IntTimeString) ? 3 : int.Parse(IntTimeString);
-            IntTime = (IntTime * 60) * 1000;
-
-            Zaman.Enabled = true;
-            Zaman.Interval = IntTime;
-            Zaman.Start();
-        }        
+        }      
 
         private void Zaman_Tick(object sender, EventArgs e)
         {
@@ -300,18 +424,44 @@ namespace Togi
 
         private void tsChangeUser_Click(object sender, EventArgs e)
         {
-            
             if (MessageBox.Show("Kullanıcıyı değiştirmek istiyormusun?", "Togi",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Regedit.SetKey_("login_name", String.Empty);
-                Regedit.SetKey_("login_pass", String.Empty);                
+                Regedit.SetKey_("login_pass", String.Empty);
+
+                Regedit.SetKey_("since_message", String.Empty);
+                Regedit.SetKey_("since_recent", String.Empty);
+                Regedit.SetKey_("since_reply", String.Empty);
+
 
                 LoginIn();
             }
         }
 
+        private void TimeLine_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.mouse_pos.X = e.X;
+            this.mouse_pos.Y = e.Y;
+            this.mouse_is_down = true;
+        }
+
+        private void TimeLine_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (this.mouse_is_down)
+            {
+                Point mousePosition = Control.MousePosition;
+                mousePosition.X -= this.mouse_pos.X;
+                mousePosition.Y -= this.mouse_pos.Y;
+                base.Location = mousePosition;
+            }
+        }
+
+        private void TimeLine_MouseUp(object sender, MouseEventArgs e)
+        {
+            this.mouse_is_down = false;
+        }
         #endregion
 
         #region CheckNewTweets
@@ -425,6 +575,7 @@ namespace Togi
             Notification n = new Notification(t);
             n.Notice();
         }
+
         #endregion
 
         #region TweetItemEvents
@@ -652,6 +803,7 @@ namespace Togi
                     {
                         if (item.ItemTweet.Id.Equals(TweetId))
                         {
+                            item.ItemTweet.isFavorite = isFavorite;
                             item.ShowFavoriteIcon(isFavorite);
                             break;
                         }
@@ -848,5 +1000,10 @@ namespace Togi
         
 
         #endregion
+
+
+
+
+
     }
 }

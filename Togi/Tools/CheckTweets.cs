@@ -31,26 +31,30 @@ namespace Togi.Tools
 
         public IList<TweetItem> CheckRepliesFirsTime()
         {
+            string SinceId = Regedit.GetKey_("since_reply");
             IList<TweetItem> tmp_list = new List<TweetItem>();
 
             //Okunmamislar aliniyor. SinceId
             LoadTweetItem(tmp_list, CheckReplies(), false);
 
             //Okunmuslar aliniyor. MaxId
-            LoadTweetItem(tmp_list, CheckReplies_Read(), true);
+            if(!String.IsNullOrEmpty(SinceId))
+                LoadTweetItem(tmp_list, CheckReplies_Read(), true);
 
             return tmp_list;
         }
 
         public IList<TweetItem> CheckMessagesFirsTime()
         {
+            string SinceId = Regedit.GetKey_("since_message");
             IList<TweetItem> tmp_list = new List<TweetItem>();
 
             //Okunmamislar aliniyor. SinceId
             LoadTweetItem(tmp_list, CheckMessages(), false);
 
             //Okunmuslar aliniyor. MaxId
-            LoadTweetItem(tmp_list, CheckMessages_Read(), true);
+            if (!String.IsNullOrEmpty(SinceId))
+                LoadTweetItem(tmp_list, CheckMessages_Read(), true);
 
             return tmp_list;
         }
