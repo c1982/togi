@@ -75,7 +75,9 @@ namespace Togi
             ScreenName = tSname.Text;
             Password = tPass.Text;
 
-            ChangeUserFlow();
+            if(_ChangeUser)
+                ChangeUserFlow();
+
             LoginStart();
         }
 

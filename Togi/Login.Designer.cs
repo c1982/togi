@@ -193,8 +193,8 @@
             // P2
             // 
             this.P2.BackColor = System.Drawing.Color.Transparent;
-            this.P2.Controls.Add(this.lLoading);
             this.P2.Controls.Add(this.pLoadingIcon);
+            this.P2.Controls.Add(this.lLoading);
             this.P2.Location = new System.Drawing.Point(10, 89);
             this.P2.Name = "P2";
             this.P2.Size = new System.Drawing.Size(224, 83);
@@ -214,8 +214,8 @@
             // 
             // pLoadingIcon
             // 
-            this.pLoadingIcon.Image = global::Togi.Properties.Resources._32_0;
-            this.pLoadingIcon.Location = new System.Drawing.Point(87, 27);
+            this.pLoadingIcon.Image = global::Togi.Properties.Resources._32_01;
+            this.pLoadingIcon.Location = new System.Drawing.Point(79, 30);
             this.pLoadingIcon.Name = "pLoadingIcon";
             this.pLoadingIcon.Size = new System.Drawing.Size(50, 50);
             this.pLoadingIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -226,8 +226,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.PowderBlue;
-            this.ClientSize = new System.Drawing.Size(245, 260);
+            this.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.ClientSize = new System.Drawing.Size(245, 235);
             this.ControlBox = false;
             this.Controls.Add(this.lClose);
             this.Controls.Add(this.label4);

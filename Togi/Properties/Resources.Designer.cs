@@ -60,9 +60,9 @@ namespace Togi.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap _32_0 {
+        internal static System.Drawing.Bitmap _32_01 {
             get {
-                object obj = ResourceManager.GetObject("32-0", resourceCulture);
+                object obj = ResourceManager.GetObject("32-01", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
