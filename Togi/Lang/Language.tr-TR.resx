@@ -165,6 +165,42 @@
   <data name="ITEM_MENU_7" xml:space="preserve">
     <value>Kullanıcı Bilgisi</value>
   </data>
+  <data name="ITEM_MENU_8" xml:space="preserve">
+    <value>{0}, {1} ile</value>
+  </data>
+  <data name="ITEM_TIME_1" xml:space="preserve">
+    <value>{0} saniye önce</value>
+  </data>
+  <data name="ITEM_TIME_2_0" xml:space="preserve">
+    <value>{0} dakika önce</value>
+  </data>
+  <data name="ITEM_TIME_2_1" xml:space="preserve">
+    <value>şimdi</value>
+  </data>
+  <data name="ITEM_TIME_3_0" xml:space="preserve">
+    <value>{0} saat önce</value>
+  </data>
+  <data name="ITEM_TIME_3_1" xml:space="preserve">
+    <value>bir saat önce</value>
+  </data>
+  <data name="ITEM_TIME_4_0" xml:space="preserve">
+    <value>{0} gün önce</value>
+  </data>
+  <data name="ITEM_TIME_4_1" xml:space="preserve">
+    <value>dün</value>
+  </data>
+  <data name="ITEM_TIME_5_0" xml:space="preserve">
+    <value>{0} ay önce</value>
+  </data>
+  <data name="ITEM_TIME_5_1" xml:space="preserve">
+    <value>geçen ay</value>
+  </data>
+  <data name="ITEM_TIME_6_0" xml:space="preserve">
+    <value>yıl önce</value>
+  </data>
+  <data name="ITEM_TIME_6_1" xml:space="preserve">
+    <value>geçen sene</value>
+  </data>
   <data name="LOGIN_BUTTON_1" xml:space="preserve">
     <value>Giriş</value>
   </data>

@@ -5,6 +5,7 @@ using System.Net;
 using System.Collections.Specialized;
 using System.Xml;
 using TogiApi.Tools;
+using System.Text.RegularExpressions;
 
 namespace TogiApi
 {
@@ -85,6 +86,7 @@ namespace TogiApi
         {
             string GetProxy;
             GetProxy = Regedit.GetKey_("proxy");
+
             if (String.IsNullOrEmpty(GetProxy))
                 GetProxy = "false";
 
@@ -316,7 +318,7 @@ namespace TogiApi
 
             t.TweetType = tip;
 
-            t.Source = XmlTweet.SelectSingleNode("source").InnerText;
+            t.Source = GetSourceFromLink(XmlTweet.SelectSingleNode("source").InnerText);
             t.Text = XmlTweet.SelectSingleNode("text").InnerText;
 
             t.UserId = XmlTweet.SelectSingleNode("user/id").InnerText;
@@ -363,37 +365,24 @@ namespace TogiApi
             }
         }
 
-
-        public static string ToRelativeDate(DateTime dateTime)
+        private string GetSourceFromLink(string SourceLink)
         {
-            TimeSpan timeSpan = DateTime.Now - dateTime;
+            if (String.IsNullOrEmpty(SourceLink))
+                return String.Empty;
 
-            if (timeSpan <= TimeSpan.FromSeconds(60))
+            string Captured = String.Empty;
+            Match m = Regex.Match(SourceLink, @"<.*>(.*)<\/a>");
+            if (m.Success)
             {
-                return timeSpan.Seconds + " saniye önce";
+                if (m.Groups.Count > 0)
+                    Captured = m.Groups[1].Value;
+            }
+            else
+            {
+                Captured = SourceLink;
             }
 
-            if (timeSpan <= TimeSpan.FromMinutes(60))
-            {
-                return timeSpan.Minutes > 1 ? timeSpan.Minutes + " dakika önce" : "şimdi";
-            }
-
-            if (timeSpan <= TimeSpan.FromHours(24))
-            {
-                return timeSpan.Hours > 1 ? timeSpan.Hours + " saat önce" : "bir saat önce";
-            }
-
-            if (timeSpan <= TimeSpan.FromDays(30))
-            {
-                return timeSpan.Days > 1 ? timeSpan.Days + " gün önce" : "dün";
-            }
-
-            if (timeSpan <= TimeSpan.FromDays(365))
-            {
-                return timeSpan.Days > 30 ? timeSpan.Days / 30 + " ay önce" : "geçen ay";
-            }
-
-            return timeSpan.Days > 365 ? timeSpan.Days / 365 + " yıl önce" : "geçen sene";
+            return Captured;
         }
 
         #region IDisposable Members

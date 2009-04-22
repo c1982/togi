@@ -152,7 +152,6 @@
   </data>
   <data name="ITEM_MENU_3" xml:space="preserve">
     <value>Message User</value>
-    <comment> </comment>
   </data>
   <data name="ITEM_MENU_4" xml:space="preserve">
     <value>Mark as Favorite</value>
@@ -165,6 +164,42 @@
   </data>
   <data name="ITEM_MENU_7" xml:space="preserve">
     <value>Info</value>
+  </data>
+  <data name="ITEM_MENU_8" xml:space="preserve">
+    <value>{0} from {1}</value>
+  </data>
+  <data name="ITEM_TIME_1" xml:space="preserve">
+    <value>{0} second ago</value>
+  </data>
+  <data name="ITEM_TIME_2_0" xml:space="preserve">
+    <value>{0} minutes ago</value>
+  </data>
+  <data name="ITEM_TIME_2_1" xml:space="preserve">
+    <value>now</value>
+  </data>
+  <data name="ITEM_TIME_3_0" xml:space="preserve">
+    <value>{0} hours ago</value>
+  </data>
+  <data name="ITEM_TIME_3_1" xml:space="preserve">
+    <value>a hour</value>
+  </data>
+  <data name="ITEM_TIME_4_0" xml:space="preserve">
+    <value>{0} days ago</value>
+  </data>
+  <data name="ITEM_TIME_4_1" xml:space="preserve">
+    <value>a day</value>
+  </data>
+  <data name="ITEM_TIME_5_0" xml:space="preserve">
+    <value>{0} month ago</value>
+  </data>
+  <data name="ITEM_TIME_5_1" xml:space="preserve">
+    <value>last month</value>
+  </data>
+  <data name="ITEM_TIME_6_0" xml:space="preserve">
+    <value>{0} years ago</value>
+  </data>
+  <data name="ITEM_TIME_6_1" xml:space="preserve">
+    <value>last year</value>
   </data>
   <data name="LOGIN_BUTTON_1" xml:space="preserve">
     <value>Login</value>

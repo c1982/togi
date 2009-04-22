@@ -92,10 +92,10 @@ namespace TimeLineControl
                 ItemTweet.UserName,
                 ItemTweet.UserScreenName);
 
-            lTime.Text = String.Format("{0} from {1}",
-                Twitter.ToRelativeDate(ItemTweet.CreateAt),
-                TweetUtils.GetSourceFromLink(ItemTweet.Source)
-                );
+            //lTime.Text = String.Format("{0} from {1}",
+            //    Twitter.ToRelativeDate(ItemTweet.CreateAt),
+            //    TweetUtils.GetSourceFromLink(ItemTweet.Source)
+            //    );
 
             IsRead = ItemTweet.isRead;
             Resim = Properties.Resources.default_profile_normal;

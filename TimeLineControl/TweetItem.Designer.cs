@@ -98,53 +98,53 @@
             this.ItemMenu.Name = "ItemMenu";
             this.ItemMenu.ShowImageMargin = false;
             this.ItemMenu.ShowItemToolTips = false;
-            this.ItemMenu.Size = new System.Drawing.Size(141, 148);
+            this.ItemMenu.Size = new System.Drawing.Size(130, 148);
             // 
             // tsReply
             // 
             this.tsReply.Name = "tsReply";
-            this.tsReply.Size = new System.Drawing.Size(140, 22);
+            this.tsReply.Size = new System.Drawing.Size(129, 22);
             this.tsReply.Text = "Reply";
             // 
             // tsReTweet
             // 
             this.tsReTweet.Name = "tsReTweet";
-            this.tsReTweet.Size = new System.Drawing.Size(140, 22);
+            this.tsReTweet.Size = new System.Drawing.Size(129, 22);
             this.tsReTweet.Text = "Re Tweet";
             // 
             // ts1
             // 
             this.ts1.Name = "ts1";
-            this.ts1.Size = new System.Drawing.Size(137, 6);
+            this.ts1.Size = new System.Drawing.Size(126, 6);
             // 
             // tsMessage
             // 
             this.tsMessage.Name = "tsMessage";
-            this.tsMessage.Size = new System.Drawing.Size(140, 22);
+            this.tsMessage.Size = new System.Drawing.Size(129, 22);
             this.tsMessage.Text = "Message User";
             // 
             // tsFavorite
             // 
             this.tsFavorite.Name = "tsFavorite";
-            this.tsFavorite.Size = new System.Drawing.Size(140, 22);
+            this.tsFavorite.Size = new System.Drawing.Size(129, 22);
             this.tsFavorite.Text = "Mark as Favorite";
             // 
             // tsDelete
             // 
             this.tsDelete.Enabled = false;
             this.tsDelete.Name = "tsDelete";
-            this.tsDelete.Size = new System.Drawing.Size(140, 22);
+            this.tsDelete.Size = new System.Drawing.Size(129, 22);
             this.tsDelete.Text = "Delete Tweet";
             // 
             // ts2
             // 
             this.ts2.Name = "ts2";
-            this.ts2.Size = new System.Drawing.Size(137, 6);
+            this.ts2.Size = new System.Drawing.Size(126, 6);
             // 
             // tsUserInfo
             // 
             this.tsUserInfo.Name = "tsUserInfo";
-            this.tsUserInfo.Size = new System.Drawing.Size(140, 22);
+            this.tsUserInfo.Size = new System.Drawing.Size(129, 22);
             this.tsUserInfo.Text = "User Info";
             // 
             // lTime
@@ -219,12 +219,12 @@
         public System.Windows.Forms.ContextMenuStrip ItemMenu;
         public System.Windows.Forms.ToolStripMenuItem tsFavorite;
         public System.Windows.Forms.ToolStripMenuItem tsReply;
-        private System.Windows.Forms.Label lTime;
         public System.Windows.Forms.ToolStripMenuItem tsReTweet;
         public System.Windows.Forms.ToolStripMenuItem tsMessage;
         public System.Windows.Forms.ToolStripMenuItem tsDelete;
         public System.Windows.Forms.LinkLabel TweetText;
         private System.Windows.Forms.ToolStripSeparator ts2;
         public System.Windows.Forms.ToolStripMenuItem tsUserInfo;
+        public System.Windows.Forms.Label lTime;
     }
 }

@@ -769,13 +769,15 @@ namespace Togi
         {
             ti.tsReply.Text = dil_.GetString("ITEM_MENU_1", cInfo_);
             ti.tsReTweet.Text = dil_.GetString("ITEM_MENU_2", cInfo_);
-            ti.tsMessage.Text = dil_.GetString("ITEM_MENU_3", cInfo_);
-            ti.tsFavorite.Text = dil_.GetString("ITEM_MENU_4", cInfo_);            
+            ti.tsMessage.Text = dil_.GetString("ITEM_MENU_3", cInfo_);        
+            ti.SetMenuText(ti.tsFavorite, dil_.GetString(ti.ItemTweet.isFavorite ? "ITEM_MENU_5" : "ITEM_MENU_4", cInfo_));
             ti.tsDelete.Text = dil_.GetString("ITEM_MENU_6", cInfo_);
             ti.tsUserInfo.Text = dil_.GetString("ITEM_MENU_7", cInfo_);
 
-            if(ti.ItemTweet.isFavorite)
-                ti.SetMenuText(ti.tsFavorite, dil_.GetString("ITEM_MENU_5", cInfo_));
+            ti.lTime.Text = String.Format(dil_.GetString("ITEM_MENU_8",cInfo_),
+                ToRelativeDate(ti.ItemTweet.CreateAt),
+                ti.ItemTweet.Source);
+            
         }
 
         void tsMessage_Click(object sender, EventArgs e)
@@ -1082,6 +1084,45 @@ namespace Togi
 
                 SetStatusMsg(dil_.GetString("TIME_LINE_MESAJ_10", cInfo_));
             }
+        }
+
+        private string ToRelativeDate(DateTime dateTime)
+        {
+            TimeSpan timeSpan = DateTime.Now - dateTime;
+
+            if (timeSpan <= TimeSpan.FromSeconds(60))
+            {
+                return String.Format(dil_.GetString("ITEM_TIME_1", cInfo_),
+                    timeSpan.Seconds);
+            }
+
+            if (timeSpan <= TimeSpan.FromMinutes(60))
+            {
+                return timeSpan.Minutes > 1 ? 
+                    String.Format(dil_.GetString("ITEM_TIME_2_0",cInfo_),
+                    timeSpan.Minutes) : dil_.GetString("ITEM_TIME_2_1", cInfo_);
+            }
+
+            if (timeSpan <= TimeSpan.FromHours(24))
+            {
+                return timeSpan.Hours > 1 ? String.Format(dil_.GetString("ITEM_TIME_3_0",cInfo_),
+                    timeSpan.Hours) : dil_.GetString("ITEM_TIME_3_1", cInfo_);
+            }
+
+            if (timeSpan <= TimeSpan.FromDays(30))
+            {
+                return timeSpan.Days > 1 ? String.Format(dil_.GetString("ITEM_TIME_4_0", cInfo_),
+                    timeSpan.Days) : dil_.GetString("ITEM_TIME_4_1", cInfo_);
+            }
+
+            if (timeSpan <= TimeSpan.FromDays(365))
+            {
+                return timeSpan.Days > 30 ? String.Format(dil_.GetString("ITEM_TIME_5_0", cInfo_),
+                    (timeSpan.Days/30)) : dil_.GetString("ITEM_TIME_5_1", cInfo_);                   
+            }
+
+            return timeSpan.Days > 365 ? String.Format(dil_.GetString("ITEM_TIME_6_0", cInfo_),
+                    (timeSpan.Days/365)) : dil_.GetString("ITEM_TIME_6_1", cInfo_); 
         }
 
         #endregion

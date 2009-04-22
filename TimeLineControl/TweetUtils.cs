@@ -34,26 +34,5 @@ namespace TimeLineControl
                 }
             }
         }
-
-
-        public static string GetSourceFromLink(string SourceLink)
-        {
-            if(String.IsNullOrEmpty(SourceLink))
-                return String.Empty;
-
-            string Captured = String.Empty;
-            Match m = Regex.Match(SourceLink,@"<.*>(.*)<\/a>");
-            if (m.Success)
-            {
-                if (m.Groups.Count > 0)
-                    Captured = m.Groups[1].Value;
-            }
-            else
-            {
-                Captured = SourceLink;
-            }
-
-            return Captured;
-        }
     }
 }

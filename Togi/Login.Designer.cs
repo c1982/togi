@@ -40,8 +40,8 @@
             this.lClose = new System.Windows.Forms.Label();
             this.P1 = new System.Windows.Forms.Panel();
             this.P2 = new System.Windows.Forms.Panel();
-            this.lLoading = new System.Windows.Forms.Label();
             this.pLoadingIcon = new System.Windows.Forms.PictureBox();
+            this.lLoading = new System.Windows.Forms.Label();
             this.T1.SuspendLayout();
             this.P1.SuspendLayout();
             this.P2.SuspendLayout();
@@ -201,17 +201,6 @@
             this.P2.TabIndex = 10;
             this.P2.Visible = false;
             // 
-            // lLoading
-            // 
-            this.lLoading.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lLoading.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lLoading.Location = new System.Drawing.Point(0, 0);
-            this.lLoading.Name = "lLoading";
-            this.lLoading.Size = new System.Drawing.Size(224, 23);
-            this.lLoading.TabIndex = 1;
-            this.lLoading.Text = "Loading...";
-            this.lLoading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // pLoadingIcon
             // 
             this.pLoadingIcon.Image = global::Togi.Properties.Resources._32_01;
@@ -221,6 +210,17 @@
             this.pLoadingIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pLoadingIcon.TabIndex = 0;
             this.pLoadingIcon.TabStop = false;
+            // 
+            // lLoading
+            // 
+            this.lLoading.AutoSize = true;
+            this.lLoading.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lLoading.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lLoading.Location = new System.Drawing.Point(0, 0);
+            this.lLoading.Name = "lLoading";
+            this.lLoading.Size = new System.Drawing.Size(0, 15);
+            this.lLoading.TabIndex = 1;
+            this.lLoading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Login
             // 
