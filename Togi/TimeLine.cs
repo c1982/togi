@@ -203,7 +203,7 @@ namespace Togi
             {
                 foreach (TweetItem item in liste_)
                 {
-                    item.ItemTweet.isRead = true;
+                    item.IsRead = true;
                 }
             }
         }

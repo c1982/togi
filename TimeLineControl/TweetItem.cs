@@ -46,6 +46,8 @@ namespace TimeLineControl
 
                 if (value)
                     SetRead_(this, new EventArgs());
+
+                ItemTweet.isRead = value;
             }
         }
 
@@ -190,7 +192,7 @@ namespace TimeLineControl
 
         private void TweetItem_MouseHover(object sender, EventArgs e)
         {
-            if (!IsRead)
+            if (IsRead)
             {
                 SetBackColorIsRead(ItemTweet.TweetType);
             }
