@@ -34,6 +34,7 @@
             this.cShorUrl = new System.Windows.Forms.ComboBox();
             this.cRun = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.link_language = new System.Windows.Forms.LinkLabel();
             this.cLang = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lMinutes = new System.Windows.Forms.Label();
@@ -56,7 +57,6 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.link_language = new System.Windows.Forms.LinkLabel();
             this.tabControl1.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -156,6 +156,17 @@
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Languages";
+            // 
+            // link_language
+            // 
+            this.link_language.Location = new System.Drawing.Point(45, 48);
+            this.link_language.Name = "link_language";
+            this.link_language.Size = new System.Drawing.Size(232, 15);
+            this.link_language.TabIndex = 1;
+            this.link_language.TabStop = true;
+            this.link_language.Text = "check for new language";
+            this.link_language.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.link_language.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_language_LinkClicked);
             // 
             // cLang
             // 
@@ -421,25 +432,15 @@
             this.label1.Text = "Oğuzhan YILMAZ\r\naspsrc@gmail.com\r\nwww.oguzhan.info/togi\r\nwww.twitter.com/c1982\r\n";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // link_language
-            // 
-            this.link_language.Location = new System.Drawing.Point(45, 48);
-            this.link_language.Name = "link_language";
-            this.link_language.Size = new System.Drawing.Size(232, 15);
-            this.link_language.TabIndex = 1;
-            this.link_language.TabStop = true;
-            this.link_language.Text = "check for new language";
-            this.link_language.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.link_language.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_language_LinkClicked);
-            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImage = global::Togi.Properties.Resources.bg2;
             this.ClientSize = new System.Drawing.Size(316, 288);
             this.Controls.Add(this.tabControl1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SettingsForm";

@@ -20,6 +20,7 @@ namespace TimeLineControl
         
         public delegate void SetTweetType(object sender, EventArgs e);
         public delegate void AllowDelete(object sender, EventArgs e);
+        public delegate void dSetRead(object sender, EventArgs e);
 
         delegate void SetPicture(Bitmap Resim);
         delegate void SetFavoriteIcon(bool isFavorite);
@@ -28,11 +29,25 @@ namespace TimeLineControl
 
         public event SetTweetType TweetTypeSec_;
         public event AllowDelete TweetAllowDelete_;
+        public event dSetRead SetRead_;
 
         public Tweet ItemTweet;
         private Bitmap Resim;
         private WebClient ResimIstegi;
         private sbyte ImageRetriveCount;
+        private bool _isRead;
+
+        public bool IsRead
+        {
+            get { return _isRead; }
+            set 
+            { 
+                _isRead = value;
+
+                if (value)
+                    SetRead_(this, new EventArgs());
+            }
+        }
 
         public TweetItem()
         {
@@ -76,21 +91,12 @@ namespace TimeLineControl
                 ItemTweet.UserScreenName);
 
             lTime.Text = String.Format("{0} from {1}",
-                TweetUtils.ToRelativeDate(ItemTweet.CreateAt),
+                Twitter.ToRelativeDate(ItemTweet.CreateAt),
                 TweetUtils.GetSourceFromLink(ItemTweet.Source)
                 );
 
-            if (!ItemTweet.isRead)
-            {
-                SetBackColorIsRead(ItemTweet.TweetType); 
-            }
-            else
-            {
-                SetBackColorDefault(ItemTweet.TweetType);
-            } 
-
+            IsRead = ItemTweet.isRead;
             Resim = Properties.Resources.default_profile_normal;
-
 
             tsFavorite.Tag = ItemTweet.Id;
             tsReply.Tag = ItemTweet.Id;
@@ -109,17 +115,15 @@ namespace TimeLineControl
                 tsDelete.Enabled = true;
             }
 
+            if (!IsRead)
+                SetBackColorIsRead(ItemTweet.TweetType);
+
             // Favori ise yıldızı göster.
             ShowFavoriteIcon(ItemTweet.isFavorite);
-
-            // Favori ise favoriyi sil yaz.
-            if (ItemTweet.isFavorite)
-                SetMenuText(tsFavorite, "Un-Favorite");
 
             // Resim Aliniyor.
             Thread img = new Thread(new ParameterizedThreadStart(ShowProfileImage));
             img.Start(ItemTweet.ProfilImageUrl);
-
         }
 
         private void ShowProfileImage(object ImageUrl)
@@ -142,7 +146,7 @@ namespace TimeLineControl
             ProfileImage.Image = Resim;
         }
 
-        private void SetMenuText(ToolStripMenuItem tmenu, string text_)
+        public void SetMenuText(ToolStripMenuItem tmenu, string text_)
         {
             if (InvokeRequired)
             {
@@ -186,7 +190,7 @@ namespace TimeLineControl
 
         private void TweetItem_MouseHover(object sender, EventArgs e)
         {
-            if (ItemTweet.isRead)
+            if (!IsRead)
             {
                 SetBackColorIsRead(ItemTweet.TweetType);
             }
@@ -194,13 +198,13 @@ namespace TimeLineControl
 
         private void TweetItem_MouseLeave(object sender, EventArgs e)
         {
-            if (ItemTweet.isRead)
+            if (IsRead)
             {
                 SetBackColorDefault(ItemTweet.TweetType);
             }
         }
 
-        private void SetBackColorIsRead(Tweet.TweetTypes tp)
+        public void SetBackColorIsRead(Tweet.TweetTypes tp)
         {
             this.TweetText.ForeColor = Color.Black;
             this.TweetText.LinkColor = Color.RoyalBlue;

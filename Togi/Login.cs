@@ -93,8 +93,8 @@ namespace Togi
 
         private void TwitterLogin()
         {
-            try
-            {
+            //try
+            //{
                 string SinceId = Regedit.GetKey_("since_recent");
                 Thread.Sleep(1000);
 
@@ -126,15 +126,15 @@ namespace Togi
                     RememberThisAccount(ScreenName, Password);
 
                 DialogResult = DialogResult.OK;
-            }
-            catch(Exception ex)
-            {
-                SetTextBoxText(ex.Message , lLoading);
-                Thread.Sleep(2000);
+            //}
+            //catch(Exception ex)
+            //{
+            //    SetTextBoxText(ex.Message , lLoading);
+            //    Thread.Sleep(2000);
 
-                SetPanelVisibility(P1, true);
-                SetPanelVisibility(P2, false);
-            }
+            //    SetPanelVisibility(P1, true);
+            //    SetPanelVisibility(P2, false);
+            //}
         }
 
         private void LanguageCtor()

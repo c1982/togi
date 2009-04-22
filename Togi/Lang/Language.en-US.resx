@@ -144,6 +144,28 @@
   <data name="INFO_LABEL_8" xml:space="preserve">
     <value>Togi Points</value>
   </data>
+  <data name="ITEM_MENU_1" xml:space="preserve">
+    <value>Replies</value>
+  </data>
+  <data name="ITEM_MENU_2" xml:space="preserve">
+    <value>Re Tweet</value>
+  </data>
+  <data name="ITEM_MENU_3" xml:space="preserve">
+    <value>Message User</value>
+    <comment> </comment>
+  </data>
+  <data name="ITEM_MENU_4" xml:space="preserve">
+    <value>Mark as Favorite</value>
+  </data>
+  <data name="ITEM_MENU_5" xml:space="preserve">
+    <value>Un-Favorite</value>
+  </data>
+  <data name="ITEM_MENU_6" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="ITEM_MENU_7" xml:space="preserve">
+    <value>Info</value>
+  </data>
   <data name="LOGIN_BUTTON_1" xml:space="preserve">
     <value>Login</value>
   </data>

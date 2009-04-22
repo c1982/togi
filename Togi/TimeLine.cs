@@ -659,7 +659,16 @@ namespace Togi
 
             //Info
             item.tsUserInfo.Click += new EventHandler(tsUserInfo_Click);
+
+            //Okunduğu zaman
+            item.SetRead_ += new TweetItem.dSetRead(item_SetRead_);
             
+        }
+
+        void item_SetRead_(object sender, EventArgs e)
+        {
+            TweetItem ti = (TweetItem)sender;
+            ti.SetBackColorDefault(ti.ItemTweet.TweetType);            
         }
 
         void tsUserInfo_Click(object sender, EventArgs e)
@@ -688,7 +697,7 @@ namespace Togi
                 if (ti != null)
                 {
                     // Okundu;
-                    ti.ItemTweet.isRead = true;
+                    ti.IsRead = true;
                     ti.SetBackColorDefault(ti.ItemTweet.TweetType);
 
                     // Buton sayıları güncelleniyor.
@@ -700,8 +709,7 @@ namespace Togi
                         TweetItem sub_ti = GetTweetItemByIdPrivate(link_.Tag.ToString());
                         if (sub_ti != null)
                         {
-                            sub_ti.ItemTweet.isRead = true;
-                            sub_ti.SetBackColorDefault(ti.ItemTweet.TweetType);
+                            sub_ti.IsRead= true;                            
                             RefreshReadItem(Tweet.TweetTypes.Normal);
                         }                        
                     }
@@ -752,7 +760,22 @@ namespace Togi
                 if(ti.ItemTweet.TweetType != Tweet.TweetTypes.Message)
                     if (ti.ItemTweet.ReplyScreenName.Equals(TwitterUser.ScreenName))
                         ti.ItemTweet.TweetType = Tweet.TweetTypes.Reply;
+
+                TweetItemLanguageCtor(ti);
             }
+        }
+
+        void TweetItemLanguageCtor(TweetItem ti)
+        {
+            ti.tsReply.Text = dil_.GetString("ITEM_MENU_1", cInfo_);
+            ti.tsReTweet.Text = dil_.GetString("ITEM_MENU_2", cInfo_);
+            ti.tsMessage.Text = dil_.GetString("ITEM_MENU_3", cInfo_);
+            ti.tsFavorite.Text = dil_.GetString("ITEM_MENU_4", cInfo_);            
+            ti.tsDelete.Text = dil_.GetString("ITEM_MENU_6", cInfo_);
+            ti.tsUserInfo.Text = dil_.GetString("ITEM_MENU_7", cInfo_);
+
+            if(ti.ItemTweet.isFavorite)
+                ti.SetMenuText(ti.tsFavorite, dil_.GetString("ITEM_MENU_5", cInfo_));
         }
 
         void tsMessage_Click(object sender, EventArgs e)
@@ -852,7 +875,11 @@ namespace Togi
                         {
                             item.ItemTweet.isFavorite = isFavorite;
                             item.ShowFavoriteIcon(isFavorite);
-                            break;
+
+                            item.SetMenuText(item.tsFavorite,
+                                dil_.GetString(isFavorite ? "ITEM_MENU_5" : "ITEM_MENU_4", cInfo_));
+
+                            return;
                         }
                     }
                 }
@@ -866,8 +893,13 @@ namespace Togi
                     {
                         if (item.ItemTweet.Id.Equals(TweetId))
                         {
+                            item.ItemTweet.isFavorite = isFavorite;
                             item.ShowFavoriteIcon(isFavorite);
-                            break;
+
+                            item.SetMenuText(item.tsFavorite, 
+                                dil_.GetString(isFavorite ? "ITEM_MENU_5" : "ITEM_MENU_4", cInfo_));
+
+                            return;
                         }
                     }
                 }
@@ -889,7 +921,7 @@ namespace Togi
                             //Silindiği zaman arka planı grip yapan olay.
                             item.SetBackColorDefault(Tweet.TweetTypes.Deleted);
                             item.SetDeletedStatusText();
-                            break;
+                            return;
                         }
                     }
                 }
@@ -908,7 +940,7 @@ namespace Togi
                             //Silindiği zaman arka planı grip yapan olay.
                             item.SetBackColorDefault(Tweet.TweetTypes.Deleted);
                             item.SetDeletedStatusText();
-                            break;
+                            return;
                         }
                     }
                 }
@@ -927,7 +959,7 @@ namespace Togi
                             //Silindiği zaman arka planı grip yapan olay.
                             item.SetBackColorDefault(Tweet.TweetTypes.Deleted);
                             item.SetDeletedStatusText();
-                            break;
+                            return;
                         }
                     }
                 }

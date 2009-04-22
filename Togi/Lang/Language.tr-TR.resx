@@ -144,6 +144,27 @@
   <data name="INFO_LABEL_8" xml:space="preserve">
     <value>Togi Puanı</value>
   </data>
+  <data name="ITEM_MENU_1" xml:space="preserve">
+    <value>Yanıtla</value>
+  </data>
+  <data name="ITEM_MENU_2" xml:space="preserve">
+    <value>Tekrarla</value>
+  </data>
+  <data name="ITEM_MENU_3" xml:space="preserve">
+    <value>Mesaj Gönder</value>
+  </data>
+  <data name="ITEM_MENU_4" xml:space="preserve">
+    <value>Favori Olarak İşaretle</value>
+  </data>
+  <data name="ITEM_MENU_5" xml:space="preserve">
+    <value>Favori İşaretini Kaldır</value>
+  </data>
+  <data name="ITEM_MENU_6" xml:space="preserve">
+    <value>Bildiriyi Sil</value>
+  </data>
+  <data name="ITEM_MENU_7" xml:space="preserve">
+    <value>Kullanıcı Bilgisi</value>
+  </data>
   <data name="LOGIN_BUTTON_1" xml:space="preserve">
     <value>Giriş</value>
   </data>
