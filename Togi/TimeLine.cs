@@ -12,6 +12,7 @@ using System.Collections;
 using System.Globalization;
 using System.Reflection;
 using System.Resources;
+using System.Runtime.InteropServices;
 
 namespace Togi
 {
@@ -22,17 +23,35 @@ namespace Togi
         public IList<TweetItem> FriendsTimeLine { get; set; }
         public IList<TweetItem> RepliesTimeLine { get; set; }
         public IList<TweetItem> MessagesTimeLine { get; set; }
-
-        private const int WM_HOTKEY = 0x0312;
+        
         private bool mouse_is_down;
         private Point mouse_pos;
         private ResourceManager dil_;
         private CultureInfo cInfo_;
+        private byte NoticePadding;
 
         private delegate void SetFavoriteIcon(bool isFavorite);
-        private delegate void del_OpenNoticeForm(TweetItem t);
+        private delegate void del_OpenNoticeForm(Tweet t);
         private delegate void SetTextToolStripButtons(ToolStripButton ts, int Count_);
         private delegate void SetTextStatusMesage(string text_);
+
+        [DllImport("user32.dll", EntryPoint = "SetWindowPos")]
+        static extern bool SetWindowPos(
+             int hWnd,           // window handle
+             int hWndInsertAfter,    // placement-order handle
+             int X,          // horizontal position
+             int Y,          // vertical position
+             int cx,         // width
+             int cy,         // height
+             uint uFlags);       // window positioning flags
+
+        [DllImport("user32.dll")]
+        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+        private const int SW_SHOWNOACTIVATE = 4;
+        private const int HWND_TOPMOST = -1;
+        private const uint SWP_NOACTIVATE = 0x0010;
+        private const int WM_HOTKEY = 0x0312;
 
         #region Construct
 
@@ -301,7 +320,7 @@ namespace Togi
                     {
                         //if (!item.IsDisposed)
                         //{
-                        item.Dock = DockStyle.Bottom;
+                        item.Dock = DockStyle.Top;                        
                         Tablo.RowStyles.Add(new RowStyle(SizeType.AutoSize));
                         Tablo.Controls.Add(item, 1, TableRowIndex);
                         TableRowIndex++;
@@ -508,6 +527,16 @@ namespace Togi
         {
             this.mouse_is_down = false;
         }
+
+        private void Tablo_ControlAdded(object sender, ControlEventArgs e)
+        {
+            // Saniye yenileniyor.
+            TweetItem ti = (TweetItem)e.Control;
+            ti.lTime.Text = String.Format(dil_.GetString("ITEM_MENU_8", cInfo_),
+                ToRelativeDate(ti.ItemTweet.CreateAt),
+                ti.ItemTweet.Source);
+        }
+
         #endregion
 
         #region CheckNewTweets
@@ -547,6 +576,7 @@ namespace Togi
         private void AddNewTweetInList(IList<TweetItem> tList_, 
             Tweet.TweetTypes tip)
         {
+            NoticePadding = 0;
             string ShotNoticeStr_ = Regedit.GetKey_("check_notice");
             bool ShowNotice = String.IsNullOrEmpty(ShotNoticeStr_) ? true : 
                 bool.Parse(ShotNoticeStr_);
@@ -589,8 +619,10 @@ namespace Togi
                             }
 
                             // Show Notice
-                            //if (ShowNotice)                            
-                            //    OpenNoticeForm(item);                            
+                            if (ShowNotice)
+                            {
+                                OpenNoticeForm(item.ItemTweet);                                
+                            }
                         }
                     }
                 }
@@ -606,10 +638,9 @@ namespace Togi
             }
 
             ts.Text = Count_.Equals(0) ? String.Empty : Count_.ToString();
-
         }
 
-        private void OpenNoticeForm(TweetItem t)
+        private void OpenNoticeForm(Tweet t)
         {
             if (InvokeRequired)
             {
@@ -618,7 +649,15 @@ namespace Togi
             }
 
             Notification n = new Notification(t);
-            n.Notice();
+
+            ShowWindow(n.Handle, SW_SHOWNOACTIVATE);
+            SetWindowPos(n.Handle.ToInt32(), HWND_TOPMOST,
+            (Screen.PrimaryScreen.WorkingArea.Width - n.Width)-5,
+            (Screen.PrimaryScreen.WorkingArea.Height - n.Height) - NoticePadding, 
+            n.Width, n.Height,
+            SWP_NOACTIVATE);
+
+            NoticePadding += 64;
         }
 
         #endregion
@@ -662,7 +701,6 @@ namespace Togi
 
             //Okunduğu zaman
             item.SetRead_ += new TweetItem.dSetRead(item_SetRead_);
-            
         }
 
         void item_SetRead_(object sender, EventArgs e)
@@ -716,8 +754,6 @@ namespace Togi
                 }
             }
         }
-
-
 
         void item_TweetAllowDelete_(object sender, EventArgs e)
         {
@@ -1077,7 +1113,8 @@ namespace Togi
 
         public void DestroyMessages(object TweetId)
         {
-            using (Twitter t = new Twitter(TwitterUser.UserName, TwitterUser.UserPass))
+            using (Twitter t = new Twitter(TwitterUser.UserName, 
+                TwitterUser.UserPass))
             {
                 t.DestroyMessages(TweetId.ToString());
                 SetDestroyById(TweetId.ToString());

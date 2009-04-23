@@ -268,6 +268,7 @@
             this.Tablo.Size = new System.Drawing.Size(374, 374);
             this.Tablo.TabIndex = 0;
             this.Tablo.TabStop = true;
+            this.Tablo.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.Tablo_ControlAdded);
             // 
             // pictureBox1
             // 

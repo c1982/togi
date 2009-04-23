@@ -13,11 +13,9 @@ using System.ComponentModel.Design;
 
 namespace TimeLineControl
 {
-
-    [Designer("System.Windows.Forms.Design.ParentControlDesigner, System.Design", typeof(IDesigner))] 
+    [Designer("System.Windows.Forms.Design.ParentControlDesigner, System.Design", typeof(IDesigner))]
     public partial class TweetItem : UserControl
     {
-        
         public delegate void SetTweetType(object sender, EventArgs e);
         public delegate void AllowDelete(object sender, EventArgs e);
         public delegate void dSetRead(object sender, EventArgs e);

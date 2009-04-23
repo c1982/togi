@@ -237,7 +237,5 @@ namespace Togi
             Regedit.SetKey_("since_reply", String.Empty);
         }
 
-
-
     }
 }

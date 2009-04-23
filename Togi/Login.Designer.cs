@@ -81,7 +81,7 @@
             // 
             this.btLogin.BackColor = System.Drawing.Color.Transparent;
             this.btLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btLogin.Location = new System.Drawing.Point(151, 118);
+            this.btLogin.Location = new System.Drawing.Point(152, 118);
             this.btLogin.Name = "btLogin";
             this.btLogin.Size = new System.Drawing.Size(75, 23);
             this.btLogin.TabIndex = 2;
@@ -96,7 +96,7 @@
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Font = new System.Drawing.Font("Arial Black", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label1.ForeColor = System.Drawing.Color.Transparent;
-            this.label1.Location = new System.Drawing.Point(40, -2);
+            this.label1.Location = new System.Drawing.Point(35, -2);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(144, 68);
             this.label1.TabIndex = 3;
@@ -130,7 +130,7 @@
             this.T1.Controls.Add(this.lPassword, 0, 2);
             this.T1.Controls.Add(this.tPass, 0, 3);
             this.T1.Controls.Add(this.tSname, 1, 0);
-            this.T1.Location = new System.Drawing.Point(3, 3);
+            this.T1.Location = new System.Drawing.Point(4, 3);
             this.T1.Name = "T1";
             this.T1.RowCount = 4;
             this.T1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.5942F));
@@ -145,7 +145,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label4.Location = new System.Drawing.Point(151, 53);
+            this.label4.Location = new System.Drawing.Point(146, 53);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(70, 14);
             this.label4.TabIndex = 7;
@@ -156,7 +156,7 @@
             this.cRemember.AutoSize = true;
             this.cRemember.BackColor = System.Drawing.Color.Transparent;
             this.cRemember.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cRemember.Location = new System.Drawing.Point(6, 122);
+            this.cRemember.Location = new System.Drawing.Point(7, 122);
             this.cRemember.Name = "cRemember";
             this.cRemember.Size = new System.Drawing.Size(91, 17);
             this.cRemember.TabIndex = 1;
@@ -171,7 +171,7 @@
             this.lClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lClose.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lClose.ForeColor = System.Drawing.Color.LightCyan;
-            this.lClose.Location = new System.Drawing.Point(223, 1);
+            this.lClose.Location = new System.Drawing.Point(232, 1);
             this.lClose.Margin = new System.Windows.Forms.Padding(0);
             this.lClose.Name = "lClose";
             this.lClose.Size = new System.Drawing.Size(18, 19);
@@ -185,7 +185,7 @@
             this.P1.Controls.Add(this.T1);
             this.P1.Controls.Add(this.btLogin);
             this.P1.Controls.Add(this.cRemember);
-            this.P1.Location = new System.Drawing.Point(6, 72);
+            this.P1.Location = new System.Drawing.Point(12, 72);
             this.P1.Name = "P1";
             this.P1.Size = new System.Drawing.Size(232, 151);
             this.P1.TabIndex = 8;
@@ -195,16 +195,16 @@
             this.P2.BackColor = System.Drawing.Color.Transparent;
             this.P2.Controls.Add(this.pLoadingIcon);
             this.P2.Controls.Add(this.lLoading);
-            this.P2.Location = new System.Drawing.Point(10, 89);
+            this.P2.Location = new System.Drawing.Point(12, 69);
             this.P2.Name = "P2";
-            this.P2.Size = new System.Drawing.Size(224, 83);
+            this.P2.Size = new System.Drawing.Size(232, 120);
             this.P2.TabIndex = 10;
             this.P2.Visible = false;
             // 
             // pLoadingIcon
             // 
             this.pLoadingIcon.Image = global::Togi.Properties.Resources._32_01;
-            this.pLoadingIcon.Location = new System.Drawing.Point(79, 30);
+            this.pLoadingIcon.Location = new System.Drawing.Point(90, 47);
             this.pLoadingIcon.Name = "pLoadingIcon";
             this.pLoadingIcon.Size = new System.Drawing.Size(50, 50);
             this.pLoadingIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -213,13 +213,13 @@
             // 
             // lLoading
             // 
-            this.lLoading.AutoSize = true;
             this.lLoading.Dock = System.Windows.Forms.DockStyle.Top;
             this.lLoading.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lLoading.Location = new System.Drawing.Point(0, 0);
             this.lLoading.Name = "lLoading";
-            this.lLoading.Size = new System.Drawing.Size(0, 15);
+            this.lLoading.Size = new System.Drawing.Size(232, 44);
             this.lLoading.TabIndex = 1;
+            this.lLoading.Text = "...";
             this.lLoading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Login
@@ -227,7 +227,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.ClientSize = new System.Drawing.Size(245, 235);
+            this.ClientSize = new System.Drawing.Size(254, 235);
             this.ControlBox = false;
             this.Controls.Add(this.lClose);
             this.Controls.Add(this.label4);

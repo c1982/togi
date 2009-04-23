@@ -114,7 +114,9 @@ namespace Togi.Tools
             return tmp_list;
         }
 
-        private void LoadTweetItem(IList<TweetItem> dest_, IList<TweetItem> source_, bool isRead)
+        private void LoadTweetItem(IList<TweetItem> dest_, 
+            IList<TweetItem> source_, 
+            bool isRead)
         {
             lock (this)
             {
