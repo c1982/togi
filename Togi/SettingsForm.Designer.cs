@@ -173,8 +173,6 @@
             this.cLang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cLang.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cLang.FormattingEnabled = true;
-            this.cLang.Items.AddRange(new object[] {
-            "tr-TR"});
             this.cLang.Location = new System.Drawing.Point(23, 24);
             this.cLang.Name = "cLang";
             this.cLang.Size = new System.Drawing.Size(254, 21);

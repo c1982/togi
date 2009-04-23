@@ -648,7 +648,11 @@ namespace Togi
                 return;
             }
 
-            Notification n = new Notification(t);
+            string lTimeCaption = String.Format(dil_.GetString("ITEM_MENU_8", cInfo_),
+                ToRelativeDate(t.CreateAt),
+                t.Source);
+
+            Notification n = new Notification(t, lTimeCaption);
 
             ShowWindow(n.Handle, SW_SHOWNOACTIVATE);
             SetWindowPos(n.Handle.ToInt32(), HWND_TOPMOST,
@@ -1123,7 +1127,7 @@ namespace Togi
             }
         }
 
-        private string ToRelativeDate(DateTime dateTime)
+        public string ToRelativeDate(DateTime dateTime)
         {
             TimeSpan timeSpan = DateTime.Now - dateTime;
 

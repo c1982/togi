@@ -5,6 +5,7 @@ using System.Resources;
 using System.Threading;
 using System.Reflection;
 using TogiApi;
+using System.IO;
 
 namespace Togi
 {
@@ -26,7 +27,7 @@ namespace Togi
         private void cLang_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(!String.IsNullOrEmpty(cLang.Text))
-                Regedit.SetKey_("language", cLang.Text);
+                Regedit.SetKey_("language", cLang.SelectedValue.ToString());
         }
 
         private void cShorUrl_SelectedIndexChanged(object sender, EventArgs e)
@@ -81,7 +82,7 @@ namespace Togi
         private void LoadValues()
         {
             string v_CheckTime = Regedit.GetKey_("check_time");
-            string v_Languages = Regedit.GetKey_("language");
+            string v_Languages = CultureInfo.GetCultureInfo(Regedit.GetKey_("language")).DisplayName;
             string v_ShorUrl = Regedit.GetKey_("short_url");
             string v_Run = Regedit.GetKey_("run");
 
@@ -92,6 +93,10 @@ namespace Togi
             string v_Proxy_User = Regedit.GetKey_("proxy_user");
 
 
+            cLang.DataSource = Diller();
+            cLang.DisplayMember = "DisMember";
+            cLang.ValueMember = "ValMember";
+            
             nCheckTime.Value = String.IsNullOrEmpty(v_CheckTime) ? 3 : int.Parse(v_CheckTime);
             cLang.SelectedIndex = cLang.FindString(v_Languages);
             cShorUrl.SelectedIndex = cShorUrl.FindString(v_ShorUrl);
@@ -111,8 +116,8 @@ namespace Togi
 
             CultureInfo cInfo_ = new CultureInfo(String.IsNullOrEmpty(CultureName) ?
                 "en-US" :
-                CultureName);
-
+                CultureName);            
+            
             Thread.CurrentThread.CurrentUICulture = cInfo_;
 
             ResourceManager dil_ = new ResourceManager("Togi.Lang.Language",
@@ -146,5 +151,38 @@ namespace Togi
         {
             System.Diagnostics.Process.Start("http://www.oguzhan.info/togi");
         }
+
+        private LanguageItem[] Diller()
+        {
+            DirectoryInfo bilgi_ = new DirectoryInfo(Application.StartupPath);
+            DirectoryInfo[] dizinler_ = bilgi_.GetDirectories();
+            LanguageItem[] langs_ = new LanguageItem[dizinler_.Length];
+
+            for (int i = 0; i < dizinler_.Length; i++)
+            {
+                LanguageItem newitem = new LanguageItem();
+                newitem.ValMember = dizinler_[i].Name;
+                newitem.DisMember = dizinler_[i].Name;
+
+                langs_[i] = newitem;
+            }
+
+            return langs_;
+        }        
+    }
+
+    public class LanguageItem
+    {
+
+        private string _DisMember;
+
+        public string DisMember
+        {
+            get { return _DisMember; }
+            set { _DisMember = CultureInfo.GetCultureInfo(value).DisplayName; }
+        }
+
+        public string ValMember { get; set; }
+
     }
 }
