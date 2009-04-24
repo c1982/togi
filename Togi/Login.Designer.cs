@@ -50,38 +50,41 @@
             // 
             // tSname
             // 
+            this.tSname.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tSname.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.T1.SetColumnSpan(this.tSname, 2);
-            this.tSname.Dock = System.Windows.Forms.DockStyle.Top;
             this.tSname.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.tSname.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.tSname.Location = new System.Drawing.Point(3, 15);
+            this.tSname.Location = new System.Drawing.Point(0, 12);
+            this.tSname.Margin = new System.Windows.Forms.Padding(0);
             this.tSname.MaxLength = 50;
             this.tSname.Name = "tSname";
             this.tSname.ShortcutsEnabled = false;
-            this.tSname.Size = new System.Drawing.Size(217, 23);
+            this.tSname.Size = new System.Drawing.Size(183, 23);
             this.tSname.TabIndex = 0;
-            this.tSname.Text = "tellibahce";
             // 
             // tPass
             // 
+            this.tPass.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tPass.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tPass.Dock = System.Windows.Forms.DockStyle.Top;
             this.tPass.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.tPass.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.tPass.Location = new System.Drawing.Point(3, 70);
+            this.tPass.Location = new System.Drawing.Point(0, 67);
+            this.tPass.Margin = new System.Windows.Forms.Padding(0);
             this.tPass.MaxLength = 50;
             this.tPass.Name = "tPass";
             this.tPass.PasswordChar = '*';
-            this.tPass.Size = new System.Drawing.Size(217, 23);
+            this.tPass.Size = new System.Drawing.Size(183, 23);
             this.tPass.TabIndex = 1;
-            this.tPass.Text = "osman12";
             // 
             // btLogin
             // 
+            this.btLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btLogin.BackColor = System.Drawing.Color.Transparent;
             this.btLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btLogin.Location = new System.Drawing.Point(152, 118);
+            this.btLogin.Location = new System.Drawing.Point(112, 118);
             this.btLogin.Name = "btLogin";
             this.btLogin.Size = new System.Drawing.Size(75, 23);
             this.btLogin.TabIndex = 2;
@@ -96,7 +99,7 @@
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Font = new System.Drawing.Font("Arial Black", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label1.ForeColor = System.Drawing.Color.Transparent;
-            this.label1.Location = new System.Drawing.Point(35, -2);
+            this.label1.Location = new System.Drawing.Point(12, -1);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(144, 68);
             this.label1.TabIndex = 3;
@@ -123,6 +126,9 @@
             // 
             // T1
             // 
+            this.T1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.T1.BackColor = System.Drawing.Color.Transparent;
             this.T1.ColumnCount = 1;
             this.T1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -137,7 +143,7 @@
             this.T1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 36.60714F));
             this.T1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.T1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.28571F));
-            this.T1.Size = new System.Drawing.Size(223, 112);
+            this.T1.Size = new System.Drawing.Size(183, 112);
             this.T1.TabIndex = 0;
             // 
             // label4
@@ -145,7 +151,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label4.Location = new System.Drawing.Point(146, 53);
+            this.label4.Location = new System.Drawing.Point(121, 53);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(70, 14);
             this.label4.TabIndex = 7;
@@ -153,6 +159,7 @@
             // 
             // cRemember
             // 
+            this.cRemember.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cRemember.AutoSize = true;
             this.cRemember.BackColor = System.Drawing.Color.Transparent;
             this.cRemember.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -171,7 +178,7 @@
             this.lClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lClose.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lClose.ForeColor = System.Drawing.Color.LightCyan;
-            this.lClose.Location = new System.Drawing.Point(232, 1);
+            this.lClose.Location = new System.Drawing.Point(187, 1);
             this.lClose.Margin = new System.Windows.Forms.Padding(0);
             this.lClose.Name = "lClose";
             this.lClose.Size = new System.Drawing.Size(18, 19);
@@ -185,9 +192,9 @@
             this.P1.Controls.Add(this.T1);
             this.P1.Controls.Add(this.btLogin);
             this.P1.Controls.Add(this.cRemember);
-            this.P1.Location = new System.Drawing.Point(12, 72);
+            this.P1.Location = new System.Drawing.Point(9, 80);
             this.P1.Name = "P1";
-            this.P1.Size = new System.Drawing.Size(232, 151);
+            this.P1.Size = new System.Drawing.Size(190, 151);
             this.P1.TabIndex = 8;
             // 
             // P2
@@ -195,16 +202,17 @@
             this.P2.BackColor = System.Drawing.Color.Transparent;
             this.P2.Controls.Add(this.pLoadingIcon);
             this.P2.Controls.Add(this.lLoading);
-            this.P2.Location = new System.Drawing.Point(12, 69);
+            this.P2.Location = new System.Drawing.Point(9, 80);
             this.P2.Name = "P2";
-            this.P2.Size = new System.Drawing.Size(232, 120);
+            this.P2.Size = new System.Drawing.Size(190, 120);
             this.P2.TabIndex = 10;
             this.P2.Visible = false;
             // 
             // pLoadingIcon
             // 
+            this.pLoadingIcon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.pLoadingIcon.Image = global::Togi.Properties.Resources._32_01;
-            this.pLoadingIcon.Location = new System.Drawing.Point(90, 47);
+            this.pLoadingIcon.Location = new System.Drawing.Point(69, 47);
             this.pLoadingIcon.Name = "pLoadingIcon";
             this.pLoadingIcon.Size = new System.Drawing.Size(50, 50);
             this.pLoadingIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -217,17 +225,18 @@
             this.lLoading.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lLoading.Location = new System.Drawing.Point(0, 0);
             this.lLoading.Name = "lLoading";
-            this.lLoading.Size = new System.Drawing.Size(232, 44);
+            this.lLoading.Size = new System.Drawing.Size(190, 44);
             this.lLoading.TabIndex = 1;
             this.lLoading.Text = "...";
             this.lLoading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Login
             // 
+            this.AcceptButton = this.btLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.ClientSize = new System.Drawing.Size(254, 235);
+            this.ClientSize = new System.Drawing.Size(209, 250);
             this.ControlBox = false;
             this.Controls.Add(this.lClose);
             this.Controls.Add(this.label4);
@@ -241,6 +250,9 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.TopMost = true;
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Login_MouseUp);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Login_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Login_MouseMove);
             this.T1.ResumeLayout(false);
             this.T1.PerformLayout();
             this.P1.ResumeLayout(false);

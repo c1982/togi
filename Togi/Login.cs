@@ -8,6 +8,7 @@ using System.Reflection;
 using TogiApi;
 using TogiApi.Tools;
 using TimeLineControl;
+using System.Drawing;
 
 namespace Togi
 {
@@ -20,6 +21,8 @@ namespace Togi
         private Thread lng;
         private ResourceManager dil_;
         private CultureInfo cInfo_;
+        private bool mouse_is_down;
+        private Point mouse_pos;
 
         private bool _ChangeUser;
         private string ScreenName;
@@ -111,7 +114,8 @@ namespace Togi
 
                 //3. Okunmuslar Aliniyor. Max_id
                 if(!String.IsNullOrEmpty(SinceId))
-                    LoadTweetItem(login.FriendsTimeLine(SinceId, true), true);                
+                    LoadTweetItem(login.FriendsTimeLine(SinceId, true), 
+                        true);                
 
                 //4. User Bilgileri Aliniyor.
                 SetTextBoxText(dil_.GetString("LOGIN_LOADING_2", cInfo_), lLoading);
@@ -237,5 +241,27 @@ namespace Togi
             Regedit.SetKey_("since_reply", String.Empty);
         }
 
+        private void Login_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.mouse_pos.X = e.X;
+            this.mouse_pos.Y = e.Y;
+            this.mouse_is_down = true;
+        }
+
+        private void Login_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (this.mouse_is_down)
+            {
+                Point mousePosition = Control.MousePosition;
+                mousePosition.X -= this.mouse_pos.X;
+                mousePosition.Y -= this.mouse_pos.Y;
+                base.Location = mousePosition;
+            }
+        }
+
+        private void Login_MouseUp(object sender, MouseEventArgs e)
+        {
+            this.mouse_is_down = false;
+        }
     }
 }

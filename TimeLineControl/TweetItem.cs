@@ -177,15 +177,18 @@ namespace TimeLineControl
 
         private void TweetText_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            e.Link.Visited = true;
-            //try
-            //{
+            try
+            {
                 System.Diagnostics.Process.Start(e.Link.LinkData.ToString());
-            //}
-            //catch
-            //{                
-            //    // Lay Lay Lom...
-            //}
+            }
+            catch
+            {
+                // Lay Lay Lom...
+            }
+            finally
+            {
+                e.Link.Visited = true;
+            }
         }
 
         private void TweetItem_MouseHover(object sender, EventArgs e)

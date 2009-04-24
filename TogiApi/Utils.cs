@@ -63,8 +63,6 @@ namespace TogiApi
 
             return localOffset.Hours;
         }
-
-
     }
         
 }

@@ -372,6 +372,8 @@ namespace Togi
             tsChangeUserNow.Text = dil_.GetString("TIME_LINE_MENU_5");
             tsCheckTweetsNow.Text = dil_.GetString("TIME_LINE_MENU_4");
 
+            this.Refresh();
+
         }
 
         #endregion
@@ -415,6 +417,14 @@ namespace Togi
                 s.ShowDialog();
                 s.Dispose();
             }
+
+            //Refresh culture Info
+            string CultureName = Regedit.GetKey_("language");
+            cInfo_ = new CultureInfo(String.IsNullOrEmpty(CultureName) ?
+                "en-US" :
+                CultureName);
+
+            LanguageCtor();
         }
 
         private void tsRecents_Click(object sender, EventArgs e)
