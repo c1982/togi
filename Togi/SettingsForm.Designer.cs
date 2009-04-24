@@ -164,7 +164,7 @@
             this.link_language.Size = new System.Drawing.Size(232, 15);
             this.link_language.TabIndex = 1;
             this.link_language.TabStop = true;
-            this.link_language.Text = "check for new language";
+            this.link_language.Text = "...";
             this.link_language.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.link_language.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_language_LinkClicked);
             // 

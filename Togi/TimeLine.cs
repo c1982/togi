@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using TogiApi;
 using TimeLineControl;
@@ -69,6 +66,10 @@ namespace Togi
             
             dil_ = new ResourceManager("Togi.Lang.Language",
                 Assembly.GetExecutingAssembly());
+
+            // Başlangıçta çalıştır
+            if(Regedit.GetKey_("run").Equals("true"))
+                Regedit.SetRun();
 
             LanguageCtor();
             TableCtor();
@@ -738,6 +739,8 @@ namespace Togi
                 TweetItem ti = GetTweetItemById(link_.Tag.ToString());
                 if (ti != null)
                 {
+                    ti.Focus();
+
                     // Okundu;
                     ti.IsRead = true;
                     ti.SetBackColorDefault(ti.ItemTweet.TweetType);
@@ -1167,10 +1170,6 @@ namespace Togi
         }
 
         #endregion
-
-
-
-
 
     }
 }

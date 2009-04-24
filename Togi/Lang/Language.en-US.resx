@@ -252,6 +252,9 @@
   <data name="SETTINGS_LABEL_2" xml:space="preserve">
     <value>Port</value>
   </data>
+  <data name="SETTINGS_LABEL_3" xml:space="preserve">
+    <value>check for new language</value>
+  </data>
   <data name="SETTINGS_MENU_1" xml:space="preserve">
     <value>General</value>
   </data>

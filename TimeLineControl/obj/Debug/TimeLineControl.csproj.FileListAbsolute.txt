@@ -138,3 +138,13 @@ C:\togi\24042008\TimeLineControl\obj\Debug\TimeLineControl.TweetItem.resources
 C:\togi\24042008\TimeLineControl\obj\Debug\TimeLineControl.csproj.GenerateResource.Cache
 C:\togi\24042008\TimeLineControl\obj\Debug\TimeLineControl.dll
 C:\togi\24042008\TimeLineControl\obj\Debug\TimeLineControl.pdb
+C:\togi\24042009\TimeLineControl\bin\Debug\TimeLineControl.dll
+C:\togi\24042009\TimeLineControl\bin\Debug\TimeLineControl.pdb
+C:\togi\24042009\TimeLineControl\bin\Debug\TogiApi.dll
+C:\togi\24042009\TimeLineControl\bin\Debug\TogiApi.pdb
+C:\togi\24042009\TimeLineControl\obj\Debug\ResolveAssemblyReference.cache
+C:\togi\24042009\TimeLineControl\obj\Debug\TimeLineControl.Properties.Resources.resources
+C:\togi\24042009\TimeLineControl\obj\Debug\TimeLineControl.TweetItem.resources
+C:\togi\24042009\TimeLineControl\obj\Debug\TimeLineControl.csproj.GenerateResource.Cache
+C:\togi\24042009\TimeLineControl\obj\Debug\TimeLineControl.dll
+C:\togi\24042009\TimeLineControl\obj\Debug\TimeLineControl.pdb

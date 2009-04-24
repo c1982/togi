@@ -39,6 +39,11 @@ namespace Togi
         private void cRun_CheckedChanged(object sender, EventArgs e)
         {
             Regedit.SetKey_("run", cRun.Checked ? "true":"false");
+
+            if (cRun.Checked)
+                Regedit.SetRun();
+            else
+                Regedit.DeleteRun();
         }
 
         private void cProxy_CheckedChanged(object sender, EventArgs e)
@@ -144,6 +149,7 @@ namespace Togi
             tpAbout.Text = dil_.GetString("SETTINGS_MENU_3");
             tpProxy.Text = dil_.GetString("SETTINGS_MENU_2");
 
+            link_language.Text = dil_.GetString("SETTINGS_LABEL_3");
             dil_.ReleaseAllResources();
         }
 
@@ -183,6 +189,11 @@ namespace Togi
         }
 
         public string ValMember { get; set; }
+
+        public override string ToString()
+        {
+            return ValMember;
+        }
 
     }
 }

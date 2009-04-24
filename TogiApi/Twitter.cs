@@ -36,12 +36,13 @@ namespace TogiApi
 
             DonenYanit = null;
             System.Net.ServicePointManager.Expect100Continue = false;
+            NetworkCredential Yetki = new NetworkCredential(UserName, Password);
+
             using (WebClient wClient = new WebClient())
-            {
-                
-                wClient.Credentials = new NetworkCredential(UserName, Password);
-                wClient.Headers.Add("X-Twitter-Client", "Togi");
-                wClient.Headers.Add("X-Twitter-Version", "0.3.0");
+            {                
+                wClient.Credentials = Yetki;                
+                wClient.Headers.Add("X-Twitter-Client", "togi");
+                wClient.Headers.Add("X-Twitter-Version", "1.0");
                 wClient.Headers.Add("X-Twitter-URL", "http://www.oguzhan.info/togi");
                 
                 // Proxy Kullanılacak mı?

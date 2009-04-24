@@ -44,5 +44,29 @@ namespace TogiApi
 
             return Deger;
         }
+
+        public static void SetRun()
+        {
+            RegistryKey masterKey = Registry.LocalMachine.OpenSubKey(RunKey, true);
+
+            if (masterKey == null)
+            {
+                masterKey = Registry.CurrentUser.CreateSubKey(RunKey);
+            }
+
+            masterKey.SetValue("Togi Twitter Client", Environment.CommandLine.ToString());
+            Registry.LocalMachine.Flush();
+            masterKey.Close();            
+        }
+
+        public static void DeleteRun()
+        {
+            RegistryKey masterKey = Registry.LocalMachine.OpenSubKey(RunKey, true);
+
+            if (masterKey != null)
+            {
+                    masterKey.DeleteValue("Togi Twitter Client",false);
+            }
+        }
     }
 }
