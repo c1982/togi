@@ -20,7 +20,7 @@ namespace Togi
         public IList<TweetItem> FriendsTimeLine { get; set; }
         public IList<TweetItem> RepliesTimeLine { get; set; }
         public IList<TweetItem> MessagesTimeLine { get; set; }
-        
+
         private bool mouse_is_down;
         private Point mouse_pos;
         private ResourceManager dil_;
@@ -216,7 +216,6 @@ namespace Togi
             SetStatusMsg(dil_.GetString("TIME_LINE_MESAJ_3", cInfo_));                                 
         }
 
-
         private void MarkAsReadItem(IList<TweetItem> liste_)
         {
             lock (liste_)
@@ -371,9 +370,27 @@ namespace Togi
             tsShow.Text = dil_.GetString("TIME_LINE_NOTIFY_MENU_2");
             tsChangeUserNow.Text = dil_.GetString("TIME_LINE_MENU_5");
             tsCheckTweetsNow.Text = dil_.GetString("TIME_LINE_MENU_4");
+        }
 
-            this.Refresh();
+        private void LanguageRefresh()
+        {
+            //Recents
+            RefreshNewLanguage(FriendsTimeLine);
+            //Replies
+            RefreshNewLanguage(RepliesTimeLine);
+            //Messages
+            RefreshNewLanguage(MessagesTimeLine);
+        }
 
+        private void RefreshNewLanguage(IList<TweetItem> liste_)
+        {
+            lock (liste_)
+            {
+                foreach (TweetItem item in liste_)
+                {
+                    TweetItemLanguageCtor(item);
+                }
+            }
         }
 
         #endregion
@@ -415,16 +432,24 @@ namespace Togi
             using (SettingsForm s = new SettingsForm())
             {
                 s.ShowDialog();
+
+                string CultureName = Regedit.GetKey_("language");
+
+                //Kültür bilgisi değiştiyse değerleri yenile.
+                if (cInfo_.Name != CultureName)
+                {
+                    cInfo_ = new CultureInfo(String.IsNullOrEmpty(CultureName) ?
+                        "en-US" :
+                        CultureName);
+
+                    Thread.CurrentThread.CurrentUICulture = cInfo_;
+
+                    LanguageCtor();
+                    LanguageRefresh();
+                }
+
                 s.Dispose();
             }
-
-            //Refresh culture Info
-            string CultureName = Regedit.GetKey_("language");
-            cInfo_ = new CultureInfo(String.IsNullOrEmpty(CultureName) ?
-                "en-US" :
-                CultureName);
-
-            LanguageCtor();
         }
 
         private void tsRecents_Click(object sender, EventArgs e)
@@ -543,9 +568,13 @@ namespace Togi
         {
             // Saniye yenileniyor.
             TweetItem ti = (TweetItem)e.Control;
+
             ti.lTime.Text = String.Format(dil_.GetString("ITEM_MENU_8", cInfo_),
                 ToRelativeDate(ti.ItemTweet.CreateAt),
                 ti.ItemTweet.Source);
+
+            //Refresh Language
+            //TweetItemLanguageCtor(ti);
         }
 
         #endregion
@@ -766,7 +795,7 @@ namespace Togi
                         {
                             sub_ti.IsRead= true;                            
                             RefreshReadItem(Tweet.TweetTypes.Normal);
-                        }                        
+                        }
                     }
                 }
             }
