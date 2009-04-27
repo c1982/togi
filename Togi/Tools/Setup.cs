@@ -3,6 +3,10 @@ using TogiApi;
 using System.Net;
 using System.Text;
 using System.Windows.Forms;
+using System.Globalization;
+using System.Text.RegularExpressions;
+using System.Resources;
+using System.Reflection;
 
 namespace Togi.Tools
 {
@@ -51,13 +55,29 @@ namespace Togi.Tools
                     {
                         blReturn_ = true;
                     }
+                    blReturn_ = true;
                 }
-
-                blReturn_ = true;
             }
             catch { }
 
             return blReturn_;
         }
+
+        public static CultureInfo GetCultureInfo()
+        {
+            string CultureName = Regedit.GetKey_("language");
+
+            if (!Regex.IsMatch(CultureName, @"^[a-z]{2}-[A-Z]{2}$"))
+                CultureName = "en-US";
+
+            return new CultureInfo(CultureName);
+        }
+
+        public static ResourceManager GetResourceManager()
+        {
+            return new ResourceManager("Togi.Lang.Language",
+                           Assembly.GetExecutingAssembly());
+        }
+    
     }
 }

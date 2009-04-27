@@ -5,7 +5,6 @@ using TogiApi;
 using System.Threading;
 using System.Globalization;
 using System.Resources;
-using System.Reflection;
 
 namespace Togi
 {
@@ -65,16 +64,9 @@ namespace Togi
 
         private void LanguageCtor()
         {
-            string CultureName = Regedit.GetKey_("language");
-
-            CultureInfo cInfo_ = new CultureInfo(String.IsNullOrEmpty(CultureName) ?
-                "en-US" :
-                CultureName);
-
+            CultureInfo cInfo_ = Tools.Setup.GetCultureInfo();
             Thread.CurrentThread.CurrentUICulture = cInfo_;
-
-            ResourceManager dil_ = new ResourceManager("Togi.Lang.Language",
-                Assembly.GetExecutingAssembly());
+            ResourceManager dil_ = Tools.Setup.GetResourceManager();
 
             l_Name.Text = dil_.GetString("INFO_LABEL_1");            
             l_Location.Text = dil_.GetString("INFO_LABEL_2");

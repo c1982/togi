@@ -220,7 +220,7 @@
     <value>Oturum Açılıyor...</value>
   </data>
   <data name="LOGIN_MESSAGE" xml:space="preserve">
-    <value>Yeni versiyon yayınlandı. İndirmek için Tamam tuşuna basınız.</value>
+    <value>Yeni sürüm yayınlandı. İndirmek istiyormusunuz?</value>
   </data>
   <data name="SETTINGS_BOX_1" xml:space="preserve">
     <value>Kontrol Zamanı</value>
@@ -356,5 +356,11 @@
   </data>
   <data name="TIME_LINE_TOOLS_MENU_3" xml:space="preserve">
     <value>Hepsini okundu olarak işaretle</value>
+  </data>
+  <data name="UPGRADE_STATUS" xml:space="preserve">
+    <value>İndiriliyor {0}/{1} (%{2})</value>
+  </data>
+  <data name="UPGRADE_TITLE" xml:space="preserve">
+    <value>Togi Twitter Client Yükseltme</value>
   </data>
 </root>

@@ -17,7 +17,6 @@ namespace Togi
             LanguageCtor();
             LoadValues();
 
-
             label2.Text = String.Format("Togi Twitter Client Version: {0}",
                 Application.ProductVersion);
         }
@@ -121,16 +120,9 @@ namespace Togi
 
         private void LanguageCtor()
         {
-            string CultureName = Regedit.GetKey_("language");
-
-            CultureInfo cInfo_ = new CultureInfo(String.IsNullOrEmpty(CultureName) ?
-                "en-US" :
-                CultureName);            
-            
+            CultureInfo cInfo_ = Tools.Setup.GetCultureInfo();            
             Thread.CurrentThread.CurrentUICulture = cInfo_;
-
-            ResourceManager dil_ = new ResourceManager("Togi.Lang.Language",
-                Assembly.GetExecutingAssembly());
+            ResourceManager dil_ = Tools.Setup.GetResourceManager();
 
             groupBox1.Text = dil_.GetString("SETTINGS_BOX_1");
             groupBox2.Text = dil_.GetString("SETTINGS_BOX_2");
@@ -165,7 +157,7 @@ namespace Togi
         private LanguageItem[] Diller()
         {
             DirectoryInfo bilgi_ = new DirectoryInfo(Application.StartupPath);
-            DirectoryInfo[] dizinler_ = bilgi_.GetDirectories();
+            DirectoryInfo[] dizinler_ = bilgi_.GetDirectories("*-*");
             LanguageItem[] langs_ = new LanguageItem[dizinler_.Length];
 
             for (int i = 0; i < dizinler_.Length; i++)

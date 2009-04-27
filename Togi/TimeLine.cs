@@ -7,7 +7,6 @@ using TimeLineControl;
 using System.Threading;
 using System.Collections;
 using System.Globalization;
-using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
 
@@ -56,16 +55,9 @@ namespace Togi
         {            
             InitializeComponent();
 
-            string CultureName = Regedit.GetKey_("language");
-
-            cInfo_ = new CultureInfo(String.IsNullOrEmpty(CultureName) ? 
-                "en-US":
-                CultureName);
-
+            cInfo_ = Tools.Setup.GetCultureInfo();
             Thread.CurrentThread.CurrentUICulture = cInfo_;
-            
-            dil_ = new ResourceManager("Togi.Lang.Language",
-                Assembly.GetExecutingAssembly());
+            dil_ = Tools.Setup.GetResourceManager();
 
             // Başlangıçta çalıştır
             if(Regedit.GetKey_("run").Equals("true"))
@@ -83,6 +75,7 @@ namespace Togi
         {
             bool isExit = false;
 
+            #region CheckNewVersion
             // write registry default values
             Tools.Setup ChkSetup = new Tools.Setup();
 
@@ -103,8 +96,9 @@ namespace Togi
                     }
                 }
             }
+            #endregion
 
-            if(!isExit)
+            if (!isExit)
                 LoginIn(false);
 
             if(isExit)
@@ -403,8 +397,10 @@ namespace Togi
         {
             //Recents
             RefreshNewLanguage(FriendsTimeLine);
+
             //Replies
             RefreshNewLanguage(RepliesTimeLine);
+
             //Messages
             RefreshNewLanguage(MessagesTimeLine);
         }
@@ -460,15 +456,10 @@ namespace Togi
             {
                 s.ShowDialog();
 
-                string CultureName = Regedit.GetKey_("language");
-
-                //Kültür bilgisi değiştiyse değerleri yenile.
-                if (cInfo_.Name != CultureName)
+                // Kültür bilgisi değiştiyse değerleri yenile.
+                if (cInfo_.Name != Regedit.GetKey_("language"))
                 {
-                    cInfo_ = new CultureInfo(String.IsNullOrEmpty(CultureName) ?
-                        "en-US" :
-                        CultureName);
-
+                    cInfo_ = Tools.Setup.GetCultureInfo();
                     Thread.CurrentThread.CurrentUICulture = cInfo_;
 
                     LanguageCtor();

@@ -219,6 +219,9 @@
   <data name="LOGIN_LOADING_2" xml:space="preserve">
     <value>Open Session...</value>
   </data>
+  <data name="LOGIN_MESSAGE" xml:space="preserve">
+    <value>New version available. Please download now.</value>
+  </data>
   <data name="SETTINGS_BOX_1" xml:space="preserve">
     <value>Check Time</value>
   </data>
@@ -340,7 +343,7 @@
     <value>Replies</value>
   </data>
   <data name="TIME_LINE_STATUS_TEXT_DEFAULT" xml:space="preserve">
-    <value>Tweet'lemek için CTRL+ALT+ENTER</value>
+    <value>Tweet for Press CTRL+ALT+ENTER</value>
   </data>
   <data name="TIME_LINE_TOOLS" xml:space="preserve">
     <value>Tools</value>
@@ -353,5 +356,11 @@
   </data>
   <data name="TIME_LINE_TOOLS_MENU_3" xml:space="preserve">
     <value>Mark as read all</value>
+  </data>
+  <data name="UPGRADE_STATUS" xml:space="preserve">
+    <value>Downloading {0}/{1} (%{2})</value>
+  </data>
+  <data name="UPGRADE_TITLE" xml:space="preserve">
+    <value>Upgrade Togi Twitter Client</value>
   </data>
 </root>

@@ -9,6 +9,10 @@ using System.Net;
 using System.IO;
 using System.Threading;
 using System.Diagnostics;
+using System.Globalization;
+using System.Resources;
+using System.Reflection;
+using TogiApi;
 
 namespace Togi
 {
@@ -21,27 +25,19 @@ namespace Togi
         private HttpWebResponse webResponse;
         private static int PercentProgress;
         private delegate void UpdateProgessCallback(Int64 BytesRead, Int64 TotalBytes);
+        private ResourceManager dil_;
+        private CultureInfo cInfo_;
 
         public Upgrade()
         {
             InitializeComponent();
-        }
-
-        private void btCancel_Click(object sender, EventArgs e)
-        {            
-            webResponse.Close();
-            strResponse.Close();
-            strLocal.Close();            
-            thrDownload.Abort();
-            this.Close();
-
-            this.DialogResult = DialogResult.Cancel;
+            LanguageCtor();
         }
 
         private void Download()
         {
             string DownloadUrl = "http://www.oguzhan.info/togi/TogiSetup.0.2.6.exe";
-            string SavePath = Application.StartupPath + "/togi_setup.exe";
+            string SavePath = String.Format("{0}\\togi_setup.exe",Application.StartupPath);
 
             using (WebClient wcDownload = new WebClient())
             {
@@ -49,7 +45,7 @@ namespace Togi
                 {
                     webRequest = (HttpWebRequest)WebRequest.Create(DownloadUrl);                    
                     webRequest.Credentials = CredentialCache.DefaultCredentials;                    
-                    webResponse = (HttpWebResponse)webRequest.GetResponse();                    
+                    webResponse = (HttpWebResponse)webRequest.GetResponse();
                     Int64 fileSize = webResponse.ContentLength;
                     strResponse = wcDownload.OpenRead(DownloadUrl);
                     strLocal = new FileStream(SavePath, FileMode.Create, FileAccess.Write, FileShare.None);
@@ -78,7 +74,11 @@ namespace Togi
         {
             PercentProgress = Convert.ToInt32((BytesRead * 100) / TotalBytes);
             progressBar1.Value = PercentProgress;
-            label1.Text = "Downloaded " + BytesRead + " out of " + TotalBytes + " (" + PercentProgress + "%)";
+
+            label1.Text = String.Format(dil_.GetString("UPGRADE_STATUS"),
+                BytesRead,
+                TotalBytes,
+                PercentProgress);
         }
 
         private void Upgrade_Load(object sender, EventArgs e)
@@ -87,5 +87,25 @@ namespace Togi
             thrDownload.Start();
         }
 
+        private void lClose_Click(object sender, EventArgs e)
+        {
+            webResponse.Close();
+            strResponse.Close();
+            strLocal.Close();
+            thrDownload.Abort();
+
+            this.Close();
+            this.DialogResult = DialogResult.Cancel;
+        }
+
+        private void LanguageCtor()
+        {
+            cInfo_ = Tools.Setup.GetCultureInfo();
+            Thread.CurrentThread.CurrentUICulture = cInfo_;
+            dil_ = Tools.Setup.GetResourceManager();
+
+            label_title.Text = dil_.GetString("UPGRADE_TITLE");
+            lClose.Text = dil_.GetString("INFO_BUTTON_1");
+        }
     }
 }

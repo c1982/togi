@@ -32,20 +32,13 @@ namespace Togi
         delegate void SetVisible(Panel p, bool Display);
 
         public Login(bool changeuser)
-        {
-            _ChangeUser = changeuser;
-
+        {            
             InitializeComponent();
-            string CultureName = Regedit.GetKey_("language");
 
-            cInfo_ = new CultureInfo(String.IsNullOrEmpty(CultureName) ?
-                "en-US" :
-                CultureName);
-
+            _ChangeUser = changeuser;
+            cInfo_ = Tools.Setup.GetCultureInfo();
             Thread.CurrentThread.CurrentUICulture = cInfo_;
-
-            dil_ = new ResourceManager("Togi.Lang.Language",
-                Assembly.GetExecutingAssembly());
+            dil_ = Tools.Setup.GetResourceManager();
 
             LanguageCtor();
 
