@@ -120,7 +120,6 @@
             this.cShorUrl.Items.AddRange(new object[] {
             "tinyurl.com",
             "shorl.com",
-            "url.fm",
             "kissa.be",
             "is.gd",
             "bit.ly"});

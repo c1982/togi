@@ -81,7 +81,34 @@ namespace Togi
 
         private void TimeLine_Load(object sender, EventArgs e)
         {
-            LoginIn(false);
+            bool isExit = false;
+
+            // write registry default values
+            Tools.Setup ChkSetup = new Tools.Setup();
+
+            // Check New Version
+            if (ChkSetup.NewVersion())
+            {
+                if (MessageBox.Show(dil_.GetString("LOGIN_MESSAGE", cInfo_),
+                    "Togi Twitter Client",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    using (Upgrade upgrade_ = new Upgrade())
+                    {
+                        if (upgrade_.ShowDialog() == DialogResult.Ignore)
+                            isExit = true;
+
+                        upgrade_.Dispose();
+                    }
+                }
+            }
+
+            if(!isExit)
+                LoginIn(false);
+
+            if(isExit)
+                Application.Exit();
         }
 
         private void LoginIn(bool ChangeUser)
@@ -594,23 +621,30 @@ namespace Togi
 
         private void CheckNewTweets()
         {
-            using (Tools.CheckTweets chck = new Togi.Tools.CheckTweets(TwitterUser))
+            try
             {
-                SetStatusMsg(dil_.GetString("TIME_LINE_MESAJ_4", cInfo_));
-                AddNewTweetInList(chck.CheckTimeLine(), Tweet.TweetTypes.Normal);
-                SetTweetNumber(tsRecents, GetUnreadItem(FriendsTimeLine));
+                using (Tools.CheckTweets chck = new Togi.Tools.CheckTweets(TwitterUser))
+                {
+                    SetStatusMsg(dil_.GetString("TIME_LINE_MESAJ_4", cInfo_));
+                    AddNewTweetInList(chck.CheckTimeLine(), Tweet.TweetTypes.Normal);
+                    SetTweetNumber(tsRecents, GetUnreadItem(FriendsTimeLine));
 
-                SetStatusMsg(dil_.GetString("TIME_LINE_MESAJ_5", cInfo_));
-                AddNewTweetInList(chck.CheckReplies(), Tweet.TweetTypes.Reply);
-                SetTweetNumber(tsReplys, GetUnreadItem(RepliesTimeLine));
+                    SetStatusMsg(dil_.GetString("TIME_LINE_MESAJ_5", cInfo_));
+                    AddNewTweetInList(chck.CheckReplies(), Tweet.TweetTypes.Reply);
+                    SetTweetNumber(tsReplys, GetUnreadItem(RepliesTimeLine));
 
-                SetStatusMsg(dil_.GetString("TIME_LINE_MESAJ_6", cInfo_));
-                AddNewTweetInList(chck.CheckMessages(), Tweet.TweetTypes.Message);
-                SetTweetNumber(tsMessages, GetUnreadItem(MessagesTimeLine));
+                    SetStatusMsg(dil_.GetString("TIME_LINE_MESAJ_6", cInfo_));
+                    AddNewTweetInList(chck.CheckMessages(), Tweet.TweetTypes.Message);
+                    SetTweetNumber(tsMessages, GetUnreadItem(MessagesTimeLine));
+                }
+
+                SetStatusMsg(String.Format(dil_.GetString("TIME_LINE_MESAJ_7", cInfo_),
+                    DateTime.Now.ToShortTimeString()));
             }
-
-            SetStatusMsg(String.Format(dil_.GetString("TIME_LINE_MESAJ_7", cInfo_), 
-                DateTime.Now.ToShortTimeString()));                        
+            catch (Exception ex)
+            {
+                SetStatusMsg(ex.Message);
+            }
         }
 
         private void AddNewTweetInList(IList<TweetItem> tList_, 

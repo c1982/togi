@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using TogiApi;
 using System.Threading;
@@ -74,11 +69,14 @@ namespace Togi
         {
             if (String.IsNullOrEmpty(txtGuncelle.Text))
             {
+                txtGuncelle.Focus();
                 return;
             }
-
-            Thread t = new Thread(new ParameterizedThreadStart(Guncelle));
-            t.Start(txtGuncelle.Text);
+            else
+            {
+                Thread t = new Thread(new ParameterizedThreadStart(Guncelle));
+                t.Start(txtGuncelle.Text);
+            }
         }
 
         private void Guncelle(object Status)
@@ -105,6 +103,14 @@ namespace Togi
                 {
                     this.txtGuncelle.SelectAll();
                 }
+            }
+        }
+
+        private void txtGuncelle_TextChanged(object sender, EventArgs e)
+        {
+            if (lblTolerans.Text.Length >= 0)
+            {
+                lblTolerans.Text = ((140 - txtGuncelle.Text.Length)).ToString();
             }
         }
 

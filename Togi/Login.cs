@@ -51,7 +51,7 @@ namespace Togi
 
             FriendsTimeLine = new List<TweetItem>();
 
-            //Write registry default values
+            // write registry default values
             Tools.Setup ChkSetup = new Togi.Tools.Setup();
             ChkSetup.LoadRegistry();
 

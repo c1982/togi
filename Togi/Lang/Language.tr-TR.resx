@@ -219,6 +219,9 @@
   <data name="LOGIN_LOADING_2" xml:space="preserve">
     <value>Oturum Açılıyor...</value>
   </data>
+  <data name="LOGIN_MESSAGE" xml:space="preserve">
+    <value>Yeni versiyon yayınlandı. İndirmek için Tamam tuşuna basınız.</value>
+  </data>
   <data name="SETTINGS_BOX_1" xml:space="preserve">
     <value>Kontrol Zamanı</value>
   </data>
@@ -313,7 +316,7 @@
     <value>Özel mesajlar kontrol ediliyor...</value>
   </data>
   <data name="TIME_LINE_MESAJ_7" xml:space="preserve">
-    <value>Son kontrol edilme zamanı  {0}</value>
+    <value>Son kontrol edilme zamanı {0}</value>
   </data>
   <data name="TIME_LINE_MESAJ_8_0" xml:space="preserve">
     <value>Bildiri favori olarak işaretlendi</value>

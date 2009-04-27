@@ -16,6 +16,10 @@ namespace Togi
             InitializeComponent();
             LanguageCtor();
             LoadValues();
+
+
+            label2.Text = String.Format("Togi Twitter Client Version: {0}",
+                Application.ProductVersion);
         }
 
         private void nCheckTime_ValueChanged(object sender, EventArgs e)

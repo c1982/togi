@@ -97,6 +97,9 @@
       <DependentUpon>TimeLine.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Upgrade.resx">
+      <DependentUpon>Upgrade.cs</DependentUpon>
+    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
@@ -127,6 +130,12 @@
     <Compile Include="Tools\HandleKeys.cs" />
     <Compile Include="Tools\Setup.cs" />
     <Compile Include="Tools\WinAPI.cs" />
+    <Compile Include="Upgrade.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Upgrade.Designer.cs">
+      <DependentUpon>Upgrade.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TimeLineControl\TimeLineControl.csproj">

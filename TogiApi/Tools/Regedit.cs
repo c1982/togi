@@ -7,7 +7,7 @@ namespace TogiApi
 {
     public class Regedit
     {
-        public const string ProgramKey = "Software\\Togi_Yeni";
+        public const string ProgramKey = "Software\\Togi";
         public const string RunKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
 
         public static void SetKey_(string key_, string value_)

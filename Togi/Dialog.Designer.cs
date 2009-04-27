@@ -35,7 +35,7 @@
             this.LabelUserName = new System.Windows.Forms.Label();
             this.bClose = new System.Windows.Forms.Button();
             this.bUpdate = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblTolerans = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -53,6 +53,7 @@
             this.txtGuncelle.Name = "txtGuncelle";
             this.txtGuncelle.Size = new System.Drawing.Size(332, 67);
             this.txtGuncelle.TabIndex = 0;
+            this.txtGuncelle.TextChanged += new System.EventHandler(this.txtGuncelle_TextChanged);
             this.txtGuncelle.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtGuncelle_KeyDown);
             // 
             // pictureBox2
@@ -134,19 +135,19 @@
             this.bUpdate.UseVisualStyleBackColor = false;
             this.bUpdate.Click += new System.EventHandler(this.bUpdate_Click);
             // 
-            // label1
+            // lblTolerans
             // 
-            this.label1.AutoEllipsis = true;
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label1.Location = new System.Drawing.Point(9, 100);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(25, 14);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "140";
+            this.lblTolerans.AutoEllipsis = true;
+            this.lblTolerans.AutoSize = true;
+            this.lblTolerans.BackColor = System.Drawing.Color.Transparent;
+            this.lblTolerans.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblTolerans.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblTolerans.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblTolerans.Location = new System.Drawing.Point(9, 100);
+            this.lblTolerans.Name = "lblTolerans";
+            this.lblTolerans.Size = new System.Drawing.Size(25, 14);
+            this.lblTolerans.TabIndex = 12;
+            this.lblTolerans.Text = "140";
             // 
             // Dialog
             // 
@@ -157,7 +158,7 @@
             this.CancelButton = this.bClose;
             this.ClientSize = new System.Drawing.Size(354, 163);
             this.ControlBox = false;
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblTolerans);
             this.Controls.Add(this.bUpdate);
             this.Controls.Add(this.bClose);
             this.Controls.Add(this.LabelUserName);
@@ -187,6 +188,6 @@
         private System.Windows.Forms.Label LabelUserName;
         private System.Windows.Forms.Button bClose;
         private System.Windows.Forms.Button bUpdate;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTolerans;
     }
 }

@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TogiApi")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Togi Api")]
+[assembly: AssemblyDescription("Togi Api")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft Corporation")]
+[assembly: AssemblyCompany("Togi Api")]
 [assembly: AssemblyProduct("TogiApi")]
-[assembly: AssemblyCopyright("Copyright © Microsoft Corporation 2009")]
+[assembly: AssemblyCopyright("Togi Api")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
