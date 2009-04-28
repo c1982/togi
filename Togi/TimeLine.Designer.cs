@@ -36,7 +36,6 @@
             this.tsMessages = new System.Windows.Forms.ToolStripButton();
             this.tsStatus = new System.Windows.Forms.ToolStripLabel();
             this.tsSettings = new System.Windows.Forms.ToolStripDropDownButton();
-            this.tsCheckNewVersion = new System.Windows.Forms.ToolStripMenuItem();
             this.tsChangeUser = new System.Windows.Forms.ToolStripMenuItem();
             this.ts1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsCheckTweets = new System.Windows.Forms.ToolStripMenuItem();
@@ -144,7 +143,6 @@
             // 
             this.tsSettings.BackColor = System.Drawing.Color.Transparent;
             this.tsSettings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsCheckNewVersion,
             this.tsChangeUser,
             this.ts1,
             this.tsCheckTweets,
@@ -162,16 +160,10 @@
             this.tsSettings.Size = new System.Drawing.Size(26, 26);
             this.tsSettings.ToolTipText = "Settings";
             // 
-            // tsCheckNewVersion
-            // 
-            this.tsCheckNewVersion.Name = "tsCheckNewVersion";
-            this.tsCheckNewVersion.Size = new System.Drawing.Size(185, 22);
-            this.tsCheckNewVersion.Text = "Check for new version";
-            // 
             // tsChangeUser
             // 
             this.tsChangeUser.Name = "tsChangeUser";
-            this.tsChangeUser.Size = new System.Drawing.Size(185, 22);
+            this.tsChangeUser.Size = new System.Drawing.Size(176, 22);
             this.tsChangeUser.Text = "Change user";
             this.tsChangeUser.Click += new System.EventHandler(this.tsChangeUser_Click);
             // 
@@ -180,7 +172,7 @@
             this.ts1.BackColor = System.Drawing.Color.PowderBlue;
             this.ts1.ForeColor = System.Drawing.Color.PowderBlue;
             this.ts1.Name = "ts1";
-            this.ts1.Size = new System.Drawing.Size(182, 6);
+            this.ts1.Size = new System.Drawing.Size(173, 6);
             // 
             // tsCheckTweets
             // 
@@ -190,7 +182,7 @@
             this.tsCheckTweets.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.tsCheckTweets.Name = "tsCheckTweets";
             this.tsCheckTweets.ShowShortcutKeys = false;
-            this.tsCheckTweets.Size = new System.Drawing.Size(185, 22);
+            this.tsCheckTweets.Size = new System.Drawing.Size(176, 22);
             this.tsCheckTweets.Text = "Check for new tweets";
             this.tsCheckTweets.CheckedChanged += new System.EventHandler(this.tsCheckTweets_CheckedChanged);
             // 
@@ -202,7 +194,7 @@
             this.tsShorgUrl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.tsShorgUrl.Name = "tsShorgUrl";
             this.tsShorgUrl.ShowShortcutKeys = false;
-            this.tsShorgUrl.Size = new System.Drawing.Size(185, 22);
+            this.tsShorgUrl.Size = new System.Drawing.Size(176, 22);
             this.tsShorgUrl.Text = "Short url";
             this.tsShorgUrl.CheckedChanged += new System.EventHandler(this.tsShorgUrl_CheckedChanged);
             // 
@@ -214,7 +206,7 @@
             this.tsShowNotice.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.tsShowNotice.Name = "tsShowNotice";
             this.tsShowNotice.ShowShortcutKeys = false;
-            this.tsShowNotice.Size = new System.Drawing.Size(185, 22);
+            this.tsShowNotice.Size = new System.Drawing.Size(176, 22);
             this.tsShowNotice.Text = "Show notifications";
             this.tsShowNotice.CheckedChanged += new System.EventHandler(this.tsShowNotice_CheckedChanged);
             // 
@@ -223,12 +215,12 @@
             this.st2.BackColor = System.Drawing.Color.PowderBlue;
             this.st2.ForeColor = System.Drawing.Color.PowderBlue;
             this.st2.Name = "st2";
-            this.st2.Size = new System.Drawing.Size(182, 6);
+            this.st2.Size = new System.Drawing.Size(173, 6);
             // 
             // tsAdvanced
             // 
             this.tsAdvanced.Name = "tsAdvanced";
-            this.tsAdvanced.Size = new System.Drawing.Size(185, 22);
+            this.tsAdvanced.Size = new System.Drawing.Size(176, 22);
             this.tsAdvanced.Text = "Advanced";
             this.tsAdvanced.Click += new System.EventHandler(this.tsAdvanced_Click);
             // 
@@ -456,7 +448,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lScreenName;
         private System.Windows.Forms.ToolStripDropDownButton tsSettings;
-        private System.Windows.Forms.ToolStripMenuItem tsCheckNewVersion;
         private System.Windows.Forms.ToolStripSeparator ts1;
         private System.Windows.Forms.ToolStripMenuItem tsCheckTweets;
         private System.Windows.Forms.ToolStripMenuItem tsShorgUrl;

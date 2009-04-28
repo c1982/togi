@@ -77,7 +77,7 @@ namespace TogiApi
                 Regedit.GetKey_("proxy_port"));
 
             WebProxy p = new WebProxy();            
-            p.Address = new Uri(proxyAddress); // format: http://proxy.domain.com:8080
+            p.Address = new Uri(proxyAddress); //format: http://proxy.domain.com:8080
             p.BypassProxyOnLocal = true;            
 
             return p;

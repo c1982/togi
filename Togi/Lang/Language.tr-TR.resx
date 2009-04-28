@@ -282,9 +282,6 @@
   <data name="TIME_LINE_MENU_5" xml:space="preserve">
     <value>Kullanıcı Değiştir</value>
   </data>
-  <data name="TIME_LINE_MENU_6" xml:space="preserve">
-    <value>Yenisi Çıktı mı?</value>
-  </data>
   <data name="TIME_LINE_MESAJ_1" xml:space="preserve">
     <value>Okunmamış bildiri yok</value>
   </data>

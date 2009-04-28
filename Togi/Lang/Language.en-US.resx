@@ -282,9 +282,6 @@
   <data name="TIME_LINE_MENU_5" xml:space="preserve">
     <value>Change user</value>
   </data>
-  <data name="TIME_LINE_MENU_6" xml:space="preserve">
-    <value>Check new version</value>
-  </data>
   <data name="TIME_LINE_MESAJ_1" xml:space="preserve">
     <value>No unread updates</value>
   </data>

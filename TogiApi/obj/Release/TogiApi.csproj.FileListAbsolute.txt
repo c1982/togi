@@ -28,3 +28,8 @@ C:\togi\27042009\TogiApi\bin\Release\TogiApi.pdb
 C:\togi\27042009\TogiApi\obj\Release\ResolveAssemblyReference.cache
 C:\togi\27042009\TogiApi\obj\Release\TogiApi.dll
 C:\togi\27042009\TogiApi\obj\Release\TogiApi.pdb
+C:\togi\28042009\TogiApi\bin\Release\TogiApi.dll
+C:\togi\28042009\TogiApi\bin\Release\TogiApi.pdb
+C:\togi\28042009\TogiApi\obj\Release\ResolveAssemblyReference.cache
+C:\togi\28042009\TogiApi\obj\Release\TogiApi.dll
+C:\togi\28042009\TogiApi\obj\Release\TogiApi.pdb

@@ -376,7 +376,7 @@ namespace Togi
 
             tsStatus.Text = dil_.GetString("TIME_LINE_STATUS_TEXT_DEFAULT");
             
-            tsCheckNewVersion.Text = dil_.GetString("TIME_LINE_MENU_6");            
+            //tsCheckNewVersion.Text = dil_.GetString("TIME_LINE_MENU_6");            
             tsChangeUser.Text = dil_.GetString("TIME_LINE_MENU_5");
             tsCheckTweets.Text = dil_.GetString("TIME_LINE_MENU_4");
             tsShorgUrl.Text = dil_.GetString("TIME_LINE_MENU_3");

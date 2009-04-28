@@ -36,7 +36,7 @@ namespace Togi
 
         private void Download()
         {
-            string DownloadUrl = "http://www.oguzhan.info/togi/TogiSetup.0.2.6.exe";
+            string DownloadUrl = "http://www.oguzhan.info/togi/togi_setup.exe";
             string SavePath = String.Format("{0}\\togi_setup.exe",Application.StartupPath);
 
             using (WebClient wcDownload = new WebClient())

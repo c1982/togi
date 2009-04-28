@@ -51,11 +51,10 @@ namespace Togi.Tools
                     DonenYanit = wClient.DownloadData("http://www.oguzhan.info/togi/togi.txt");
                     strReturn_ = Encoding.UTF8.GetString(DonenYanit);
 
-                    if (strReturn_ != Application.ProductVersion)
+                    if (strReturn_.Trim() != Application.ProductVersion)
                     {
                         blReturn_ = true;
                     }
-                    blReturn_ = true;
                 }
             }
             catch { }
