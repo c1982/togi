@@ -171,6 +171,9 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.TopMost = true;
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Dialog_MouseUp);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Dialog_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Dialog_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

@@ -61,6 +61,7 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsReadAll = new System.Windows.Forms.ToolStripMenuItem();
             this.lTools = new System.Windows.Forms.Label();
+            this.tsUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.tsDugmeler.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.NotifyMenu.SuspendLayout();
@@ -301,42 +302,43 @@
             this.tsChangeUserNow,
             this.tsCheckTweetsNow,
             this.toolStripSeparator1,
-            this.tsShow,
-            this.tsExit});
+            this.tsUpdate,
+            this.tsExit,
+            this.tsShow});
             this.NotifyMenu.Name = "NotifyMenu";
             this.NotifyMenu.ShowImageMargin = false;
-            this.NotifyMenu.Size = new System.Drawing.Size(146, 98);
+            this.NotifyMenu.Size = new System.Drawing.Size(145, 142);
             // 
             // tsChangeUserNow
             // 
             this.tsChangeUserNow.Name = "tsChangeUserNow";
-            this.tsChangeUserNow.Size = new System.Drawing.Size(145, 22);
+            this.tsChangeUserNow.Size = new System.Drawing.Size(144, 22);
             this.tsChangeUserNow.Text = "Change User";
             this.tsChangeUserNow.Click += new System.EventHandler(this.tsChangeUser_Click);
             // 
             // tsCheckTweetsNow
             // 
             this.tsCheckTweetsNow.Name = "tsCheckTweetsNow";
-            this.tsCheckTweetsNow.Size = new System.Drawing.Size(145, 22);
+            this.tsCheckTweetsNow.Size = new System.Drawing.Size(144, 22);
             this.tsCheckTweetsNow.Text = "Check Tweets Now";
             this.tsCheckTweetsNow.Click += new System.EventHandler(this.Zaman_Tick);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(142, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(141, 6);
             // 
             // tsShow
             // 
             this.tsShow.Name = "tsShow";
-            this.tsShow.Size = new System.Drawing.Size(145, 22);
+            this.tsShow.Size = new System.Drawing.Size(144, 22);
             this.tsShow.Text = "Show";
             this.tsShow.Click += new System.EventHandler(this.tsShow_Click);
             // 
             // tsExit
             // 
             this.tsExit.Name = "tsExit";
-            this.tsExit.Size = new System.Drawing.Size(145, 22);
+            this.tsExit.Size = new System.Drawing.Size(144, 22);
             this.tsExit.Text = "Exit";
             this.tsExit.Click += new System.EventHandler(this.tsExit_Click);
             // 
@@ -356,31 +358,31 @@
             this.tsReadAll});
             this.ToolsMenu.Name = "ToolsMenu";
             this.ToolsMenu.ShowImageMargin = false;
-            this.ToolsMenu.Size = new System.Drawing.Size(136, 76);
+            this.ToolsMenu.Size = new System.Drawing.Size(134, 76);
             // 
             // tsShowFavorites
             // 
             this.tsShowFavorites.Name = "tsShowFavorites";
-            this.tsShowFavorites.Size = new System.Drawing.Size(135, 22);
+            this.tsShowFavorites.Size = new System.Drawing.Size(133, 22);
             this.tsShowFavorites.Text = "Filter Favorites";
             this.tsShowFavorites.Click += new System.EventHandler(this.tsShowFavorites_Click);
             // 
             // tsUnreads
             // 
             this.tsUnreads.Name = "tsUnreads";
-            this.tsUnreads.Size = new System.Drawing.Size(135, 22);
+            this.tsUnreads.Size = new System.Drawing.Size(133, 22);
             this.tsUnreads.Text = "Filter Unreads";
             this.tsUnreads.Click += new System.EventHandler(this.tsUnreads_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(132, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(130, 6);
             // 
             // tsReadAll
             // 
             this.tsReadAll.Name = "tsReadAll";
-            this.tsReadAll.Size = new System.Drawing.Size(135, 22);
+            this.tsReadAll.Size = new System.Drawing.Size(133, 22);
             this.tsReadAll.Text = "Mark As  Read All";
             this.tsReadAll.Click += new System.EventHandler(this.tsReadAll_Click);
             // 
@@ -399,6 +401,13 @@
             this.lTools.Text = "Tools";
             this.lTools.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lTools.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lTools_MouseDown);
+            // 
+            // tsUpdate
+            // 
+            this.tsUpdate.Name = "tsUpdate";
+            this.tsUpdate.Size = new System.Drawing.Size(144, 22);
+            this.tsUpdate.Text = "Update";
+            this.tsUpdate.Click += new System.EventHandler(this.tsUpdate_Click);
             // 
             // TimeLine
             // 
@@ -470,6 +479,7 @@
         private System.Windows.Forms.Label lTools;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.TableLayoutPanel Tablo;
+        private System.Windows.Forms.ToolStripMenuItem tsUpdate;
 
     }
 }

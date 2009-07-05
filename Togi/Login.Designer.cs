@@ -153,7 +153,7 @@
             this.label4.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label4.Location = new System.Drawing.Point(121, 53);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(70, 14);
+            this.label4.Size = new System.Drawing.Size(69, 14);
             this.label4.TabIndex = 7;
             this.label4.Text = "Twitter Client";
             // 
@@ -250,6 +250,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.Login_Load);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Login_MouseUp);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Login_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Login_MouseMove);

@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using TogiApi;
 using System.Threading;
+using System.Drawing;
 
 namespace Togi
 {
@@ -9,6 +10,8 @@ namespace Togi
     {
         private User TwitterUser;
         private Tweet CurrentTweet;
+        private bool mouse_is_down;
+        private Point mouse_pos;
 
         public Dialog(User u)
         {            
@@ -112,6 +115,29 @@ namespace Togi
             {
                 lblTolerans.Text = ((140 - txtGuncelle.Text.Length)).ToString();
             }
+        }
+
+        private void Dialog_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.mouse_pos.X = e.X;
+            this.mouse_pos.Y = e.Y;
+            this.mouse_is_down = true;
+        }
+
+        private void Dialog_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (this.mouse_is_down)
+            {
+                Point mousePosition = Control.MousePosition;
+                mousePosition.X -= this.mouse_pos.X;
+                mousePosition.Y -= this.mouse_pos.Y;
+                base.Location = mousePosition;
+            }
+        }
+
+        private void Dialog_MouseUp(object sender, MouseEventArgs e)
+        {
+            this.mouse_is_down = false;
         }
 
     }

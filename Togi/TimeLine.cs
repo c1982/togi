@@ -595,6 +595,11 @@ namespace Togi
             //TweetItemLanguageCtor(ti);
         }
 
+        private void tsUpdate_Click(object sender, EventArgs e)
+        {
+            OpenUpdateForm();
+        }
+
         #endregion
 
         #region CheckNewTweets
@@ -1234,6 +1239,8 @@ namespace Togi
         }
 
         #endregion
+
+
 
     }
 }

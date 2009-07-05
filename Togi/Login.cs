@@ -256,5 +256,10 @@ namespace Togi
         {
             this.mouse_is_down = false;
         }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
