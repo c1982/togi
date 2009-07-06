@@ -45,14 +45,11 @@
             this.l_Fallowing = new System.Windows.Forms.Label();
             this.l_Fallowers = new System.Windows.Forms.Label();
             this.l_Updates = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.l_Togi_Points = new System.Windows.Forms.Label();
             this.lClose = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pb1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -122,7 +119,7 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label5.Location = new System.Drawing.Point(3, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(86, 13);
+            this.label5.Size = new System.Drawing.Size(87, 13);
             this.label5.TabIndex = 5;
             this.label5.Text = "Fallowing";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -132,9 +129,9 @@
             this.label6.AutoSize = true;
             this.label6.Dock = System.Windows.Forms.DockStyle.Top;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label6.Location = new System.Drawing.Point(95, 0);
+            this.label6.Location = new System.Drawing.Point(96, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(86, 13);
+            this.label6.Size = new System.Drawing.Size(87, 13);
             this.label6.TabIndex = 6;
             this.label6.Text = "Fallowers";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -144,9 +141,9 @@
             this.label7.AutoSize = true;
             this.label7.Dock = System.Windows.Forms.DockStyle.Top;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label7.Location = new System.Drawing.Point(187, 0);
+            this.label7.Location = new System.Drawing.Point(189, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(89, 13);
+            this.label7.Size = new System.Drawing.Size(87, 13);
             this.label7.TabIndex = 7;
             this.label7.Text = "Updates";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -246,7 +243,7 @@
             this.l_Fallowing.Dock = System.Windows.Forms.DockStyle.Fill;
             this.l_Fallowing.Location = new System.Drawing.Point(3, 16);
             this.l_Fallowing.Name = "l_Fallowing";
-            this.l_Fallowing.Size = new System.Drawing.Size(86, 25);
+            this.l_Fallowing.Size = new System.Drawing.Size(87, 25);
             this.l_Fallowing.TabIndex = 8;
             this.l_Fallowing.Text = "0";
             this.l_Fallowing.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -255,9 +252,9 @@
             // 
             this.l_Fallowers.AutoSize = true;
             this.l_Fallowers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.l_Fallowers.Location = new System.Drawing.Point(95, 16);
+            this.l_Fallowers.Location = new System.Drawing.Point(96, 16);
             this.l_Fallowers.Name = "l_Fallowers";
-            this.l_Fallowers.Size = new System.Drawing.Size(86, 25);
+            this.l_Fallowers.Size = new System.Drawing.Size(87, 25);
             this.l_Fallowers.TabIndex = 9;
             this.l_Fallowers.Text = "0";
             this.l_Fallowers.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -266,33 +263,12 @@
             // 
             this.l_Updates.AutoSize = true;
             this.l_Updates.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.l_Updates.Location = new System.Drawing.Point(187, 16);
+            this.l_Updates.Location = new System.Drawing.Point(189, 16);
             this.l_Updates.Name = "l_Updates";
-            this.l_Updates.Size = new System.Drawing.Size(89, 25);
+            this.l_Updates.Size = new System.Drawing.Size(87, 25);
             this.l_Updates.TabIndex = 10;
             this.l_Updates.Text = "0";
             this.l_Updates.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Controls.Add(this.l_Togi_Points);
-            this.groupBox1.Location = new System.Drawing.Point(6, 139);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(279, 57);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Togi Points";
-            // 
-            // l_Togi_Points
-            // 
-            this.l_Togi_Points.AutoSize = true;
-            this.l_Togi_Points.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.l_Togi_Points.Location = new System.Drawing.Point(103, 15);
-            this.l_Togi_Points.Name = "l_Togi_Points";
-            this.l_Togi_Points.Size = new System.Drawing.Size(69, 32);
-            this.l_Togi_Points.TabIndex = 0;
-            this.l_Togi_Points.Text = "00%";
             // 
             // lClose
             // 
@@ -301,7 +277,7 @@
             this.lClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.lClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lClose.ForeColor = System.Drawing.Color.White;
-            this.lClose.Location = new System.Drawing.Point(212, 206);
+            this.lClose.Location = new System.Drawing.Point(218, 155);
             this.lClose.Margin = new System.Windows.Forms.Padding(0);
             this.lClose.Name = "lClose";
             this.lClose.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -316,11 +292,10 @@
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.tableLayoutPanel1);
             this.panel1.Controls.Add(this.pb1);
-            this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.tableLayoutPanel2);
             this.panel1.Location = new System.Drawing.Point(5, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(291, 200);
+            this.panel1.Size = new System.Drawing.Size(291, 148);
             this.panel1.TabIndex = 1;
             // 
             // Info
@@ -329,7 +304,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleTurquoise;
             this.BackgroundImage = global::Togi.Properties.Resources.bg2;
-            this.ClientSize = new System.Drawing.Size(301, 229);
+            this.ClientSize = new System.Drawing.Size(301, 179);
             this.ControlBox = false;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lClose);
@@ -344,8 +319,6 @@
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -370,8 +343,6 @@
         private System.Windows.Forms.Label l_Fallowing;
         private System.Windows.Forms.Label l_Fallowers;
         private System.Windows.Forms.Label l_Updates;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label l_Togi_Points;
         private System.Windows.Forms.Label lClose;
         private System.Windows.Forms.Panel panel1;
     }

@@ -50,7 +50,21 @@ namespace Togi
 
             if (isSave(out ScreenName, out Password))
             {
-                LoginStart();
+                // Checking Connection
+                if (Utils.IsConnected())
+                {
+                    btTry.Visible = false;
+                    LoginStart();
+                }
+                else
+                {
+                    SetPanelVisibility(P1, false);
+                    SetPanelVisibility(P2, true);
+                    lLoading.Text = dil_.GetString("LOGIN_MESSAGE_1", cInfo_);
+                    pLoadingIcon.Visible = false;
+                    btTry.Text = dil_.GetString("LOGIN_BUTTON_2", cInfo_);
+                    btTry.Visible = true;
+                }
             }
         }
 
@@ -81,7 +95,7 @@ namespace Togi
         {
             SetPanelVisibility(P1, false);
             SetPanelVisibility(P2, true);
-
+            
             lng = new Thread(TwitterLogin);
             lng.SetApartmentState(ApartmentState.STA);
             lng.Start();
@@ -92,9 +106,8 @@ namespace Togi
             try
             {
                 string SinceId = Regedit.GetKey_("since_recent");
-
                 Twitter login = new Twitter(ScreenName, Password);
-
+                
                 // TimeLine geliyor
                 SetTextBoxText(dil_.GetString("LOGIN_LOADING_1", cInfo_), lLoading);
 
@@ -257,9 +270,16 @@ namespace Togi
             this.mouse_is_down = false;
         }
 
-        private void Login_Load(object sender, EventArgs e)
+        private void btTry_Click(object sender, EventArgs e)
         {
+            this.btTry.Enabled = false;
+            if (Utils.IsConnected())
+            {
+                btTry.Visible = false;
+                LoginStart();
+            }
 
+            this.btTry.Enabled = true;
         }
     }
 }

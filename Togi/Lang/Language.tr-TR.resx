@@ -141,9 +141,6 @@
   <data name="INFO_LABEL_7" xml:space="preserve">
     <value>Bildirileri</value>
   </data>
-  <data name="INFO_LABEL_8" xml:space="preserve">
-    <value>Togi Puanı</value>
-  </data>
   <data name="ITEM_MENU_1" xml:space="preserve">
     <value>Yanıtla</value>
   </data>
@@ -204,6 +201,9 @@
   <data name="LOGIN_BUTTON_1" xml:space="preserve">
     <value>Giriş</value>
   </data>
+  <data name="LOGIN_BUTTON_2" xml:space="preserve">
+    <value>Tekrar Dene</value>
+  </data>
   <data name="LOGIN_LABEL_1" xml:space="preserve">
     <value>Kullanıcı</value>
   </data>
@@ -221,6 +221,9 @@
   </data>
   <data name="LOGIN_MESSAGE" xml:space="preserve">
     <value>Yeni sürüm yayınlandı. İndirmek istiyormusunuz?</value>
+  </data>
+  <data name="LOGIN_MESSAGE_1" xml:space="preserve">
+    <value>Internet bağlantınızı kontrol edin.</value>
   </data>
   <data name="SETTINGS_BOX_1" xml:space="preserve">
     <value>Kontrol Zamanı</value>
@@ -332,6 +335,9 @@
   </data>
   <data name="TIME_LINE_NOTIFY_MENU_2" xml:space="preserve">
     <value>Göster</value>
+  </data>
+  <data name="TIME_LINE_NOTIFY_MENU_3" xml:space="preserve">
+    <value>Durumu Güncelle</value>
   </data>
   <data name="TIME_LINE_RECENTS_BUTTON" xml:space="preserve">
     <value>Genel Akış</value>

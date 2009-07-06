@@ -42,6 +42,7 @@
             this.P2 = new System.Windows.Forms.Panel();
             this.pLoadingIcon = new System.Windows.Forms.PictureBox();
             this.lLoading = new System.Windows.Forms.Label();
+            this.btTry = new System.Windows.Forms.Button();
             this.T1.SuspendLayout();
             this.P1.SuspendLayout();
             this.P2.SuspendLayout();
@@ -230,14 +231,29 @@
             this.lLoading.Text = "...";
             this.lLoading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // btTry
+            // 
+            this.btTry.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btTry.BackColor = System.Drawing.Color.Transparent;
+            this.btTry.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btTry.Location = new System.Drawing.Point(67, 138);
+            this.btTry.Name = "btTry";
+            this.btTry.Size = new System.Drawing.Size(75, 23);
+            this.btTry.TabIndex = 11;
+            this.btTry.Text = "Login";
+            this.btTry.UseVisualStyleBackColor = false;
+            this.btTry.Visible = false;
+            this.btTry.Click += new System.EventHandler(this.btTry_Click);
+            // 
             // Login
             // 
             this.AcceptButton = this.btLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.ClientSize = new System.Drawing.Size(209, 250);
+            this.ClientSize = new System.Drawing.Size(209, 245);
             this.ControlBox = false;
+            this.Controls.Add(this.btTry);
             this.Controls.Add(this.lClose);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
@@ -250,7 +266,6 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.TopMost = true;
-            this.Load += new System.EventHandler(this.Login_Load);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Login_MouseUp);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Login_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Login_MouseMove);
@@ -282,5 +297,6 @@
         private System.Windows.Forms.Panel P2;
         private System.Windows.Forms.PictureBox pLoadingIcon;
         private System.Windows.Forms.Label lLoading;
+        private System.Windows.Forms.Button btTry;
     }
 }

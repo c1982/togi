@@ -389,8 +389,11 @@ namespace Togi
 
             tsExit.Text = dil_.GetString("TIME_LINE_NOTIFY_MENU_1");
             tsShow.Text = dil_.GetString("TIME_LINE_NOTIFY_MENU_2");
+            tsUpdate.Text = dil_.GetString("TIME_LINE_NOTIFY_MENU_3");
+
             tsChangeUserNow.Text = dil_.GetString("TIME_LINE_MENU_5");
             tsCheckTweetsNow.Text = dil_.GetString("TIME_LINE_MENU_4");
+            
         }
 
         private void LanguageRefresh()

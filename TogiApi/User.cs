@@ -37,7 +37,7 @@ namespace TogiApi
             Name = Utils.GetValueFromNode(xdoc.SelectSingleNode("/user/name"));
             ScreenName = Utils.GetValueFromNode(xdoc.SelectSingleNode("/user/screen_name"));
             Location = Utils.GetValueFromNode(xdoc.SelectSingleNode("/user/location"));
-            Url = Utils.GetValueFromNode(xdoc.SelectSingleNode("/user/location"));
+            Url = Utils.GetValueFromNode(xdoc.SelectSingleNode("/user/url"));
 
             ImageUrl = Utils.GetValueFromNode(xdoc.SelectSingleNode("/user/profile_image_url"));
             ImageNormal = Utils.GetImage(ImageUrl);

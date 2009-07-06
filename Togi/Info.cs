@@ -76,8 +76,7 @@ namespace Togi
             label5.Text = dil_.GetString("INFO_LABEL_5");
             label6.Text = dil_.GetString("INFO_LABEL_6");
             label7.Text = dil_.GetString("INFO_LABEL_7");
-
-            groupBox1.Text = dil_.GetString("INFO_LABEL_8");
+            
             lClose.Text = dil_.GetString("INFO_BUTTON_1");
 
             dil_.ReleaseAllResources();

@@ -52,8 +52,9 @@
             this.tsChangeUserNow = new System.Windows.Forms.ToolStripMenuItem();
             this.tsCheckTweetsNow = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsShow = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.tsExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsShow = new System.Windows.Forms.ToolStripMenuItem();
             this.Zaman = new System.Windows.Forms.Timer(this.components);
             this.ToolsMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsShowFavorites = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,7 +62,6 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsReadAll = new System.Windows.Forms.ToolStripMenuItem();
             this.lTools = new System.Windows.Forms.Label();
-            this.tsUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.tsDugmeler.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.NotifyMenu.SuspendLayout();
@@ -303,8 +303,8 @@
             this.tsCheckTweetsNow,
             this.toolStripSeparator1,
             this.tsUpdate,
-            this.tsExit,
-            this.tsShow});
+            this.tsShow,
+            this.tsExit});
             this.NotifyMenu.Name = "NotifyMenu";
             this.NotifyMenu.ShowImageMargin = false;
             this.NotifyMenu.Size = new System.Drawing.Size(145, 142);
@@ -328,12 +328,12 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(141, 6);
             // 
-            // tsShow
+            // tsUpdate
             // 
-            this.tsShow.Name = "tsShow";
-            this.tsShow.Size = new System.Drawing.Size(144, 22);
-            this.tsShow.Text = "Show";
-            this.tsShow.Click += new System.EventHandler(this.tsShow_Click);
+            this.tsUpdate.Name = "tsUpdate";
+            this.tsUpdate.Size = new System.Drawing.Size(144, 22);
+            this.tsUpdate.Text = "Update";
+            this.tsUpdate.Click += new System.EventHandler(this.tsUpdate_Click);
             // 
             // tsExit
             // 
@@ -341,6 +341,13 @@
             this.tsExit.Size = new System.Drawing.Size(144, 22);
             this.tsExit.Text = "Exit";
             this.tsExit.Click += new System.EventHandler(this.tsExit_Click);
+            // 
+            // tsShow
+            // 
+            this.tsShow.Name = "tsShow";
+            this.tsShow.Size = new System.Drawing.Size(144, 22);
+            this.tsShow.Text = "Show";
+            this.tsShow.Click += new System.EventHandler(this.tsShow_Click);
             // 
             // Zaman
             // 
@@ -401,13 +408,6 @@
             this.lTools.Text = "Tools";
             this.lTools.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lTools.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lTools_MouseDown);
-            // 
-            // tsUpdate
-            // 
-            this.tsUpdate.Name = "tsUpdate";
-            this.tsUpdate.Size = new System.Drawing.Size(144, 22);
-            this.tsUpdate.Text = "Update";
-            this.tsUpdate.Click += new System.EventHandler(this.tsUpdate_Click);
             // 
             // TimeLine
             // 

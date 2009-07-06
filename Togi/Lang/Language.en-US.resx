@@ -133,16 +133,13 @@
     <value>Bio</value>
   </data>
   <data name="INFO_LABEL_5" xml:space="preserve">
-    <value>Fallowers</value>
+    <value>Followers</value>
   </data>
   <data name="INFO_LABEL_6" xml:space="preserve">
-    <value>Fallowing</value>
+    <value>Following</value>
   </data>
   <data name="INFO_LABEL_7" xml:space="preserve">
     <value>Updates</value>
-  </data>
-  <data name="INFO_LABEL_8" xml:space="preserve">
-    <value>Togi Points</value>
   </data>
   <data name="ITEM_MENU_1" xml:space="preserve">
     <value>Replies</value>
@@ -204,6 +201,9 @@
   <data name="LOGIN_BUTTON_1" xml:space="preserve">
     <value>Login</value>
   </data>
+  <data name="LOGIN_BUTTON_2" xml:space="preserve">
+    <value>Try Again</value>
+  </data>
   <data name="LOGIN_LABEL_1" xml:space="preserve">
     <value>Screen Name</value>
   </data>
@@ -221,6 +221,9 @@
   </data>
   <data name="LOGIN_MESSAGE" xml:space="preserve">
     <value>New version available. Please download now.</value>
+  </data>
+  <data name="LOGIN_MESSAGE_1" xml:space="preserve">
+    <value>Check your internet connection</value>
   </data>
   <data name="SETTINGS_BOX_1" xml:space="preserve">
     <value>Check Time</value>
@@ -332,6 +335,9 @@
   </data>
   <data name="TIME_LINE_NOTIFY_MENU_2" xml:space="preserve">
     <value>Show</value>
+  </data>
+  <data name="TIME_LINE_NOTIFY_MENU_3" xml:space="preserve">
+    <value>Update Status</value>
   </data>
   <data name="TIME_LINE_RECENTS_BUTTON" xml:space="preserve">
     <value>Recents</value>

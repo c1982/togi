@@ -4,11 +4,16 @@ using System.Net;
 using System.IO;
 using System.Xml;
 using System.Globalization;
+using System.Runtime;
+using System.Runtime.InteropServices; 
 
 namespace TogiApi
 {
     public class Utils
     {
+        [DllImport("wininet.dll")]
+        private extern static bool InternetGetConnectedState(out int Description, int ReservedValue);
+
         public static Bitmap GetImage(string Uri_)
         {
             Bitmap Resim;
@@ -61,6 +66,13 @@ namespace TogiApi
 
             return localOffset.Hours;
         }
+
+        public static bool IsConnected( )
+        {
+            int Desc ;
+            return InternetGetConnectedState( out Desc, 0 );
+        }
+
     }
         
 }
