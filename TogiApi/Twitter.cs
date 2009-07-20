@@ -155,6 +155,16 @@ namespace TogiApi
                 Postlar);
         }
 
+        public void UnFollow(string ScreenName)
+        {
+            if (String.IsNullOrEmpty(ScreenName))
+                return;
+
+            Istek(String.Format("http://twitter.com/friendships/destroy/{0}.xml", ScreenName),
+                "POST",
+                new NameValueCollection());
+        }
+
         public void UnFavorite(string StatusId)
         {
             if (String.IsNullOrEmpty(StatusId))
@@ -176,6 +186,8 @@ namespace TogiApi
 
             return new User(XmlData);
         }
+
+
 
         public IList<Tweet> FriendsTimeLine(string SinceId)
         {

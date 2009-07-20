@@ -753,12 +753,13 @@ namespace Togi
         }
 
         private void AddEventsTweetItem(TweetItem item)
-        {
-            
+        {            
             item.tsReply.Click += new EventHandler(tsReply_Click);
             item.tsFavorite.Click += new EventHandler(tsFavorite_Click);
             item.tsReTweet.Click += new EventHandler(tsReTweet_Click);
             item.tsMessage.Click += new EventHandler(tsMessage_Click);
+            item.tsUnfollow.Click += new EventHandler(tsUnfollow_Click);
+            
 
             // TweetType'ı denetleniyor.
             item.TweetTypeSec_ += new TweetItem.SetTweetType(item_TweetTypeSec_);
@@ -778,6 +779,22 @@ namespace Togi
 
             //Okunduğu zaman
             item.SetRead_ += new TweetItem.dSetRead(item_SetRead_);
+        }
+
+        void tsUnfollow_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem menu_ = (ToolStripMenuItem)sender;
+            if (menu_.Tag != null)
+            {
+                TweetItem ti = GetTweetItemById(menu_.Tag.ToString());
+                if (ti != null)
+                {
+                    Thread th = new Thread(new ParameterizedThreadStart(UnFollowUser));
+                    th.SetApartmentState(ApartmentState.STA);
+                    th.IsBackground = true;
+                    th.Start(ti.ItemTweet.UserScreenName);
+                }
+            }
         }
 
         void item_SetRead_(object sender, EventArgs e)
@@ -845,7 +862,7 @@ namespace Togi
         }
 
         void tsDelete_Click(object sender, EventArgs e)
-        {
+        {            
             ToolStripMenuItem menu_ = (ToolStripMenuItem)sender;
             if (menu_.Tag != null)
             {
@@ -892,6 +909,8 @@ namespace Togi
             ti.lTime.Text = String.Format(dil_.GetString("ITEM_MENU_8",cInfo_),
                 ToRelativeDate(ti.ItemTweet.CreateAt),
                 ti.ItemTweet.Source);
+
+            ti.tsUnfollow.Text = dil_.GetString("ITEM_MENU_9", cInfo_);
             
         }
 
@@ -1199,6 +1218,18 @@ namespace Togi
                 SetDestroyById(TweetId.ToString());
 
                 SetStatusMsg(dil_.GetString("TIME_LINE_MESAJ_10", cInfo_));
+            }
+        }
+
+        public void UnFollowUser(object ScreenName)
+        {
+            using (Twitter t = new Twitter(TwitterUser.UserName,
+                TwitterUser.UserPass))
+            {
+                t.UnFollow(ScreenName.ToString());
+                SetStatusMsg(
+                    String.Format(dil_.GetString("TIME_LINE_MESAJ_12", cInfo_),
+                    ScreenName));
             }
         }
 

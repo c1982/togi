@@ -42,9 +42,11 @@ namespace Togi
 
         private void GetUserInfo()
         {
-            Twitter t = new Twitter();
-            User_ = t.ShowUser(ScreenName);
-            ShowTextValues();
+            using (Twitter t = new Twitter())
+            {
+                User_ = t.ShowUser(ScreenName);
+                ShowTextValues();
+            }
         }
 
         private void ShowTextValues()

@@ -43,6 +43,7 @@
             this.lTime = new System.Windows.Forms.Label();
             this.pFavoriIcon = new System.Windows.Forms.PictureBox();
             this.ProfileImage = new System.Windows.Forms.PictureBox();
+            this.tsUnfollow = new System.Windows.Forms.ToolStripMenuItem();
             this.ItemMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pFavoriIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProfileImage)).BeginInit();
@@ -88,63 +89,64 @@
             this.ItemMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsReply,
             this.tsReTweet,
-            this.ts1,
             this.tsMessage,
+            this.ts1,
             this.tsFavorite,
             this.tsDelete,
             this.ts2,
+            this.tsUnfollow,
             this.tsUserInfo});
             this.ItemMenu.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.ItemMenu.Name = "ItemMenu";
             this.ItemMenu.ShowImageMargin = false;
             this.ItemMenu.ShowItemToolTips = false;
-            this.ItemMenu.Size = new System.Drawing.Size(141, 148);
+            this.ItemMenu.Size = new System.Drawing.Size(136, 192);
             // 
             // tsReply
             // 
             this.tsReply.Name = "tsReply";
-            this.tsReply.Size = new System.Drawing.Size(140, 22);
+            this.tsReply.Size = new System.Drawing.Size(135, 22);
             this.tsReply.Text = "Reply";
             // 
             // tsReTweet
             // 
             this.tsReTweet.Name = "tsReTweet";
-            this.tsReTweet.Size = new System.Drawing.Size(140, 22);
+            this.tsReTweet.Size = new System.Drawing.Size(135, 22);
             this.tsReTweet.Text = "Re Tweet";
             // 
             // ts1
             // 
             this.ts1.Name = "ts1";
-            this.ts1.Size = new System.Drawing.Size(137, 6);
+            this.ts1.Size = new System.Drawing.Size(132, 6);
             // 
             // tsMessage
             // 
             this.tsMessage.Name = "tsMessage";
-            this.tsMessage.Size = new System.Drawing.Size(140, 22);
+            this.tsMessage.Size = new System.Drawing.Size(135, 22);
             this.tsMessage.Text = "Message User";
             // 
             // tsFavorite
             // 
             this.tsFavorite.Name = "tsFavorite";
-            this.tsFavorite.Size = new System.Drawing.Size(140, 22);
+            this.tsFavorite.Size = new System.Drawing.Size(135, 22);
             this.tsFavorite.Text = "Mark as Favorite";
             // 
             // tsDelete
             // 
             this.tsDelete.Enabled = false;
             this.tsDelete.Name = "tsDelete";
-            this.tsDelete.Size = new System.Drawing.Size(140, 22);
+            this.tsDelete.Size = new System.Drawing.Size(135, 22);
             this.tsDelete.Text = "Delete Tweet";
             // 
             // ts2
             // 
             this.ts2.Name = "ts2";
-            this.ts2.Size = new System.Drawing.Size(137, 6);
+            this.ts2.Size = new System.Drawing.Size(132, 6);
             // 
             // tsUserInfo
             // 
             this.tsUserInfo.Name = "tsUserInfo";
-            this.tsUserInfo.Size = new System.Drawing.Size(140, 22);
+            this.tsUserInfo.Size = new System.Drawing.Size(135, 22);
             this.tsUserInfo.Text = "User Info";
             // 
             // lTime
@@ -186,6 +188,12 @@
             this.ProfileImage.TabStop = false;
             this.ProfileImage.Click += new System.EventHandler(this.ProfileImage_Click);
             // 
+            // tsUnfollow
+            // 
+            this.tsUnfollow.Name = "tsUnfollow";
+            this.tsUnfollow.Size = new System.Drawing.Size(135, 22);
+            this.tsUnfollow.Text = "Unfollow";
+            // 
             // TweetItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -226,5 +234,6 @@
         private System.Windows.Forms.ToolStripSeparator ts2;
         public System.Windows.Forms.ToolStripMenuItem tsUserInfo;
         public System.Windows.Forms.Label lTime;
+        public System.Windows.Forms.ToolStripMenuItem tsUnfollow;
     }
 }

@@ -15,6 +15,7 @@ namespace TimeLineControl
         public delegate void SetTweetType(object sender, EventArgs e);
         public delegate void AllowDelete(object sender, EventArgs e);
         public delegate void dSetRead(object sender, EventArgs e);
+        public delegate void delegateUnFollow(object sender, EventArgs e);
 
         delegate void SetPicture(Bitmap Resim);
         delegate void SetFavoriteIcon(bool isFavorite);
@@ -23,6 +24,7 @@ namespace TimeLineControl
 
         public event SetTweetType TweetTypeSec_;
         public event AllowDelete TweetAllowDelete_;
+        public event delegateUnFollow UnFollowEventArgs; 
         public event dSetRead SetRead_;
 
         public Tweet ItemTweet;
@@ -101,6 +103,7 @@ namespace TimeLineControl
             tsDelete.Tag = ItemTweet.Id;
             TweetText.Tag = ItemTweet.Id;
             tsUserInfo.Tag = ItemTweet.Id;
+            tsUnfollow.Tag = ItemTweet.Id;
 
             // Mesaj'da menüler kapatılır.
             if (ItemTweet.TweetType == Tweet.TweetTypes.Message)
