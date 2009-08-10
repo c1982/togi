@@ -76,6 +76,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Lang\Language.en-US.resx" />
+    <EmbeddedResource Include="Lang\Language.fr-FR.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Lang\Language.tr-TR.resx">
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">

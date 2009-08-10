@@ -164,3 +164,6 @@ C:\togi\20090705\Togi\obj\Release\en-US\Togi.resources.dll
 C:\togi\20090705\Togi\obj\Release\tr-TR\Togi.resources.dll
 C:\togi\20090705\Togi\obj\Release\Togi.exe
 C:\togi\20090705\Togi\obj\Release\Togi.pdb
+C:\togi\20090705\Togi\bin\Release\fr-FR\Togi.resources.dll
+C:\togi\20090705\Togi\obj\Release\Togi.Lang.Language.fr-FR.resources
+C:\togi\20090705\Togi\obj\Release\fr-FR\Togi.resources.dll
